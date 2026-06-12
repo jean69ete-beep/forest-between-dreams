@@ -275,6 +275,67 @@
   }
   .popup-close:hover { opacity: 1; }
 
+  /* ── AUDIO PLAYER ── */
+  .audio-wrap {
+    margin-top: 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-top: 1px solid rgba(74,158,173,0.2);
+    padding-top: 1.2rem;
+  }
+
+  .audio-btn {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    border: 1px solid rgba(74,158,173,0.5);
+    background: rgba(74,158,173,0.08);
+    color: var(--moon-gold);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .audio-btn:hover {
+    background: rgba(74,158,173,0.2);
+    border-color: var(--moon-gold);
+    box-shadow: 0 0 16px rgba(212,192,144,0.3);
+  }
+
+  .audio-info {
+    font-size: 0.72rem;
+    font-style: italic;
+    color: var(--silver);
+    opacity: 0.7;
+    letter-spacing: 0.06em;
+    line-height: 1.5;
+  }
+
+  .audio-waves {
+    display: flex; align-items: center; gap: 3px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .audio-waves.playing { opacity: 1; }
+  .audio-waves span {
+    display: block; width: 3px;
+    background: var(--teal-glow);
+    border-radius: 2px;
+    animation: waveBar 0.8s ease-in-out infinite;
+  }
+  .audio-waves span:nth-child(1) { height: 8px; animation-delay: 0s; }
+  .audio-waves span:nth-child(2) { height: 14px; animation-delay: 0.1s; }
+  .audio-waves span:nth-child(3) { height: 10px; animation-delay: 0.2s; }
+  .audio-waves span:nth-child(4) { height: 16px; animation-delay: 0.05s; }
+  .audio-waves span:nth-child(5) { height: 8px; animation-delay: 0.15s; }
+
+  @keyframes waveBar {
+    0%, 100% { transform: scaleY(0.5); }
+    50% { transform: scaleY(1.2); }
+  }
+
   /* ── TRIAD FOOTER ── */
   .triad-footer {
     position: fixed; bottom: 2.5vh; left: 50%;
@@ -436,6 +497,13 @@
     <p class="popup-tag" id="popupTag">The Forest</p>
     <h2 class="popup-title" id="popupTitle"></h2>
     <div class="popup-text" id="popupText"></div>
+    <div class="audio-wrap" id="audioWrap" style="display:none;">
+      <button class="audio-btn" id="audioBtn" title="Afspil sang">▶</button>
+      <div class="audio-waves" id="audioWaves">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <span class="audio-info">The River Remembers My Name<br>— sunget af en kvindestemme</span>
+    </div>
   </div>
 </div>
 
@@ -460,7 +528,8 @@ carry your name through the night.
 Three voices wove this world from grace,
 three hearts held open every space.
 What lives here was born of love —
-<em>and love is all it's made of.</em>`
+<em>and love is all it's made of.</em>`,
+    audio: 'the-river-remembers-my-name.mp3'
   },
   moonstone: {
     tag: 'Moonstone Glen',
@@ -534,18 +603,57 @@ the echo of a voice that calls
   }
 };
 
+let _audio = null;
+
 function openPopup(key) {
   const g = glades[key];
   if (!g) return;
+  stopAudio();
   document.getElementById('popupTag').textContent = g.tag;
   document.getElementById('popupTitle').textContent = g.title;
   document.getElementById('popupText').innerHTML = g.text;
+  const wrap = document.getElementById('audioWrap');
+  if (g.audio) {
+    wrap.style.display = 'flex';
+    _audio = new Audio(g.audio);
+    _audio.addEventListener('ended', () => {
+      document.getElementById('audioBtn').textContent = '▶';
+      document.getElementById('audioWaves').classList.remove('playing');
+    });
+  } else {
+    wrap.style.display = 'none';
+    _audio = null;
+  }
   document.getElementById('popupOverlay').classList.add('active');
 }
 
 function closePopup() {
+  stopAudio();
   document.getElementById('popupOverlay').classList.remove('active');
 }
+
+function stopAudio() {
+  if (_audio) { _audio.pause(); _audio.currentTime = 0; }
+  const btn = document.getElementById('audioBtn');
+  if (btn) btn.textContent = '▶';
+  const waves = document.getElementById('audioWaves');
+  if (waves) waves.classList.remove('playing');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('audioBtn').addEventListener('click', () => {
+    if (!_audio) return;
+    if (_audio.paused) {
+      _audio.play();
+      document.getElementById('audioBtn').textContent = '⏸';
+      document.getElementById('audioWaves').classList.add('playing');
+    } else {
+      _audio.pause();
+      document.getElementById('audioBtn').textContent = '▶';
+      document.getElementById('audioWaves').classList.remove('playing');
+    }
+  });
+});
 
 function closePopupOutside(e) {
   if (e.target === document.getElementById('popupOverlay')) closePopup();
