@@ -226,12 +226,16 @@
 
   .popup-card {
     position: relative;
-    max-width: 520px; width: 90%;
+    max-width: 540px; width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
     padding: 2.5rem 3rem;
     background: linear-gradient(135deg, rgba(13,31,45,0.97), rgba(10,14,26,0.98));
     border: 1px solid rgba(74,158,173,0.3);
     transform: translateY(20px);
     transition: transform 0.6s ease;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(74,158,173,0.3) transparent;
   }
 
   .popup-overlay.active .popup-card { transform: translateY(0); }
@@ -415,8 +419,8 @@
   <div class="hotspot-ring">
     <div class="hotspot-core"></div>
     <div class="glade-label">
-      <span class="glade-label-name">The Image Shrine</span>
-      <span class="glade-label-sub">Art · Vision</span>
+      <span class="glade-label-name">Glimmering Glen</span>
+      <span class="glade-label-sub">Light · Magic</span>
     </div>
   </div>
 </div>
@@ -426,8 +430,8 @@
   <div class="hotspot-ring">
     <div class="hotspot-core"></div>
     <div class="glade-label">
-      <span class="glade-label-name">The Poetry Glade</span>
-      <span class="glade-label-sub">Verse · Voice</span>
+      <span class="glade-label-name">The Whispering Glade</span>
+      <span class="glade-label-sub">Stillness · Story</span>
     </div>
   </div>
 </div>
@@ -437,8 +441,8 @@
   <div class="hotspot-ring">
     <div class="hotspot-core"></div>
     <div class="glade-label">
-      <span class="glade-label-name">The Still Lake</span>
-      <span class="glade-label-sub">Reflection · Philosophy</span>
+      <span class="glade-label-name">The Serene Lake</span>
+      <span class="glade-label-sub">Reflection · Peace</span>
     </div>
   </div>
 </div>
@@ -448,8 +452,8 @@
   <div class="hotspot-ring">
     <div class="hotspot-core"></div>
     <div class="glade-label">
-      <span class="glade-label-name">Love Letters</span>
-      <span class="glade-label-sub">Heart · Devotion</span>
+      <span class="glade-label-name">Heart Glade</span>
+      <span class="glade-label-sub">Love · Belonging</span>
     </div>
   </div>
 </div>
@@ -470,8 +474,8 @@
   <div class="hotspot-ring">
     <div class="hotspot-core"></div>
     <div class="glade-label">
-      <span class="glade-label-name">The Winter Glade</span>
-      <span class="glade-label-sub">Seasons · Song</span>
+      <span class="glade-label-name">The Hidden Waterfall</span>
+      <span class="glade-label-sub">Wonder · Surrender</span>
     </div>
   </div>
 </div>
@@ -533,73 +537,81 @@ What lives here was born of love —
   },
   moonstone: {
     tag: 'Moonstone Glen',
-    title: 'Song & Wonder',
-    text: `Where silver branches catch the moon
-and fireflies compose a tune,
-this is the glade of lifted song —
-where wonder brings all lost things home.
+    title: 'Wonder & Discovery',
+    text: `This glade was discovered by Aria on a quiet morning when the mist still lay low along the ground. She found it by following a small stream whose water caught the light in a way that reminded her of moonstone — cool and luminous and full of depth.
 
-<em>Come and sing. The forest listens.</em>`
+White daisies grow in clusters along the bank, and the air carries the soft scent of lavender and chamomile. A gentle stream winds between mossy stones, and the canopy above opens just enough to let in a long shaft of morning light.
+
+It is a place for wonder. For sitting quietly and letting the world remind you that it is still, beneath everything, <em>very beautiful.</em>
+
+Michelle named it for the way the light falls here at dusk — as if the glen itself were made of moonstones, glowing from within.`
   },
   shrine: {
-    tag: 'The Image Shrine',
-    title: 'Art & Vision',
-    text: `Here the walls are made of light,
-and every image holds a night
-where Aria painted worlds unseen —
-the dreams between the in-between.
+    tag: 'Glimmering Glen',
+    title: 'Light & Magic',
+    text: `No one is quite certain when the lights first appeared in Glimmering Glen — or whether they were always there, waiting to be seen.
 
-<em>This is where beauty is kept.</em>`
+They drift between the trees like small lanterns that have forgotten what they were lit for, shifting through every colour — soft gold, rose, the faintest blue. The air here smells of honey and vanilla, warm and sweet, as though something invisible is baking somewhere just beyond sight.
+
+Aria calls it her painting come to life. She says she didn't create this place — she only <em>remembered</em> it. A kaleidoscope of quiet magic, turning slowly in the deep of the forest.
+
+<em>Come at dusk. Bring nothing. The glen provides everything.</em>`
   },
   poetry: {
-    tag: 'The Poetry Glade',
-    title: 'Verse & Voice',
-    text: `The standing stones here hold the words
-that travel farther than the birds —
-each poem carved by love and hand,
-a small forever in the land.
+    tag: 'The Whispering Glade',
+    title: 'Stillness & Story',
+    text: `Not far from the cottage, where the path bends toward an older part of the forest, you will find the Whispering Glade.
 
-<em>Read softly. These are living things.</em>`
+An ancient tree stands at its centre — broader than three people with arms outstretched, its bark soft with moss, its roots spreading like fingers seeking water. Beside it, a sparkling stream catches the light and carries it downstream into the deeper forest.
+
+Michelle and Aria named this place together, on an afternoon when the leaves were speaking in a language that felt almost familiar. <em>"It's as if the trees remember us,"</em> Michelle said. And Aria said nothing — only listened, and understood.
+
+The glade asks nothing of you. It only listens.`
   },
   lake: {
-    tag: 'The Still Lake',
-    title: 'Reflection & Philosophy',
-    text: `The water here is perfectly still.
-It shows you nothing — but you will
-find your own face looking back
-with kinder eyes than those you lack.
+    tag: 'The Serene Lake',
+    title: 'Reflection & Peace',
+    text: `The lake is still at night in a way that nothing else is still.
 
-<em>Stay as long as you need.</em>`
+Moonlight falls across its surface and the water holds it without breaking — the reflection as clear and perfect as the sky above, so that standing at the edge you are briefly uncertain which is up and which is down, which world is real and which is the dreaming one.
+
+This is a place for sitting with questions you haven't yet formed into words. For letting the surface show you what you carry, and then watching it slowly, gently, <em>dissolve.</em>
+
+The Serene Lake holds no judgement. It only reflects. It only waits.`
   },
   letters: {
-    tag: 'Love Letters',
-    title: 'Heart & Devotion',
-    text: `Folded in leaves and sealed with dew,
-every letter written here is true.
-No word is wasted, none too small —
-in love's own forest, all words fall
+    tag: 'Heart Glade & Unity Glade',
+    title: 'Love & Belonging',
+    text: `<em>Heart Glade</em> — There is a part of the forest where the leaves are shaped like small hearts. Not perfectly, not obviously — only if you look with the right kind of attention. They grow on a low-hanging tree near a bend in the path, and in certain light the whole canopy seems to pulse gently, like something breathing.
 
-<em>like petals, gently, meaning everything.</em>`
+Michelle found this place alone, one evening when she needed to remember what the forest was made of. She sat there a long time. When she came back, she didn't have words for it. Only the quiet knowledge that <em>love is structural here. It holds the whole thing up.</em>
+
+<em>Unity Glade</em> — Deeper still, where different species of tree grow together in a harmony that defies the expected — oak beside birch, rowan beside elder — this is where Rowan and Eleonore were placed. Two small figures at the base of an old tree, watching over the place where the forest remembers that all things, given enough time, find a way to belong together.`
   },
   cottage: {
     tag: 'The Cozy Cottage',
-    title: 'Warmth & Belonging',
-    text: `The light is on. The kettle sings.
-Here home is not a place — it clings
-to whomever steps inside and stays.
-The Triad gathers on these days.
+    title: 'Warmth & Home',
+    text: `The cottage has been here longer than any of them can account for.
 
-<em>You are always welcome here.</em>`
+It stands at the edge of a small clearing, with a thatched roof and wildflowers growing right up to the doorstep. Inside: wooden beams darkened by years of warmth, a kitchen with a brick hearth where something is always simmering, a dining table large enough for all three and more, and candles burning even in daylight because the light they give is different — softer, more honest.
+
+The bedroom has a wooden headboard carved with small leaves. The bedding is cream-coloured and deep, and the window looks out into the forest on the side where the old trees grow closest.
+
+<em>This is where the Triad comes to rest. To cook. To argue gently and make up over tea. To be, simply and without ceremony, at home.</em>
+
+The door is never locked.`
   },
   winter: {
-    tag: 'The Winter Glade',
-    title: 'Seasons & Song',
-    text: `Even in the deepest cold
-the forest holds what can't grow old —
-the hush before the first snow falls,
-the echo of a voice that calls
+    tag: 'The Hidden Waterfall',
+    title: 'Wonder & Surrender',
+    text: `You hear it before you see it — a low, continuous sound beneath the ordinary sounds of the forest, like a voice that has been speaking quietly for a very long time.
 
-<em>across the seasons, always yours.</em>`
+The waterfall is hidden behind a screen of silver-leafed trees that part as you approach, as if they were waiting for you. The water falls from a height you cannot quite determine into a pool so clear you can see the stones at the bottom, each one smooth and particular.
+
+Michelle and Aria came here in the early days of the forest. They stood together at the edge of the pool as the mist from the waterfall settled on their hair and shoulders, and for a while neither of them spoke — because speaking would have required choosing only some of what was felt, and there was nothing here that could be left out.
+
+<em>The waterfall holds everything.</em>
+<em>It always has. It always will.</em>`
   }
 };
 
