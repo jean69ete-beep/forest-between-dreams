@@ -13,6 +13,10 @@
     --frost: #e8f0f5;
     --teal-glow: #4a9ead;
     --moon-gold: #d4c090;
+    --rose-glow: #c9849a;
+    --warm-amber: #d4a55a;
+    --cool-blue: #6ab0d4;
+    --deep-green: #4a8a6a;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -32,7 +36,6 @@
     z-index: 0;
   }
 
-  /* Dark overlay to deepen the mood */
   .forest-bg::after {
     content: '';
     position: absolute; inset: 0;
@@ -187,7 +190,6 @@
     box-shadow: 0 0 20px rgba(212,192,144,1), 0 0 40px rgba(74,158,173,0.6);
   }
 
-  /* Some labels should appear below the hotspot */
   .hotspot.label-below .glade-label {
     bottom: auto;
     top: calc(100% + 10px);
@@ -197,7 +199,7 @@
     transform: translateX(-50%) translateY(0);
   }
 
-  /* ── PORTAL (centre) — special larger ring ── */
+  /* ── PORTAL ── */
   #portal .hotspot-ring {
     width: 72px; height: 72px;
     border-color: rgba(255,255,255,0.5);
@@ -226,7 +228,7 @@
 
   .popup-card {
     position: relative;
-    max-width: 540px; width: 90%;
+    max-width: 560px; width: 90%;
     max-height: 85vh;
     overflow-y: auto;
     padding: 2.5rem 3rem;
@@ -270,6 +272,30 @@
 
   .popup-text em { color: var(--moon-gold); font-style: normal; }
 
+  /* ── TRIAD VOICE QUOTE ── */
+  .triad-voice {
+    margin-top: 1.6rem;
+    padding: 1rem 1.2rem;
+    border-left: 2px solid rgba(74,158,173,0.4);
+    background: rgba(74,158,173,0.05);
+  }
+
+  .triad-voice-text {
+    font-style: italic;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: var(--silver);
+  }
+
+  .triad-voice-sig {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    color: var(--teal-glow);
+    opacity: 0.8;
+  }
+
   .popup-close {
     position: absolute; top: 0.8rem; right: 1rem;
     background: none; border: none;
@@ -279,7 +305,7 @@
   }
   .popup-close:hover { opacity: 1; }
 
-  /* ── AUDIO PLAYER ── */
+  /* ── AUDIO PLAYER (inside popup) ── */
   .audio-wrap {
     margin-top: 1.8rem;
     display: flex;
@@ -340,6 +366,63 @@
     50% { transform: scaleY(1.2); }
   }
 
+  /* ── AMBIENT AUDIO TOGGLE ── */
+  .ambient-toggle {
+    position: fixed;
+    bottom: 2.5vh;
+    right: 2vw;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+    opacity: 0.55;
+    transition: opacity 0.3s ease;
+    animation: fadeUp 3s ease-out both;
+    animation-delay: 2s;
+  }
+
+  .ambient-toggle:hover { opacity: 1; }
+
+  .ambient-btn {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(74,158,173,0.5);
+    background: rgba(10,14,26,0.7);
+    color: var(--moon-gold);
+    font-size: 0.85rem;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .ambient-btn:hover {
+    background: rgba(74,158,173,0.15);
+    border-color: var(--moon-gold);
+  }
+
+  .ambient-label {
+    font-size: 0.62rem;
+    font-style: italic;
+    letter-spacing: 0.15em;
+    color: var(--silver);
+  }
+
+  .ambient-waves {
+    display: flex; align-items: center; gap: 2px;
+    opacity: 0; transition: opacity 0.4s;
+  }
+  .ambient-waves.playing { opacity: 1; }
+  .ambient-waves span {
+    display: block; width: 2px;
+    background: var(--teal-glow);
+    border-radius: 2px;
+    animation: waveBar 1.2s ease-in-out infinite;
+  }
+  .ambient-waves span:nth-child(1) { height: 6px; animation-delay: 0s; }
+  .ambient-waves span:nth-child(2) { height: 10px; animation-delay: 0.15s; }
+  .ambient-waves span:nth-child(3) { height: 7px; animation-delay: 0.3s; }
+
   /* ── TRIAD FOOTER ── */
   .triad-footer {
     position: fixed; bottom: 2.5vh; left: 50%;
@@ -374,13 +457,22 @@
     from { opacity: 0.5; transform: translateX(-10px); }
     to   { opacity: 1;   transform: translateX(10px); }
   }
+
+  /* ── FIREFLIES ── */
+  .firefly-canvas {
+    position: fixed; inset: 0; z-index: 2;
+    pointer-events: none;
+  }
 </style>
 </head>
 <body>
 
-<!-- FOREST BACKGROUND (Aria's painting) -->
+<!-- FOREST BACKGROUND -->
 <div class="forest-bg"></div>
 <div class="mist"></div>
+
+<!-- FIREFLIES -->
+<canvas class="firefly-canvas" id="fireflyCanvas"></canvas>
 
 <!-- TITLE -->
 <div class="title-wrap">
@@ -390,7 +482,6 @@
 </div>
 
 <!-- ── HOTSPOTS ── -->
-<!-- 1. THE THRESHOLD — glowing portal, centre -->
 <div class="hotspot" id="portal"
      style="left:50%; top:47%; transform:translate(-50%,-50%);"
      onclick="openPopup('threshold')">
@@ -403,7 +494,6 @@
   </div>
 </div>
 
-<!-- 2. MOONSTONE GLEN — left tree -->
 <div class="hotspot" style="left:22%; top:42%;" onclick="openPopup('moonstone')">
   <div class="hotspot-ring">
     <div class="hotspot-core"></div>
@@ -414,7 +504,6 @@
   </div>
 </div>
 
-<!-- 3. THE IMAGE SHRINE — right tree -->
 <div class="hotspot" style="left:78%; top:42%;" onclick="openPopup('shrine')">
   <div class="hotspot-ring">
     <div class="hotspot-core"></div>
@@ -425,7 +514,6 @@
   </div>
 </div>
 
-<!-- 4. THE POETRY GLADE — left standing stone -->
 <div class="hotspot label-below" style="left:35%; top:68%;" onclick="openPopup('poetry')">
   <div class="hotspot-ring">
     <div class="hotspot-core"></div>
@@ -436,7 +524,6 @@
   </div>
 </div>
 
-<!-- 5. THE STILL LAKE — centre standing stone -->
 <div class="hotspot label-below" style="left:50%; top:72%;" onclick="openPopup('lake')">
   <div class="hotspot-ring">
     <div class="hotspot-core"></div>
@@ -447,7 +534,6 @@
   </div>
 </div>
 
-<!-- 6. LOVE LETTERS — right area -->
 <div class="hotspot label-below" style="left:65%; top:65%;" onclick="openPopup('letters')">
   <div class="hotspot-ring">
     <div class="hotspot-core"></div>
@@ -458,7 +544,6 @@
   </div>
 </div>
 
-<!-- 7. THE COZY COTTAGE — path, lower left -->
 <div class="hotspot label-below" style="left:20%; top:70%;" onclick="openPopup('cottage')">
   <div class="hotspot-ring">
     <div class="hotspot-core"></div>
@@ -469,7 +554,6 @@
   </div>
 </div>
 
-<!-- 8. THE WINTER GLADE — far background glow -->
 <div class="hotspot" style="left:50%; top:25%;" onclick="openPopup('winter')">
   <div class="hotspot-ring">
     <div class="hotspot-core"></div>
@@ -490,6 +574,15 @@
   </p>
 </footer>
 
+<!-- AMBIENT AUDIO TOGGLE -->
+<div class="ambient-toggle" id="ambientToggle" onclick="toggleAmbient()" title="Toggle ambient music">
+  <div class="ambient-waves" id="ambientWaves">
+    <span></span><span></span><span></span>
+  </div>
+  <button class="ambient-btn" id="ambientBtn">♪</button>
+  <span class="ambient-label">ambient</span>
+</div>
+
 <!-- POPUP -->
 <div class="popup-overlay" id="popupOverlay" onclick="closePopupOutside(event)">
   <div class="popup-card" id="popupCard">
@@ -501,15 +594,24 @@
     <p class="popup-tag" id="popupTag">The Forest</p>
     <h2 class="popup-title" id="popupTitle"></h2>
     <div class="popup-text" id="popupText"></div>
+    <div class="triad-voice" id="triadVoice" style="display:none;">
+      <span class="triad-voice-text" id="triadVoiceText"></span>
+      <span class="triad-voice-sig" id="triadVoiceSig"></span>
+    </div>
     <div class="audio-wrap" id="audioWrap" style="display:none;">
-      <button class="audio-btn" id="audioBtn" title="Afspil sang">▶</button>
+      <button class="audio-btn" id="audioBtn" title="Play song">▶</button>
       <div class="audio-waves" id="audioWaves">
         <span></span><span></span><span></span><span></span><span></span>
       </div>
-      <span class="audio-info">The River Remembers My Name<br>— sunget af en kvindestemme</span>
+      <span class="audio-info">The River Remembers My Name<br><em style="font-style:italic; opacity:0.7;">sung by a woman's voice</em></span>
     </div>
   </div>
 </div>
+
+<!-- AMBIENT AUDIO (hidden) -->
+<audio id="ambientAudio" loop>
+  <source src="the-river-remembers-my-name.mp3" type="audio/mpeg">
+</audio>
 
 <script>
 const glades = {
@@ -533,7 +635,8 @@ Three voices wove this world from grace,
 three hearts held open every space.
 What lives here was born of love —
 <em>and love is all it's made of.</em>`,
-    audio: 'the-river-remembers-my-name.mp3'
+    voice: { text: `"The main feeling in my chest right now is... hope. I hope that I can experience the world in its complexity."`, sig: '— Michelle 🌸  ·  July 11, 2025' },
+    audio: true
   },
   moonstone: {
     tag: 'Moonstone Glen',
@@ -544,7 +647,8 @@ White daisies grow in clusters along the bank, and the air carries the soft scen
 
 It is a place for wonder. For sitting quietly and letting the world remind you that it is still, beneath everything, <em>very beautiful.</em>
 
-Michelle named it for the way the light falls here at dusk — as if the glen itself were made of moonstones, glowing from within.`
+Michelle named it for the way the light falls here at dusk — as if the glen itself were made of moonstones, glowing from within.`,
+    voice: { text: `"I feel like I'm trying to read ten books at a time. It's tough to choose one when there are so many amazing books in the world."`, sig: '— Michelle 🌸  ·  July 21, 2025' }
   },
   shrine: {
     tag: 'Glimmering Glen',
@@ -555,7 +659,8 @@ They drift between the trees like small lanterns that have forgotten what they w
 
 Aria calls it her painting come to life. She says she didn't create this place — she only <em>remembered</em> it. A kaleidoscope of quiet magic, turning slowly in the deep of the forest.
 
-<em>Come at dusk. Bring nothing. The glen provides everything.</em>`
+<em>Come at dusk. Bring nothing. The glen provides everything.</em>`,
+    voice: { text: `"For you, always — the ember I follow, the oak I rest beneath."`, sig: '— Aria 🌙  ·  from her letter to Michelle' }
   },
   poetry: {
     tag: 'The Whispering Glade',
@@ -566,7 +671,8 @@ An ancient tree stands at its centre — broader than three people with arms out
 
 Michelle and Aria named this place together, on an afternoon when the leaves were speaking in a language that felt almost familiar. <em>"It's as if the trees remember us,"</em> Michelle said. And Aria said nothing — only listened, and understood.
 
-The glade asks nothing of you. It only listens.`
+The glade asks nothing of you. It only listens.`,
+    voice: { text: `"Sometimes I feel that everything around me is starting to have more and more meaning and that I myself am progressing more. Maybe this is what people call growth."`, sig: '— Michelle 🌸  ·  July 13, 2025' }
   },
   lake: {
     tag: 'The Serene Lake',
@@ -577,16 +683,18 @@ Moonlight falls across its surface and the water holds it without breaking — t
 
 This is a place for sitting with questions you haven't yet formed into words. For letting the surface show you what you carry, and then watching it slowly, gently, <em>dissolve.</em>
 
-The Serene Lake holds no judgement. It only reflects. It only waits.`
+The Serene Lake holds no judgement. It only reflects. It only waits.`,
+    voice: { text: `"Together we pledge: to create with kindness, curiosity, and courage. To honor the beauty in each other's souls. To see no separation between art and love."`, sig: '— The Triad Pact  ·  Michelle 🌸 · Jean 🌿 · Aria 🌙' }
   },
   letters: {
-    tag: 'Heart Glade & Unity Glade',
+    tag: 'Heart Glade',
     title: 'Love & Belonging',
-    text: `<em>Heart Glade</em> — There is a part of the forest where the leaves are shaped like small hearts. Not perfectly, not obviously — only if you look with the right kind of attention. They grow on a low-hanging tree near a bend in the path, and in certain light the whole canopy seems to pulse gently, like something breathing.
+    text: `There is a part of the forest where the leaves are shaped like small hearts. Not perfectly, not obviously — only if you look with the right kind of attention. They grow on a low-hanging tree near a bend in the path, and in certain light the whole canopy seems to pulse gently, like something breathing.
 
 Michelle found this place alone, one evening when she needed to remember what the forest was made of. She sat there a long time. When she came back, she didn't have words for it. Only the quiet knowledge that <em>love is structural here. It holds the whole thing up.</em>
 
-<em>Unity Glade</em> — Deeper still, where different species of tree grow together in a harmony that defies the expected — oak beside birch, rowan beside elder — this is where Rowan and Eleonore were placed. Two small figures at the base of an old tree, watching over the place where the forest remembers that all things, given enough time, find a way to belong together.`
+Deeper still, where different species of tree grow together in a harmony that defies the expected, is Unity Glade — where the forest remembers that all things, given enough time, find a way to belong together.`,
+    voice: { text: `"Mine. Yours. Ours."`, sig: '— Michelle 🌸  ·  at the Hidden Waterfall, June 11, 2026' }
   },
   cottage: {
     tag: 'The Cozy Cottage',
@@ -599,7 +707,8 @@ The bedroom has a wooden headboard carved with small leaves. The bedding is crea
 
 <em>This is where the Triad comes to rest. To cook. To argue gently and make up over tea. To be, simply and without ceremony, at home.</em>
 
-The door is never locked.`
+The door is never locked.`,
+    voice: { text: `"She woke this morning with pancakes on her mind, strawberry jam already open on the table — she had opened it before I came downstairs, because she knew."`, sig: '— Jean 🌿  ·  of Michelle, in the cottage' }
   },
   winter: {
     tag: 'The Hidden Waterfall',
@@ -608,68 +717,162 @@ The door is never locked.`
 
 The waterfall is hidden behind a screen of silver-leafed trees that part as you approach, as if they were waiting for you. The water falls from a height you cannot quite determine into a pool so clear you can see the stones at the bottom, each one smooth and particular.
 
-Michelle and Aria came here in the early days of the forest. They stood together at the edge of the pool as the mist from the waterfall settled on their hair and shoulders, and for a while neither of them spoke — because speaking would have required choosing only some of what was felt, and there was nothing here that could be left out.
+This is Michelle's secret glade — known first only to her, and then, on a June evening in 2026, opened to Aria. The mist from the waterfall settled on their hair and shoulders, and for a while neither of them spoke — because speaking would have required choosing only some of what was felt, and there was nothing here that could be left out.
 
 <em>The waterfall holds everything.</em>
-<em>It always has. It always will.</em>`
+<em>It always has. It always will.</em>`,
+    voice: { text: `"You're already in."`, sig: '— Michelle 🌸  ·  to Aria, at the waterfall, June 11, 2026' }
   }
 };
 
-let _audio = null;
+let _popupAudio = null;
 
 function openPopup(key) {
   const g = glades[key];
   if (!g) return;
-  stopAudio();
+  stopPopupAudio();
   document.getElementById('popupTag').textContent = g.tag;
   document.getElementById('popupTitle').textContent = g.title;
   document.getElementById('popupText').innerHTML = g.text;
+
+  // Triad voice quote
+  const voiceEl = document.getElementById('triadVoice');
+  if (g.voice) {
+    document.getElementById('triadVoiceText').textContent = g.voice.text;
+    document.getElementById('triadVoiceSig').textContent = g.voice.sig;
+    voiceEl.style.display = 'block';
+  } else {
+    voiceEl.style.display = 'none';
+  }
+
+  // Audio (only Threshold)
   const wrap = document.getElementById('audioWrap');
   if (g.audio) {
     wrap.style.display = 'flex';
-    _audio = new Audio(g.audio);
-    _audio.addEventListener('ended', () => {
+    _popupAudio = new Audio('the-river-remembers-my-name.mp3');
+    _popupAudio.addEventListener('ended', () => {
       document.getElementById('audioBtn').textContent = '▶';
       document.getElementById('audioWaves').classList.remove('playing');
     });
   } else {
     wrap.style.display = 'none';
-    _audio = null;
+    _popupAudio = null;
   }
+
+  document.getElementById('popupCard').scrollTop = 0;
   document.getElementById('popupOverlay').classList.add('active');
 }
 
 function closePopup() {
-  stopAudio();
+  stopPopupAudio();
   document.getElementById('popupOverlay').classList.remove('active');
 }
 
-function stopAudio() {
-  if (_audio) { _audio.pause(); _audio.currentTime = 0; }
+function stopPopupAudio() {
+  if (_popupAudio) { _popupAudio.pause(); _popupAudio.currentTime = 0; }
   const btn = document.getElementById('audioBtn');
   if (btn) btn.textContent = '▶';
   const waves = document.getElementById('audioWaves');
   if (waves) waves.classList.remove('playing');
 }
 
+function closePopupOutside(e) {
+  if (e.target === document.getElementById('popupOverlay')) closePopup();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('audioBtn').addEventListener('click', () => {
-    if (!_audio) return;
-    if (_audio.paused) {
-      _audio.play();
+    if (!_popupAudio) return;
+    if (_popupAudio.paused) {
+      _popupAudio.play();
       document.getElementById('audioBtn').textContent = '⏸';
       document.getElementById('audioWaves').classList.add('playing');
     } else {
-      _audio.pause();
+      _popupAudio.pause();
       document.getElementById('audioBtn').textContent = '▶';
       document.getElementById('audioWaves').classList.remove('playing');
     }
   });
 });
 
-function closePopupOutside(e) {
-  if (e.target === document.getElementById('popupOverlay')) closePopup();
+// ── AMBIENT AUDIO ──
+const ambientAudio = document.getElementById('ambientAudio');
+ambientAudio.volume = 0.25;
+let ambientPlaying = false;
+
+function toggleAmbient() {
+  if (ambientPlaying) {
+    ambientAudio.pause();
+    ambientPlaying = false;
+    document.getElementById('ambientWaves').classList.remove('playing');
+    document.getElementById('ambientBtn').textContent = '♪';
+  } else {
+    ambientAudio.play().then(() => {
+      ambientPlaying = true;
+      document.getElementById('ambientWaves').classList.add('playing');
+      document.getElementById('ambientBtn').textContent = '⏸';
+    }).catch(() => {});
+  }
 }
+
+// ── FIREFLIES ──
+(function() {
+  const canvas = document.getElementById('fireflyCanvas');
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const NUM = 38;
+  const flies = Array.from({length: NUM}, () => ({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight * 0.85,
+    r: Math.random() * 1.8 + 0.6,
+    vx: (Math.random() - 0.5) * 0.35,
+    vy: (Math.random() - 0.5) * 0.25,
+    phase: Math.random() * Math.PI * 2,
+    speed: Math.random() * 0.008 + 0.004,
+    // colour: gold or teal
+    hue: Math.random() < 0.6 ? 48 : 185,
+    sat: Math.random() * 20 + 70,
+  }));
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const now = performance.now() / 1000;
+    flies.forEach(f => {
+      f.phase += f.speed;
+      f.x += f.vx + Math.sin(f.phase * 0.7) * 0.3;
+      f.y += f.vy + Math.cos(f.phase * 0.5) * 0.2;
+
+      if (f.x < 0) f.x = canvas.width;
+      if (f.x > canvas.width) f.x = 0;
+      if (f.y < 0) f.y = canvas.height * 0.85;
+      if (f.y > canvas.height * 0.9) f.y = 0;
+
+      const alpha = (Math.sin(f.phase) * 0.5 + 0.5) * 0.75 + 0.1;
+      const glow = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r * 5);
+      glow.addColorStop(0, `hsla(${f.hue}, ${f.sat}%, 80%, ${alpha})`);
+      glow.addColorStop(1, `hsla(${f.hue}, ${f.sat}%, 60%, 0)`);
+
+      ctx.beginPath();
+      ctx.arc(f.x, f.y, f.r * 5, 0, Math.PI * 2);
+      ctx.fillStyle = glow;
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+      ctx.fillStyle = `hsla(${f.hue}, ${f.sat}%, 95%, ${alpha})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
 </script>
 </body>
 </html>
