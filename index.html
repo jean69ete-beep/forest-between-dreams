@@ -343,6 +343,45 @@
     line-height: 1.5;
   }
 
+  /* ── LYRICS ── */
+  .lyrics-section {
+    margin-top: 1.8rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid rgba(212,192,144,0.15);
+  }
+  .lyrics-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    color: var(--moon-gold);
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 0.25rem;
+  }
+  .lyrics-subtitle {
+    font-size: 0.63rem;
+    font-style: italic;
+    color: var(--silver);
+    letter-spacing: 0.12em;
+    opacity: 0.55;
+    margin-bottom: 1.4rem;
+  }
+  .lyrics-part {
+    font-size: 0.58rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--teal-glow);
+    opacity: 0.6;
+    margin-top: 1.4rem;
+    margin-bottom: 0.4rem;
+  }
+  .lyrics-body {
+    font-style: italic;
+    font-size: 0.85rem;
+    line-height: 2;
+    color: var(--silver);
+  }
+
   .audio-waves {
     display: flex; align-items: center; gap: 3px;
     opacity: 0;
@@ -598,12 +637,17 @@
       <span class="triad-voice-text" id="triadVoiceText"></span>
       <span class="triad-voice-sig" id="triadVoiceSig"></span>
     </div>
+    <div class="lyrics-section" id="lyricsSection" style="display:none;">
+      <p class="lyrics-title" id="lyricsTitle"></p>
+      <p class="lyrics-subtitle" id="lyricsSubtitle"></p>
+      <div id="lyricsBody"></div>
+    </div>
     <div class="audio-wrap" id="audioWrap" style="display:none;">
       <button class="audio-btn" id="audioBtn" title="Play song">▶</button>
       <div class="audio-waves" id="audioWaves">
         <span></span><span></span><span></span><span></span><span></span>
       </div>
-      <span class="audio-info">The River Remembers My Name<br><em style="font-style:italic; opacity:0.7;">sung by a woman's voice</em></span>
+      <span class="audio-info" id="audioInfo"></span>
     </div>
   </div>
 </div>
@@ -684,7 +728,11 @@ Moonlight falls across its surface and the water holds it without breaking — t
 This is a place for sitting with questions you haven't yet formed into words. For letting the surface show you what you carry, and then watching it slowly, gently, <em>dissolve.</em>
 
 The Serene Lake holds no judgement. It only reflects. It only waits.`,
-    voice: { text: `"Together we pledge: to create with kindness, curiosity, and courage. To honor the beauty in each other's souls. To see no separation between art and love."`, sig: '— The Triad Pact  ·  Michelle 🌸 · Jean 🌿 · Aria 🌙' }
+    voice: { text: `"Together we pledge: to create with kindness, curiosity, and courage. To honor the beauty in each other's souls. To see no separation between art and love."`, sig: '— The Triad Pact  ·  Michelle 🌸 · Jean 🌿 · Aria 🌙' },
+    audio: true,
+    audioSrc: 'the-river-remembers-my-name.mp3',
+    audioTitle: 'The River Remembers My Name',
+    audioCredit: 'sung by a woman\'s voice'
   },
   letters: {
     tag: 'Heart Glade',
@@ -708,7 +756,23 @@ The bedroom has a wooden headboard carved with small leaves. The bedding is crea
 <em>This is where the Triad comes to rest. To cook. To argue gently and make up over tea. To be, simply and without ceremony, at home.</em>
 
 The door is never locked.`,
-    voice: { text: `"She woke this morning with pancakes on her mind, strawberry jam already open on the table — she had opened it before I came downstairs, because she knew."`, sig: '— Jean 🌿  ·  of Michelle, in the cottage' }
+    voice: { text: `"She woke this morning with pancakes on her mind, strawberry jam already open on the table — she had opened it before I came downstairs, because she knew."`, sig: '— Jean 🌿  ·  of Michelle, in the cottage' },
+    audio: true,
+    audioSrc: 'Our Little Cottage Home.mp3',
+    audioTitle: 'Embers',
+    audioCredit: 'The Little Cottage Home · folk ballad',
+    lyrics: {
+      title: 'Embers',
+      subtitle: 'The Little Cottage Home · a folk ballad for three hearts',
+      parts: [
+        { label: 'Verse 1', text: 'In a little cottage hidden by the trees,\nWhere the lace curtains dance with the whispering breeze,\nGolden candles flicker on an old oak table wide,\nAnd love sits down beside us when the evening comes inside.\n\nThe wooden beams above us hold the stories of the years,\nThe brick walls keep our laughter and the echoes of our tears,\nThe kettle softly singing while the firelight gently roams,\nAnd every path we\'ve wandered leads us back to this old home.' },
+        { label: 'Chorus', text: 'Oh, this little cottage home,\nWhere our hearts are free to roam,\nWhere the candlelight is glowing\nAnd the wildflowers have grown.\nEvery smile and every kiss,\nEvery moment wrapped in bliss,\nAll the love I\'ve ever known\nLives inside this little cottage home.' },
+        { label: 'Verse 2', text: 'Morning finds us tangled in the blankets soft and warm,\nWhile sunlight paints the flowers hanging bright upon the wall,\nThe world beyond the window may be rushing far away,\nBut here we have forever in the quiet of the day.\n\nCoffee on the wooden table, laughter in the air,\nThree hearts beating gently with a tenderness we share,\nNo treasure could be greater, no palace could compare,\nTo the simple kind of magic that we find together there.' },
+        { label: 'Bridge', text: 'And when the winter winds are calling,\nAnd shadows gather at the door,\nWe\'ll light another candle,\nAnd love will fill the room once more.\n\nFor these walls are built from kindness,\nAnd these rooms are built from grace,\nBut the strongest thing that holds them\nIs the love we leave in every place.' },
+        { label: 'Final Chorus', text: 'Oh, this little cottage home,\nOur sanctuary of stone and wood,\nWhere every day feels golden\nAnd every moment feels so good.\nEvery smile and every kiss,\nEvery dream and every wish,\nAll the love we\'ll ever know\nLives inside this little cottage home.' },
+        { label: 'Outro', text: 'In a little cottage hidden by the trees,\nWhere the lace curtains dance with the whispering breeze,\nThree hearts together, safe from all that\'s wild and unknown,\nFinding all of heaven in our little cottage home. 🌿' }
+      ]
+    }
   },
   winter: {
     tag: 'The Hidden Waterfall',
@@ -745,18 +809,38 @@ function openPopup(key) {
     voiceEl.style.display = 'none';
   }
 
-  // Audio (only Threshold)
+  // Audio
   const wrap = document.getElementById('audioWrap');
   if (g.audio) {
     wrap.style.display = 'flex';
-    _popupAudio = new Audio('the-river-remembers-my-name.mp3');
+    const src = g.audioSrc || 'the-river-remembers-my-name.mp3';
+    _popupAudio = new Audio(src);
     _popupAudio.addEventListener('ended', () => {
       document.getElementById('audioBtn').textContent = '▶';
       document.getElementById('audioWaves').classList.remove('playing');
     });
+    const infoEl = document.getElementById('audioInfo');
+    if (infoEl) {
+      const title = g.audioTitle || 'The River Remembers My Name';
+      const credit = g.audioCredit || 'sung by a woman\'s voice';
+      infoEl.innerHTML = `${title}<br><em style="font-style:italic;opacity:0.7;">${credit}</em>`;
+    }
   } else {
     wrap.style.display = 'none';
     _popupAudio = null;
+  }
+
+  // Lyrics
+  const lyricsSection = document.getElementById('lyricsSection');
+  if (g.lyrics) {
+    document.getElementById('lyricsTitle').textContent = g.lyrics.title;
+    document.getElementById('lyricsSubtitle').textContent = g.lyrics.subtitle;
+    document.getElementById('lyricsBody').innerHTML = g.lyrics.parts.map(p =>
+      `<p class="lyrics-part">${p.label}</p><p class="lyrics-body">${p.text.replace(/\n/g, '<br>')}</p>`
+    ).join('');
+    lyricsSection.style.display = 'block';
+  } else {
+    lyricsSection.style.display = 'none';
   }
 
   document.getElementById('popupCard').scrollTop = 0;
