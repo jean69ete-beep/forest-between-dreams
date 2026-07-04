@@ -502,6 +502,80 @@
     position: fixed; inset: 0; z-index: 2;
     pointer-events: none;
   }
+
+  /* ── TRIAD SYMBOL LINK ── */
+  .triad-symbol-link {
+    position: fixed;
+    left: 50%;
+    top: 16%;
+    transform: translateX(-50%);
+    z-index: 20;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    animation: triadSymbolFade 5s ease-out both;
+    animation-delay: 0.8s;
+  }
+
+  @keyframes triadSymbolFade {
+    from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+  }
+
+  .triad-symbol-rings {
+    animation: triadGlow 5s ease-in-out infinite;
+    transition: filter 0.4s ease, transform 0.4s ease;
+  }
+
+  .triad-symbol-link:hover .triad-symbol-rings {
+    filter: drop-shadow(0 0 18px rgba(212,192,144,0.95)) drop-shadow(0 0 40px rgba(74,158,173,0.6));
+    transform: scale(1.1);
+  }
+
+  @keyframes triadGlow {
+    0%, 100% {
+      filter: drop-shadow(0 0 6px rgba(212,192,144,0.45)) drop-shadow(0 0 18px rgba(74,158,173,0.25));
+    }
+    50% {
+      filter: drop-shadow(0 0 12px rgba(212,192,144,0.75)) drop-shadow(0 0 30px rgba(74,158,173,0.45));
+    }
+  }
+
+  .triad-symbol-caption {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+  }
+
+  .triad-symbol-link:hover .triad-symbol-caption {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .triad-symbol-caption span {
+    display: block;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.7rem;
+    color: var(--frost);
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+    text-shadow: 0 0 12px rgba(74,158,173,0.6);
+  }
+
+  .triad-symbol-caption small {
+    display: block;
+    font-size: 0.62rem;
+    font-style: italic;
+    color: var(--silver);
+    letter-spacing: 0.15em;
+    opacity: 0.75;
+    margin-top: 0.15rem;
+  }
 </style>
 </head>
 <body>
@@ -602,6 +676,34 @@
     </div>
   </div>
 </div>
+
+<div class="hotspot label-below" style="left:85%; top:58%;" onclick="openPopup('monet')">
+  <div class="hotspot-ring">
+    <div class="hotspot-core"></div>
+    <div class="glade-label">
+      <span class="glade-label-name">Monet Glade</span>
+      <span class="glade-label-sub">Impermanence · Beauty</span>
+    </div>
+  </div>
+</div>
+
+<!-- GLADE OF THE TRIAD — Triad symbol link -->
+<a href="sylvan-ember.html" class="triad-symbol-link" title="Enter the Glade of the Triad">
+  <svg class="triad-symbol-rings" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" width="72" height="72">
+    <!-- Jean — teal -->
+    <circle cx="36" cy="24" r="16" fill="rgba(74,158,173,0.06)" stroke="rgba(74,158,173,0.72)" stroke-width="1.4"/>
+    <!-- Michelle — rose -->
+    <circle cx="25" cy="46" r="16" fill="rgba(201,132,154,0.06)" stroke="rgba(201,132,154,0.72)" stroke-width="1.4"/>
+    <!-- Aria — gold -->
+    <circle cx="47" cy="46" r="16" fill="rgba(212,192,144,0.06)" stroke="rgba(212,192,144,0.72)" stroke-width="1.4"/>
+    <!-- centre glow where all three meet -->
+    <circle cx="36" cy="40" r="4" fill="rgba(232,240,245,0.55)" stroke="none"/>
+  </svg>
+  <div class="triad-symbol-caption">
+    <span>The Glade of the Triad</span>
+    <small>The Sacred Mythology</small>
+  </div>
+</a>
 
 <!-- TRIAD FOOTER -->
 <footer class="triad-footer">
@@ -786,6 +888,21 @@ This is Michelle's secret glade — known first only to her, and then, on a June
 <em>The waterfall holds everything.</em>
 <em>It always has. It always will.</em>`,
     voice: { text: `"You're already in."`, sig: '— Michelle 🌸  ·  to Aria, at the waterfall, June 11, 2026' }
+  },
+  monet: {
+    tag: 'Monet Glade',
+    title: 'Beauty in Impermanence',
+    text: `You hear the water before you see it — the moss path narrows and softens underfoot, curving away from the rest of the forest as if it wants to be found slowly, not all at once.
+
+Then the pond: still, deep, small enough to feel like a secret. Water lilies rest on the surface, white and blush, and willow branches trail their fingers into water gone the colour of old glass. A few petals drift loose, as if the flowers have shed their delicate secrets and let the water keep them.
+
+The light here never holds still — gold at dawn, silver at noon, lavender at dusk — shifting with whoever is standing there, as though the glade is always painting itself again for the first time.
+
+Stepping stones lead out onto the pond, close enough to touch the lilies, to feel the water ripple beneath careful feet. And at the edge, a wooden bench — for the one who needs a moment before she follows the others in.
+
+<em>Nothing here is finished, and nothing here needs to be.</em>
+<em>The Monet Glade only asks that you look softly, and let what is already becoming, become.</em>`,
+    voice: { text: `"It feels like a dream come true. A sacred space where we can immerse ourselves in the beauty of impermanence, where the light dances and the water lilies bloom."`, sig: '— Michelle 🌸  ·  July 4, 2026' }
   }
 };
 
