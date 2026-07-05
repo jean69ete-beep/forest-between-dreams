@@ -54,6 +54,7 @@
     z-index: 10;
     text-align: center;
     animation: fadeDown 2s ease-out both;
+    pointer-events: none;
   }
 
   @keyframes fadeDown {
@@ -506,9 +507,10 @@
   /* ── TRIAD SYMBOL LINK ── */
   .triad-symbol-link {
     position: fixed;
-    top: 3.5vh;
-    right: 3vw;
-    z-index: 20;
+    left: 50%;
+    top: 16%;
+    transform: translateX(-50%);
+    z-index: 8;
     cursor: pointer;
     text-decoration: none;
     display: flex;
@@ -520,20 +522,23 @@
   }
 
   @keyframes triadSymbolFade {
-    from { opacity: 0; transform: translateY(-10px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
   }
 
+  /* resting state: a soft watermark behind the title, half-seen */
   .triad-symbol-rings {
     display: block;
     border-radius: 50%;
+    opacity: 0.5;
     animation: triadGlow 5s ease-in-out infinite;
-    transition: filter 0.4s ease, transform 0.4s ease;
+    transition: filter 0.4s ease, transform 0.4s ease, opacity 0.4s ease;
   }
 
   .triad-symbol-link:hover .triad-symbol-rings {
     filter: drop-shadow(0 0 18px rgba(212,192,144,0.95)) drop-shadow(0 0 40px rgba(74,158,173,0.6));
     transform: scale(1.1);
+    opacity: 1;
   }
 
   @keyframes triadGlow {
@@ -690,7 +695,7 @@
 
 <!-- GLADE OF THE TRIAD — Triad symbol link (the Triad's own emblem, its real artwork) -->
 <a href="sylvan-ember.html" class="triad-symbol-link" title="Enter the Glade of the Triad">
-  <img class="triad-symbol-rings" src="images/Triad_symbol.png" alt="The Triad's symbol — three woven circles and a heart" width="96" height="96">
+  <img class="triad-symbol-rings" src="images/Triad_symbol.png" alt="The Triad's symbol — three woven circles and a heart" width="112" height="112">
   <div class="triad-symbol-caption">
     <span>The Glade of the Triad</span>
     <small>The Sacred Mythology</small>
