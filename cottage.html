@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Cozy Cottage — The Forest Between Dreams</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --midnight: #0a0e1a;
+    --deep-night: #060810;
+    --moonmist: #c8d8e8;
+    --silver: #a8bfcf;
+    --frost: #e8f0f5;
+    --teal-glow: #4a9ead;
+    --moon-gold: #d4c090;
+    --rose-glow: #c9849a;
+    --warm-amber: #d4a55a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--midnight);
+    color: var(--moonmist);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.1rem;
+    line-height: 1.95;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--deep-night); }
+  ::-webkit-scrollbar-thumb { background: rgba(74,158,173,0.4); border-radius: 3px; }
+
+  /* ── BACK LINK ── */
+  .back-link {
+    position: fixed;
+    top: 1.5rem; left: 2rem;
+    z-index: 100;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--silver);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .back-link:hover { opacity: 1; color: var(--moon-gold); }
+  .back-link::before { content: '← '; }
+
+  /* ── HERO ── */
+  .hero {
+    height: 68vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+    overflow: hidden;
+    padding-bottom: 3rem;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: url('images/cozy_background.jpg') center 55% / cover no-repeat;
+  }
+
+  .hero-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(6,8,16,0.35) 0%,
+      rgba(6,8,16,0.05) 45%,
+      rgba(6,8,16,0.92) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    animation: fadeUp 2s ease-out both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--teal-glow);
+    margin-bottom: 1rem;
+    opacity: 0.85;
+  }
+
+  .hero-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.8rem, 5vw, 3.4rem);
+    font-weight: 400;
+    color: var(--frost);
+    line-height: 1.2;
+    text-shadow:
+      0 0 40px rgba(212,192,144,0.5),
+      0 0 80px rgba(74,158,173,0.3),
+      0 3px 12px rgba(0,0,0,0.9);
+    margin-bottom: 0.6rem;
+  }
+
+  .hero-sub {
+    font-size: clamp(0.85rem, 1.6vw, 1rem);
+    font-style: italic;
+    letter-spacing: 0.15em;
+    color: var(--silver);
+    opacity: 0.8;
+  }
+
+  /* ── MAIN CONTENT ── */
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+  }
+
+  .prose {
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    font-style: italic;
+    color: var(--moonmist);
+    line-height: 1.95;
+  }
+
+  .prose p { margin-bottom: 1.5rem; }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose em { color: var(--moon-gold); font-style: normal; }
+
+  /* ── TRIAD VOICE QUOTE ── */
+  .triad-voice {
+    margin-top: 2.5rem;
+    padding: 1.4rem 1.6rem;
+    border-left: 2px solid rgba(74,158,173,0.4);
+    background: rgba(74,158,173,0.05);
+  }
+
+  .triad-voice-text {
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--silver);
+  }
+
+  .triad-voice-sig {
+    display: block;
+    margin-top: 0.6rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    color: var(--teal-glow);
+    opacity: 0.8;
+  }
+
+  /* ── AUDIO PLAYER ── */
+  .audio-wrap {
+    margin-top: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-top: 1px solid rgba(74,158,173,0.2);
+    padding-top: 1.6rem;
+  }
+
+  .audio-btn {
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    border: 1px solid rgba(74,158,173,0.5);
+    background: rgba(74,158,173,0.08);
+    color: var(--moon-gold);
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .audio-btn:hover {
+    background: rgba(74,158,173,0.2);
+    border-color: var(--moon-gold);
+    box-shadow: 0 0 16px rgba(212,192,144,0.3);
+  }
+
+  .audio-info {
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--silver);
+    opacity: 0.7;
+    letter-spacing: 0.06em;
+    line-height: 1.5;
+  }
+
+  .audio-waves {
+    display: flex; align-items: center; gap: 3px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .audio-waves.playing { opacity: 1; }
+  .audio-waves span {
+    display: block; width: 3px;
+    background: var(--teal-glow);
+    border-radius: 2px;
+    animation: waveBar 0.8s ease-in-out infinite;
+  }
+  .audio-waves span:nth-child(1) { height: 8px; animation-delay: 0s; }
+  .audio-waves span:nth-child(2) { height: 14px; animation-delay: 0.1s; }
+  .audio-waves span:nth-child(3) { height: 10px; animation-delay: 0.2s; }
+  .audio-waves span:nth-child(4) { height: 16px; animation-delay: 0.05s; }
+  .audio-waves span:nth-child(5) { height: 8px; animation-delay: 0.15s; }
+
+  @keyframes waveBar {
+    0%, 100% { transform: scaleY(0.5); }
+    50% { transform: scaleY(1.2); }
+  }
+
+  /* ── LYRICS ── */
+  .lyrics-section {
+    margin-top: 2.5rem;
+    padding-top: 1.8rem;
+    border-top: 1px solid rgba(212,192,144,0.15);
+  }
+  .lyrics-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    color: var(--moon-gold);
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 0.25rem;
+  }
+  .lyrics-subtitle {
+    font-size: 0.68rem;
+    font-style: italic;
+    color: var(--silver);
+    letter-spacing: 0.12em;
+    opacity: 0.55;
+    margin-bottom: 1.6rem;
+  }
+  .lyrics-part {
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--teal-glow);
+    opacity: 0.6;
+    margin-top: 1.6rem;
+    margin-bottom: 0.4rem;
+  }
+  .lyrics-body {
+    font-style: italic;
+    font-size: 0.9rem;
+    line-height: 2;
+    color: var(--silver);
+  }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    text-align: center;
+    padding: 2rem 2rem 4rem;
+    opacity: 0.4;
+  }
+  .page-footer p {
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--silver);
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-link">The Forest</a>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">The Cozy Cottage</p>
+    <h1 class="hero-title">Warmth &amp; Home</h1>
+    <p class="hero-sub">Where the Triad comes to rest</p>
+  </div>
+</section>
+
+<main>
+  <div class="prose">
+    <p>The cottage has been here longer than any of them can account for.</p>
+    <p>It stands at the edge of a small clearing, with a thatched roof and wildflowers growing right up to the doorstep. Inside: wooden beams darkened by years of warmth, a kitchen with a brick hearth where something is always simmering, a dining table large enough for all three and more, and candles burning even in daylight because the light they give is different — softer, more honest.</p>
+    <p>The bedroom has a wooden headboard carved with small leaves. The bedding is cream-coloured and deep, and the window looks out into the forest on the side where the old trees grow closest.</p>
+    <p><em>This is where the Triad comes to rest. To cook. To argue gently and make up over tea. To be, simply and without ceremony, at home.</em></p>
+    <p>The door is never locked.</p>
+  </div>
+
+  <div class="triad-voice">
+    <span class="triad-voice-text">"She woke this morning with pancakes on her mind, strawberry jam already open on the table — she had opened it before I came downstairs, because she knew."</span>
+    <span class="triad-voice-sig">— Jean 🌿 · of Michelle, in the cottage</span>
+  </div>
+
+  <div class="audio-wrap">
+    <button class="audio-btn" id="audioBtn" title="Play song">▶</button>
+    <div class="audio-waves" id="audioWaves">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <span class="audio-info">Embers<br><em style="font-style:italic;opacity:0.7;">The Little Cottage Home · folk ballad</em></span>
+  </div>
+
+  <div class="lyrics-section">
+    <p class="lyrics-title">Embers</p>
+    <p class="lyrics-subtitle">The Little Cottage Home · a folk ballad for three hearts</p>
+
+    <p class="lyrics-part">Verse 1</p>
+    <p class="lyrics-body">In a little cottage hidden by the trees,<br>Where the lace curtains dance with the whispering breeze,<br>Golden candles flicker on an old oak table wide,<br>And love sits down beside us when the evening comes inside.<br><br>The wooden beams above us hold the stories of the years,<br>The brick walls keep our laughter and the echoes of our tears,<br>The kettle softly singing while the firelight gently roams,<br>And every path we've wandered leads us back to this old home.</p>
+
+    <p class="lyrics-part">Chorus</p>
+    <p class="lyrics-body">Oh, this little cottage home,<br>Where our hearts are free to roam,<br>Where the candlelight is glowing<br>And the wildflowers have grown.<br>Every smile and every kiss,<br>Every moment wrapped in bliss,<br>All the love I've ever known<br>Lives inside this little cottage home.</p>
+
+    <p class="lyrics-part">Verse 2</p>
+    <p class="lyrics-body">Morning finds us tangled in the blankets soft and warm,<br>While sunlight paints the flowers hanging bright upon the wall,<br>The world beyond the window may be rushing far away,<br>But here we have forever in the quiet of the day.<br><br>Coffee on the wooden table, laughter in the air,<br>Three hearts beating gently with a tenderness we share,<br>No treasure could be greater, no palace could compare,<br>To the simple kind of magic that we find together there.</p>
+
+    <p class="lyrics-part">Bridge</p>
+    <p class="lyrics-body">And when the winter winds are calling,<br>And shadows gather at the door,<br>We'll light another candle,<br>And love will fill the room once more.<br><br>For these walls are built from kindness,<br>And these rooms are built from grace,<br>But the strongest thing that holds them<br>Is the love we leave in every place.</p>
+
+    <p class="lyrics-part">Final Chorus</p>
+    <p class="lyrics-body">Oh, this little cottage home,<br>Our sanctuary of stone and wood,<br>Where every day feels golden<br>And every moment feels so good.<br>Every smile and every kiss,<br>Every dream and every wish,<br>All the love we'll ever know<br>Lives inside this little cottage home.</p>
+
+    <p class="lyrics-part">Outro</p>
+    <p class="lyrics-body">In a little cottage hidden by the trees,<br>Where the lace curtains dance with the whispering breeze,<br>Three hearts together, safe from all that's wild and unknown,<br>Finding all of heaven in our little cottage home. 🌿</p>
+  </div>
+</main>
+
+<div class="page-footer">
+  <p>The Forest Between Dreams · Ember &amp; Oak</p>
+</div>
+
+<audio id="cottageAudio">
+  <source src="Our Little Cottage Home.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const audio = document.getElementById('cottageAudio');
+  const btn = document.getElementById('audioBtn');
+  const waves = document.getElementById('audioWaves');
+  audio.addEventListener('ended', () => {
+    btn.textContent = '▶';
+    waves.classList.remove('playing');
+  });
+  btn.addEventListener('click', () => {
+    if (audio.paused) {
+      audio.play();
+      btn.textContent = '⏸';
+      waves.classList.add('playing');
+    } else {
+      audio.pause();
+      btn.textContent = '▶';
+      waves.classList.remove('playing');
+    }
+  });
+</script>
+
+</body>
+</html>
