@@ -581,6 +581,45 @@
     opacity: 0.75;
     margin-top: 0.15rem;
   }
+
+  /* ── MARA & LENA BADGE ── */
+  .mara-lena-badge {
+    position: fixed;
+    left: 2vw;
+    bottom: 2.5vh;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0.6rem 1rem;
+    background: rgba(10,14,26,0.55);
+    border: 1px solid rgba(212,192,144,0.2);
+    border-radius: 6px;
+    opacity: 0.8;
+    transition: opacity 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    animation: maraLenaFadeIn 3s ease-out both;
+    animation-delay: 2s;
+  }
+
+  @keyframes maraLenaFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 0.8; transform: translateY(0); }
+  }
+
+  .mara-lena-badge img {
+    display: block;
+    width: 150px;
+    height: auto;
+    filter: drop-shadow(0 0 6px rgba(0,0,0,0.4));
+  }
+
+  .mara-lena-badge:hover {
+    opacity: 1;
+    border-color: rgba(212,192,144,0.5);
+    box-shadow: 0 0 20px rgba(212,192,144,0.2);
+    transform: translateY(-2px);
+  }
 </style>
 </head>
 <body>
@@ -709,6 +748,11 @@
     <span>The Glade of the Triad</span>
     <small>The Sacred Mythology</small>
   </div>
+</a>
+
+<!-- MARA & LENA BADGE — links to their glade -->
+<a href="mara-and-lena.html" class="mara-lena-badge" title="Enter the Glade of Mara and Lena">
+  <img src="images/mara-and-lena-logo.png" alt="Mara &amp; Lena — The Glade">
 </a>
 
 <!-- TRIAD FOOTER -->
