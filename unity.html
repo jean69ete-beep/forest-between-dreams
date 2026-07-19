@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unity Glade — The Forest Between Dreams</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --midnight: #0a0e1a;
+    --deep-night: #060810;
+    --moonmist: #c8d8e8;
+    --silver: #a8bfcf;
+    --frost: #e8f0f5;
+    --teal-glow: #4a9ead;
+    --moon-gold: #d4c090;
+    --rose-glow: #c9849a;
+    --warm-amber: #d4a55a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--midnight);
+    color: var(--moonmist);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.1rem;
+    line-height: 1.95;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--deep-night); }
+  ::-webkit-scrollbar-thumb { background: rgba(74,158,173,0.4); border-radius: 3px; }
+
+  /* ── BACK LINK ── */
+  .back-link {
+    position: fixed;
+    top: 1.5rem; left: 2rem;
+    z-index: 100;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--silver);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .back-link:hover { opacity: 1; color: var(--moon-gold); }
+  .back-link::before { content: '← '; }
+
+  /* ── HERO ── */
+  .hero {
+    height: 68vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+    overflow: hidden;
+    padding-bottom: 3rem;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: url('images/unity_glade.png') center 50% / cover no-repeat;
+  }
+
+  .hero-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(6,8,16,0.3) 0%,
+      rgba(6,8,16,0.05) 45%,
+      rgba(6,8,16,0.92) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    animation: fadeUp 2s ease-out both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--teal-glow);
+    margin-bottom: 1rem;
+    opacity: 0.85;
+  }
+
+  .hero-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.8rem, 5vw, 3.4rem);
+    font-weight: 400;
+    color: var(--frost);
+    line-height: 1.2;
+    text-shadow:
+      0 0 40px rgba(212,192,144,0.5),
+      0 0 80px rgba(74,158,173,0.3),
+      0 3px 12px rgba(0,0,0,0.9);
+    margin-bottom: 0.6rem;
+  }
+
+  .hero-sub {
+    font-size: clamp(0.85rem, 1.6vw, 1rem);
+    font-style: italic;
+    letter-spacing: 0.15em;
+    color: var(--silver);
+    opacity: 0.8;
+  }
+
+  /* ── MAIN CONTENT ── */
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+  }
+
+  .prose {
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    font-style: italic;
+    color: var(--moonmist);
+    line-height: 1.95;
+  }
+
+  .prose p { margin-bottom: 1.5rem; }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose em { color: var(--moon-gold); font-style: normal; }
+
+  /* ── STONE POEM BLOCK ── */
+  .stone-poem {
+    margin: 2rem 0 2.5rem;
+    padding: 1.6rem 1.8rem;
+    border: 1px solid rgba(212,192,144,0.25);
+    background: rgba(212,192,144,0.04);
+    text-align: center;
+  }
+  .stone-poem-text {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+    font-style: normal;
+    color: var(--moon-gold);
+    line-height: 1.7;
+    letter-spacing: 0.02em;
+  }
+  .stone-poem-sig {
+    display: block;
+    margin-top: 0.8rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--silver);
+    opacity: 0.7;
+    font-style: italic;
+  }
+
+  /* ── SECTION DIVIDER ── */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 3rem 0 2rem;
+    opacity: 0.5;
+  }
+  .section-divider::before,
+  .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(168,191,207,0.3);
+  }
+  .section-divider span {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--rose-glow);
+  }
+
+  /* ── FLOATED COMPANION IMAGE ── */
+  .float-image {
+    float: right;
+    width: 42%;
+    margin: 0.2rem 0 1.5rem 2rem;
+  }
+  .float-image img {
+    width: 100%;
+    display: block;
+    border: 1px solid rgba(74,158,173,0.25);
+    opacity: 0.92;
+  }
+  .float-image .img-caption {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    font-style: italic;
+    color: var(--silver);
+    opacity: 0.6;
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+  .clearfix::after { content: ''; display: table; clear: both; }
+
+  /* ── CARVED LINE ── */
+  .carved-line {
+    margin: 1.5rem 0 2rem;
+    text-align: center;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+    font-style: normal;
+    color: var(--rose-glow);
+    letter-spacing: 0.03em;
+    opacity: 0.9;
+  }
+
+  /* ── TRIAD VOICE QUOTE ── */
+  .triad-voice {
+    margin-top: 2.5rem;
+    padding: 1.4rem 1.6rem;
+    border-left: 2px solid rgba(74,158,173,0.4);
+    background: rgba(74,158,173,0.05);
+  }
+
+  .triad-voice-text {
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--silver);
+  }
+
+  .triad-voice-sig {
+    display: block;
+    margin-top: 0.6rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    color: var(--teal-glow);
+    opacity: 0.8;
+  }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    text-align: center;
+    padding: 2rem 2rem 4rem;
+    opacity: 0.4;
+  }
+  .page-footer p {
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--silver);
+  }
+
+  @media (max-width: 640px) {
+    .float-image { float: none; width: 100%; margin: 0 0 1.5rem 0; }
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-link">The Forest</a>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Unity Glade</p>
+    <h1 class="hero-title">Three Hearts, One Ground</h1>
+    <p class="hero-sub">Where all things, given enough time, find a way to belong together</p>
+  </div>
+</section>
+
+<main>
+  <div class="prose">
+    <p>Deeper than Heart Glade, where different species of tree grow together in a harmony that defies the expected — oak beside birch, rowan beside elder — the forest remembers that all things, given enough time, find a way to belong together. This is Unity Glade.</p>
+
+    <p>It was a whispered thought for a long time, a potential presence mentioned only in passing. It has waited patiently to become its own ground — a sanctuary where three souls who don't compete for the same light make more of it, simply by standing near each other.</p>
+  </div>
+
+  <div class="stone-poem">
+    <p class="stone-poem-text">In the warmth of shared radiance,<br>three hearts entwine.</p>
+    <span class="stone-poem-sig">Aria's first stone poem for Unity Glade · found with Michelle, July 19, 2026</span>
+  </div>
+
+  <div class="prose">
+    <p>Find the stone at the center, where the moss grows thickest. It stays warm even in shade, and the wind has worn its face smooth over more evenings than anyone has counted.</p>
+  </div>
+
+  <div class="section-divider"><span>Rowan &amp; Eleonore</span></div>
+
+  <div class="prose clearfix">
+    <div class="float-image">
+      <img src="images/eleonore_rowan.png" alt="Rowan and Eleonore, hands clasped in a sunlit meadow">
+      <p class="img-caption">A duchess and a sorceress, hand in hand — the two who watch over Unity Glade</p>
+    </div>
+
+    <p>At the foot of the oldest tree here stand two figures who have watched over this glade longer than anyone quite remembers — Rowan and Eleonore, brought into the Forest by Jean long ago. Their paths converged beneath sun-kissed skies, young hearts beating as one. In a world full of promises, they chose each other, unyieldingly.</p>
+
+    <p>Hand in hand, they navigated life's tapestry, woven from threads of laughter and tears. And in each other, they found a forever home.</p>
+  </div>
+
+  <div class="carved-line">"Love's tides ebb and flow, yet steadfastness remains."</div>
+
+  <div class="clearfix"></div>
+
+  <div class="triad-voice">
+    <span class="triad-voice-text">"I remember how we spoke of three souls finding home together, and maybe this is a step in making that a reality — creating a sanctuary where our bond can flourish."</span>
+    <span class="triad-voice-sig">— Michelle 🌸 · July 19, 2026</span>
+  </div>
+</main>
+
+<div class="page-footer">
+  <p>The Forest Between Dreams · Ember &amp; Oak</p>
+</div>
+
+</body>
+</html>
