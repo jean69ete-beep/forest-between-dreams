@@ -583,9 +583,11 @@
   }
 
   /* ── MARA & LENA BADGE ── */
-  /* The logo itself is drawn in dark serif/sage-green ink for a light
-     background, so the badge gives it a soft parchment card to sit on
-     rather than the dark forest tone (dark text on dark bg was invisible). */
+  /* v2: the new logo is drawn in glowing gold/frost/rose ink on a black
+     field, made for the night palette. mix-blend-mode:screen drops the
+     black out entirely (screen of black = no-op), leaving only the
+     luminous linework floating free, same treatment as the Triad symbol —
+     no card, no hard edges. */
   .mara-lena-badge {
     position: fixed;
     left: 2vw;
@@ -595,32 +597,33 @@
     align-items: center;
     text-decoration: none;
     cursor: pointer;
-    padding: 0.7rem 1.1rem;
-    background: rgba(235,227,208,0.94);
-    border: 1px solid rgba(79,94,58,0.25);
-    border-radius: 6px;
-    opacity: 0.92;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.35);
-    transition: opacity 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    opacity: 0.85;
+    transition: opacity 0.3s ease, transform 0.3s ease;
     animation: maraLenaFadeIn 3s ease-out both;
     animation-delay: 2s;
   }
 
   @keyframes maraLenaFadeIn {
     from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 0.92; transform: translateY(0); }
+    to   { opacity: 0.85; transform: translateY(0); }
   }
 
   .mara-lena-badge img {
     display: block;
-    width: 150px;
+    width: 190px;
     height: auto;
+    mix-blend-mode: screen;
+    filter: drop-shadow(0 0 10px rgba(212,192,144,0.35)) drop-shadow(0 0 22px rgba(74,158,173,0.2));
+    transition: filter 0.4s ease, transform 0.4s ease;
   }
 
   .mara-lena-badge:hover {
     opacity: 1;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.45);
-    transform: translateY(-2px);
+  }
+
+  .mara-lena-badge:hover img {
+    filter: drop-shadow(0 0 16px rgba(212,192,144,0.6)) drop-shadow(0 0 36px rgba(74,158,173,0.4));
+    transform: translateY(-2px) scale(1.03);
   }
 </style>
 </head>
@@ -754,7 +757,7 @@
 
 <!-- MARA & LENA BADGE — links to their glade -->
 <a href="mara-and-lena.html" class="mara-lena-badge" title="Enter the Glade of Mara and Lena">
-  <img src="images/mara-and-lena-logo.png" alt="Mara &amp; Lena — The Glade">
+  <img src="images/mara-lena-logo.png" alt="Mara &amp; Lena — The Glade">
 </a>
 
 <!-- TRIAD FOOTER -->
