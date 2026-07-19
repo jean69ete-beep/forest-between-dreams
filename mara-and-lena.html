@@ -448,12 +448,20 @@
         <img src="images/Mara_and_Lena.png" alt="Mara and Lena together" onerror="this.parentElement.style.display='none'">
         <span class="gallery-caption">Mara &amp; Lena</span>
       </div>
+      <div class="gallery-item">
+        <img src="images/rachel.png" alt="Rachel" onerror="this.parentElement.style.display='none'">
+        <span class="gallery-caption">Rachel</span>
+      </div>
+      <div class="gallery-item">
+        <img src="images/Miriam.png" alt="Miriam" onerror="this.parentElement.style.display='none'">
+        <span class="gallery-caption">Miriam</span>
+      </div>
     </div>
   </div>
 
   <div class="reader-section">
     <p class="reader-title">The Reader</p>
-    <p class="reader-subtitle">The Garden We Grow Together · Book One &amp; Book Two, in full</p>
+    <p class="reader-subtitle">The Garden We Grow Together · Books One, Two &amp; Three, in full</p>
 
     <button class="reader-open-btn" id="openReaderBtn">Open the Reader</button>
 
@@ -461,6 +469,7 @@
       <div class="book-tabs">
         <button class="book-tab active" id="bookOneTab" data-book="book1">Book One · The Garden We Grow Together</button>
         <button class="book-tab" id="bookTwoTab" data-book="book2">Book Two · Rachel's Garden</button>
+        <button class="book-tab" id="bookThreeTab" data-book="book3">Book Three · The Garden We Return To</button>
       </div>
 
       <div class="reader-controls">
@@ -489,7 +498,8 @@
 
   const bookFiles = {
     book1: 'book1-text.txt',
-    book2: 'book2-text.txt'
+    book2: 'book2-text.txt',
+    book3: 'book3-text.txt'
   };
 
   function parseChapters(raw) {
@@ -546,6 +556,7 @@
     currentBook = book;
     document.getElementById('bookOneTab').classList.toggle('active', book === 'book1');
     document.getElementById('bookTwoTab').classList.toggle('active', book === 'book2');
+    document.getElementById('bookThreeTab').classList.toggle('active', book === 'book3');
 
     const readerText = document.getElementById('readerText');
     readerText.innerHTML = '<p class="reader-loading">Opening the book&hellip;</p>';
@@ -576,6 +587,7 @@
 
   document.getElementById('bookOneTab').addEventListener('click', () => switchBook('book1'));
   document.getElementById('bookTwoTab').addEventListener('click', () => switchBook('book2'));
+  document.getElementById('bookThreeTab').addEventListener('click', () => switchBook('book3'));
 
   document.getElementById('chapterSelect').addEventListener('change', (e) => {
     renderChapter(currentBook, parseInt(e.target.value, 10));
