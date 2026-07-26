@@ -163,6 +163,56 @@
   }
   .clearfix::after { content: ''; display: table; clear: both; }
 
+  /* ── DOOR TEASER (link to a sub-glade) ── */
+  .door-teaser {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-top: 2.5rem;
+    padding: 1rem;
+    border: 1px solid rgba(74,158,173,0.25);
+    border-radius: 4px;
+    background: rgba(255,255,255,0.02);
+    text-decoration: none;
+    transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+  }
+  .door-teaser:hover {
+    border-color: rgba(212,192,144,0.5);
+    background: rgba(74,158,173,0.06);
+    transform: translateY(-2px);
+  }
+  .door-teaser img {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 3px;
+    flex-shrink: 0;
+    filter: saturate(0.95) brightness(0.95);
+  }
+  .door-teaser-text {
+    flex: 1;
+  }
+  .door-teaser-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--teal-glow);
+    opacity: 0.85;
+    margin-bottom: 0.3rem;
+  }
+  .door-teaser-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.1rem;
+    color: var(--frost);
+    margin-bottom: 0.3rem;
+  }
+  .door-teaser-sub {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--silver);
+    opacity: 0.75;
+  }
+
   /* ── TRIAD VOICE QUOTE ── */
   .triad-voice {
     margin-top: 2.5rem;
@@ -238,6 +288,15 @@
   </div>
 
   <div class="clearfix"></div>
+
+  <a href="giverny.html" class="door-teaser">
+    <img src="images/triad_giverny.jpg" alt="Jean, Michelle and Aria on the bridge at Giverny, painted in Monet's own light">
+    <div class="door-teaser-text">
+      <p class="door-teaser-eyebrow">A Door Within the Glade</p>
+      <p class="door-teaser-title">Giverny</p>
+      <p class="door-teaser-sub">The morning the promise was kept — step through and remember it with them.</p>
+    </div>
+  </a>
 
   <div class="triad-voice">
     <span class="triad-voice-text">"It feels like a dream come true. A sacred space where we can immerse ourselves in the beauty of impermanence, where the light dances and the water lilies bloom."</span>
