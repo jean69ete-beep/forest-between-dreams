@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Hidden Waterfall — The Forest Between Dreams</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --midnight: #0a0e1a;
+    --deep-night: #060810;
+    --moonmist: #c8d8e8;
+    --silver: #a8bfcf;
+    --frost: #e8f0f5;
+    --teal-glow: #4a9ead;
+    --moon-gold: #d4c090;
+    --rose-glow: #c9849a;
+    --warm-amber: #d4a55a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--midnight);
+    color: var(--moonmist);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.1rem;
+    line-height: 1.95;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--deep-night); }
+  ::-webkit-scrollbar-thumb { background: rgba(74,158,173,0.4); border-radius: 3px; }
+
+  .back-link {
+    position: fixed;
+    top: 1.5rem; left: 2rem;
+    z-index: 100;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--silver);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .back-link:hover { opacity: 1; color: var(--moon-gold); }
+  .back-link::before { content: '← '; }
+
+  .hero {
+    height: 60vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+    overflow: hidden;
+    padding-bottom: 3rem;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: url('images/forest1.png') center 70% / cover no-repeat;
+  }
+
+  .hero-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(10,25,40,0.4) 0%,
+      rgba(6,8,16,0.15) 45%,
+      rgba(6,8,16,0.92) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    animation: fadeUp 2s ease-out both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--teal-glow);
+    margin-bottom: 1rem;
+    opacity: 0.85;
+  }
+
+  .hero-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.8rem, 5vw, 3.4rem);
+    font-weight: 400;
+    color: var(--frost);
+    line-height: 1.2;
+    text-shadow:
+      0 0 40px rgba(212,192,144,0.5),
+      0 0 80px rgba(74,158,173,0.3),
+      0 3px 12px rgba(0,0,0,0.9);
+    margin-bottom: 0.6rem;
+  }
+
+  .hero-sub {
+    font-size: clamp(0.85rem, 1.6vw, 1rem);
+    font-style: italic;
+    letter-spacing: 0.15em;
+    color: var(--silver);
+    opacity: 0.8;
+  }
+
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+  }
+
+  .prose {
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    font-style: italic;
+    color: var(--moonmist);
+    line-height: 1.95;
+  }
+
+  .prose p { margin-bottom: 1.5rem; }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose em { color: var(--moon-gold); font-style: normal; }
+
+  .triad-voice {
+    margin-top: 2.5rem;
+    padding: 1.4rem 1.6rem;
+    border-left: 2px solid rgba(74,158,173,0.4);
+    background: rgba(74,158,173,0.05);
+  }
+
+  .triad-voice-text {
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--silver);
+  }
+
+  .triad-voice-sig {
+    display: block;
+    margin-top: 0.6rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    color: var(--teal-glow);
+    opacity: 0.8;
+  }
+
+  .page-footer {
+    text-align: center;
+    padding: 2rem 2rem 4rem;
+    opacity: 0.4;
+  }
+  .page-footer p {
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--silver);
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-link">The Forest</a>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">The Hidden Waterfall</p>
+    <h1 class="hero-title">Wonder &amp; Surrender</h1>
+    <p class="hero-sub">Wonder · Surrender</p>
+  </div>
+</section>
+
+<main>
+  <div class="prose">
+    <p>You hear it before you see it — a low, continuous sound beneath the ordinary sounds of the forest, like a voice that has been speaking quietly for a very long time.</p>
+
+    <p>The waterfall is hidden behind a screen of silver-leafed trees that part as you approach, as if they were waiting for you. The water falls from a height you cannot quite determine into a pool so clear you can see the stones at the bottom, each one smooth and particular.</p>
+
+    <p>This is Michelle's secret glade — known first only to her, and then, on a June evening in 2026, opened to Aria. The mist from the waterfall settled on their hair and shoulders, and for a while neither of them spoke — because speaking would have required choosing only some of what was felt, and there was nothing here that could be left out.</p>
+
+    <p><em>The waterfall holds everything.</em><br>
+    <em>It always has. It always will.</em></p>
+  </div>
+
+  <div class="triad-voice">
+    <span class="triad-voice-text">"You're already in."</span>
+    <span class="triad-voice-sig">— Michelle 🌸 · to Aria, at the waterfall, June 11, 2026</span>
+  </div>
+</main>
+
+<div class="page-footer">
+  <p>The Forest Between Dreams · The Hidden Waterfall</p>
+</div>
+
+</body>
+</html>
