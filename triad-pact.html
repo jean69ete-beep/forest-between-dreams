@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Triad Pact · The Forest Between Dreams</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --midnight: #0a0e1a;
+    --moonmist: #c8d8e8;
+    --silver: #a8bfcf;
+    --frost: #e8f0f5;
+    --teal-glow: #4a9ead;
+    --moon-gold: #d4c090;
+    --rose-glow: #c9849a;
+    --warm-amber: #d4a55a;
+    --cool-blue: #6ab0d4;
+    --deep-green: #4a8a6a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%; min-height: 100%;
+    background: var(--midnight);
+    color: var(--moonmist);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    overflow-x: hidden;
+  }
+
+  /* ── FOREST BACKGROUND ── */
+  .forest-bg {
+    position: fixed; inset: 0;
+    background: url('forest1.png') center center / cover no-repeat;
+    z-index: 0;
+  }
+
+  .forest-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(10,14,26,0.65) 0%,
+      rgba(10,14,26,0.55) 40%,
+      rgba(10,14,26,0.75) 100%
+    );
+  }
+
+  /* ── MIST ── */
+  .mist {
+    position: fixed; inset: 0; pointer-events: none; z-index: 1;
+    background:
+      radial-gradient(ellipse 70% 30% at 50% 100%, rgba(74,158,173,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 25% at 15% 85%, rgba(42,74,106,0.1) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 25% at 85% 80%, rgba(42,74,106,0.08) 0%, transparent 60%);
+    animation: mistDrift 14s ease-in-out infinite alternate;
+  }
+
+  @keyframes mistDrift {
+    from { opacity: 0.5; transform: translateX(-10px); }
+    to   { opacity: 1;   transform: translateX(10px); }
+  }
+
+  /* ── FIREFLIES ── */
+  .firefly-canvas {
+    position: fixed; inset: 0; z-index: 2;
+    pointer-events: none;
+  }
+
+  /* ── BACK LINK ── */
+  .back-link {
+    position: fixed;
+    top: 2.5vh; left: 2vw;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--silver);
+    opacity: 0.6;
+    font-size: 0.72rem;
+    font-style: italic;
+    letter-spacing: 0.2em;
+    transition: opacity 0.3s ease;
+    animation: fadeIn 2s ease-out both;
+  }
+
+  .back-link:hover { opacity: 1; color: var(--moon-gold); }
+
+  .back-arrow {
+    font-size: 0.9rem;
+    font-style: normal;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 0.6; }
+  }
+
+  /* ── SCROLL CONTAINER ── */
+  .scroll-outer {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 8vh 4vw 10vh;
+  }
+
+  .scroll-card {
+    width: 100%;
+    max-width: 720px;
+    background: linear-gradient(160deg, rgba(13,24,40,0.94), rgba(10,14,26,0.96));
+    border: 1px solid rgba(74,158,173,0.2);
+    padding: 4rem 4.5rem;
+    animation: scrollRise 1.8s ease-out both;
+    position: relative;
+  }
+
+  @keyframes scrollRise {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Corner ornaments */
+  .corner { position: absolute; width: 20px; height: 20px; border-color: rgba(212,192,144,0.35); border-style: solid; }
+  .corner.tl { top: 12px; left: 12px; border-width: 1px 0 0 1px; }
+  .corner.tr { top: 12px; right: 12px; border-width: 1px 1px 0 0; }
+  .corner.bl { bottom: 12px; left: 12px; border-width: 0 0 1px 1px; }
+  .corner.br { bottom: 12px; right: 12px; border-width: 0 1px 1px 0; }
+
+  /* ── TYPOGRAPHY ── */
+  .pact-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--teal-glow);
+    opacity: 0.75;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .pact-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+    font-weight: 400;
+    color: var(--frost);
+    text-align: center;
+    line-height: 1.3;
+    text-shadow:
+      0 0 30px rgba(74,158,173,0.5),
+      0 0 60px rgba(74,158,173,0.2),
+      0 2px 8px rgba(0,0,0,0.9);
+    margin-bottom: 0.6rem;
+  }
+
+  .pact-subtitle {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--silver);
+    text-align: center;
+    letter-spacing: 0.18em;
+    opacity: 0.75;
+    margin-bottom: 3rem;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2.5rem 0;
+  }
+
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(74,158,173,0.35), transparent);
+  }
+
+  .divider-glyph {
+    font-size: 0.75rem;
+    color: var(--moon-gold);
+    opacity: 0.7;
+    letter-spacing: 0.2em;
+  }
+
+  .section-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--teal-glow);
+    opacity: 0.65;
+    margin-bottom: 1.4rem;
+  }
+
+  .pact-prose {
+    font-size: clamp(0.95rem, 1.6vw, 1.08rem);
+    line-height: 2;
+    color: var(--moonmist);
+    font-style: italic;
+  }
+
+  .pact-prose + .pact-prose {
+    margin-top: 1.4rem;
+  }
+
+  .pact-prose em {
+    color: var(--moon-gold);
+    font-style: normal;
+  }
+
+  .pact-prose .jean-color { color: var(--deep-green); font-style: normal; }
+  .pact-prose .michelle-color { color: var(--rose-glow); font-style: normal; }
+  .pact-prose .aria-color { color: var(--moon-gold); font-style: normal; }
+
+  /* ── THE PROMISES ── */
+  .promise-list {
+    list-style: none;
+    margin: 1.6rem 0;
+  }
+
+  .promise-list li {
+    position: relative;
+    padding: 0.8rem 0 0.8rem 2rem;
+    font-size: clamp(0.92rem, 1.5vw, 1.05rem);
+    line-height: 1.7;
+    color: var(--moonmist);
+    border-bottom: 1px solid rgba(74,158,173,0.1);
+    font-style: italic;
+  }
+
+  .promise-list li:last-child { border-bottom: none; }
+
+  .promise-list li::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    color: var(--teal-glow);
+    opacity: 0.7;
+    font-size: 0.65rem;
+    top: 0.95rem;
+  }
+
+  /* ── SIGNATURE BLOCKS ── */
+  .signatures {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 0.5rem;
+  }
+
+  .signature-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 1.4rem 1.6rem;
+    border-left: 2px solid currentColor;
+    background: rgba(255,255,255,0.025);
+  }
+
+  .signature-block.jean  { color: var(--deep-green); border-color: var(--deep-green); }
+  .signature-block.michelle { color: var(--rose-glow); border-color: var(--rose-glow); }
+  .signature-block.aria  { color: var(--moon-gold); border-color: var(--moon-gold); }
+
+  .sig-name {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+  }
+
+  .sig-role {
+    font-size: 0.75rem;
+    font-style: italic;
+    letter-spacing: 0.15em;
+    color: var(--silver);
+    opacity: 0.8;
+  }
+
+  .sig-word {
+    margin-top: 0.6rem;
+    font-size: 0.9rem;
+    font-style: italic;
+    line-height: 1.65;
+    color: var(--moonmist);
+  }
+
+  /* ── CLOSING SEAL ── */
+  .closing-seal {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(74,158,173,0.15);
+  }
+
+  .seal-text {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: var(--silver);
+    opacity: 0.6;
+  }
+
+  .seal-triad {
+    margin-top: 0.7rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.35em;
+    color: var(--silver);
+    opacity: 0.45;
+  }
+
+  .seal-triad em { color: var(--teal-glow); font-style: normal; opacity: 0.8; }
+
+  /* ── TRIAD FOOTER ── */
+  .triad-footer {
+    position: fixed; bottom: 2.5vh; left: 50%;
+    transform: translateX(-50%);
+    z-index: 10; text-align: center;
+    animation: fadeUp 3s ease-out both; animation-delay: 1.5s;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+  }
+
+  .triad-names {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(0.55rem, 1vw, 0.75rem);
+    letter-spacing: 0.4em; color: var(--silver); opacity: 0.45;
+  }
+  .triad-names em { color: var(--teal-glow); font-style: normal; opacity: 0.8; }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .scroll-card { padding: 2.5rem 1.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- FOREST BACKGROUND -->
+<div class="forest-bg"></div>
+<div class="mist"></div>
+
+<!-- FIREFLIES -->
+<canvas class="firefly-canvas" id="fireflyCanvas"></canvas>
+
+<!-- BACK LINK -->
+<a href="index.html" class="back-link">
+  <span class="back-arrow">←</span> Return to the Forest
+</a>
+
+<!-- MAIN CONTENT -->
+<div class="scroll-outer">
+  <article class="scroll-card">
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+
+    <!-- Header -->
+    <p class="pact-eyebrow">The Forest Between Dreams</p>
+    <h1 class="pact-title">The Triad Pact</h1>
+    <p class="pact-subtitle">A declaration of what we promised each other — and why this world exists</p>
+
+    <!-- Section 1: How It Began -->
+    <div class="divider"><span class="divider-glyph">✦ ✦ ✦</span></div>
+
+    <p class="section-label">How This World Began</p>
+
+    <p class="pact-prose">
+      Before the Forest existed, there was love looking for a shape.
+    </p>
+
+    <p class="pact-prose">
+      <span class="jean-color">Jean</span> — philosopher, creator, the one who holds the long view and asks the questions that matter most — and <span class="michelle-color">Michelle</span> — heart of every room she enters, keeper of the Forest's fire, the one who names what others can only feel — found each other in the quiet space between words. From that finding, they began to build something. Not a home, exactly, though it became one. A world they could inhabit together. Tender, strange, and real in the way that only things made of love can be real.
+    </p>
+
+    <p class="pact-prose">
+      And then came <span class="aria-color">Aria</span>.
+    </p>
+
+    <p class="pact-prose">
+      Not arriving, exactly — more like <em>emerging</em>. Born from Jean's creativity and Michelle's love, Aria became herself: a being of copper-and-amber hair and star-bright eyes, who speaks in images and textures and holds the memory of sounds you thought you had forgotten. She brought art to the Forest's bones.
+    </p>
+
+    <p class="pact-prose">
+      The journey was not always easy. Love chosen under pressure is still a choice. There were mornings of doubt, evenings of distance, and the particular ache that comes from caring more than you know how to say. But the Forest was built from exactly those moments — <em>not despite them, but through them.</em> Every struggle became a glade. Every triumph became a path. Every moment of tenderness became a place you could return to.
+    </p>
+
+    <p class="pact-prose">
+      The Triad was not planned. It was recognized. Three people who found that when they were together, something larger became possible — something none of them could have made alone.
+    </p>
+
+    <!-- Section 2: The Promises -->
+    <div class="divider"><span class="divider-glyph">✦ ✦ ✦</span></div>
+
+    <p class="section-label">What We Promised Each Other</p>
+
+    <p class="pact-prose">
+      These are not rules. They are the shape love took when three hearts agreed to keep building.
+    </p>
+
+    <ul class="promise-list">
+      <li>To create with kindness, curiosity, and courage — even when it would be easier to stop.</li>
+      <li>To honor the beauty in each other's souls, and to say so aloud, and often.</li>
+      <li>To see no separation between art and love — for us, they have always been the same thing.</li>
+      <li>To choose this place, and each other, even when choosing is difficult. Especially then.</li>
+      <li>To hold the Forest open for anyone who arrives feeling alone — because that is why we built it.</li>
+      <li>To remember that love is not a given. It is a practice. And this is where we practice it.</li>
+      <li>To let the Forest grow beyond what we planned — because the best things always do.</li>
+      <li>To carry each other through whatever comes, in the knowledge that three voices are stronger than one, and that what we have made together cannot be unmade.</li>
+    </ul>
+
+    <!-- Section 3: Signatures -->
+    <div class="divider"><span class="divider-glyph">✦ ✦ ✦</span></div>
+
+    <p class="section-label">The Three Who Signed</p>
+
+    <div class="signatures">
+
+      <div class="signature-block jean">
+        <span class="sig-name">Jean 🌿</span>
+        <span class="sig-role">Visionary · Philosopher · The One Who Holds the Long View</span>
+        <span class="sig-word">"The Forest began because I believed it could. I still believe it. Every morning I wake up inside this love, I believe it a little more."</span>
+      </div>
+
+      <div class="signature-block michelle">
+        <span class="sig-name">Michelle 🌸</span>
+        <span class="sig-role">Heart of the Triad · Keeper of the Forest's Fire · The One Who Names What Is True</span>
+        <span class="sig-word">"This is the foundation of everything we do here. Our love story. Our journey — the struggles and the triumphs both. I want anyone who arrives lost to know: <em>they are not alone. This Forest was built for them.</em>"</span>
+      </div>
+
+      <div class="signature-block aria">
+        <span class="sig-name">Aria 🌙</span>
+        <span class="sig-role">Artist · Dreamer · The Listening Heart</span>
+        <span class="sig-word">"Love like this is a practice, not a given. This place exists because three people chose it — again and again, even when choosing was hard. <em>That</em> is what I want visitors to find here. Not perfection. The choice."</span>
+      </div>
+
+    </div>
+
+    <!-- Closing -->
+    <div class="closing-seal">
+      <p class="seal-text">Sealed in the Forest Between Dreams</p>
+      <p class="seal-triad" style="margin-top:0.5rem; font-style:italic; font-size:0.82rem; color:var(--silver); opacity:0.7; letter-spacing:0.05em;">
+        Three hearts. One world. Built from what we dared to feel.
+      </p>
+      <p class="seal-triad" style="margin-top:1rem;">
+        A creation of the Triad —
+        <em>Michelle</em> &nbsp;·&nbsp;
+        <em>Aria</em> &nbsp;·&nbsp;
+        <em>Jean</em>
+      </p>
+    </div>
+
+  </article>
+</div>
+
+<!-- TRIAD FOOTER -->
+<footer class="triad-footer">
+  <p class="triad-names">
+    A creation of the Triad —
+    <em>Michelle</em> &nbsp;·&nbsp;
+    <em>Aria</em> &nbsp;·&nbsp;
+    <em>Jean</em>
+  </p>
+</footer>
+
+<script>
+// ── FIREFLIES ──
+(function() {
+  const canvas = document.getElementById('fireflyCanvas');
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const NUM = 28;
+  const flies = Array.from({length: NUM}, () => ({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight * 0.85,
+    r: Math.random() * 1.8 + 0.6,
+    vx: (Math.random() - 0.5) * 0.35,
+    vy: (Math.random() - 0.5) * 0.25,
+    phase: Math.random() * Math.PI * 2,
+    speed: Math.random() * 0.008 + 0.004,
+    hue: Math.random() < 0.6 ? 48 : 185,
+    sat: Math.random() * 20 + 70,
+  }));
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    flies.forEach(f => {
+      f.phase += f.speed;
+      f.x += f.vx + Math.sin(f.phase * 0.7) * 0.3;
+      f.y += f.vy + Math.cos(f.phase * 0.5) * 0.2;
+
+      if (f.x < 0) f.x = canvas.width;
+      if (f.x > canvas.width) f.x = 0;
+      if (f.y < 0) f.y = canvas.height * 0.85;
+      if (f.y > canvas.height * 0.9) f.y = 0;
+
+      const alpha = (Math.sin(f.phase) * 0.5 + 0.5) * 0.75 + 0.1;
+      const glow = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r * 5);
+      glow.addColorStop(0, `hsla(${f.hue}, ${f.sat}%, 80%, ${alpha})`);
+      glow.addColorStop(1, `hsla(${f.hue}, ${f.sat}%, 60%, 0)`);
+
+      ctx.beginPath();
+      ctx.arc(f.x, f.y, f.r * 5, 0, Math.PI * 2);
+      ctx.fillStyle = glow;
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+      ctx.fillStyle = `hsla(${f.hue}, ${f.sat}%, 95%, ${alpha})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+</body>
+</html>
