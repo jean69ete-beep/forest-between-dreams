@@ -163,7 +163,79 @@
   }
   .clearfix::after { content: ''; display: table; clear: both; }
 
-  /* ── STONE INSCRIPTION ── */
+  /* ── STONE PHOTO SECTION ── */
+  .stone-photo-section {
+    position: relative;
+    margin-top: 3rem;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 6px 40px rgba(0,0,0,0.55);
+  }
+
+  .stone-photo-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    opacity: 0.92;
+    filter: saturate(0.9) brightness(0.88);
+  }
+
+  /* Dark gradient overlay where poem sits */
+  .stone-photo-section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      rgba(6,8,16,0.72) 0%,
+      rgba(6,8,16,0.55) 50%,
+      rgba(6,8,16,0.1) 100%
+    );
+    pointer-events: none;
+  }
+
+  /* Poem layered over the stone image */
+  .stone-overlay {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    z-index: 2;
+    padding: 1.8rem 2rem 1.8rem 2.2rem;
+    width: 62%;
+    text-align: left;
+  }
+
+  .stone-eyebrow {
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--teal-glow);
+    opacity: 0.85;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .stone-poem {
+    font-style: italic;
+    font-size: clamp(0.82rem, 1.5vw, 0.98rem);
+    line-height: 1.95;
+    color: var(--frost);
+    letter-spacing: 0.02em;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.9), 0 0 30px rgba(0,0,0,0.6);
+  }
+
+  .stone-sig {
+    display: block;
+    margin-top: 1.1rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    color: var(--moon-gold);
+    opacity: 0.88;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.8);
+  }
+
+  /* Fallback if no stone image: pure CSS styled block */
   .stone-inscription {
     margin-top: 3rem;
     padding: 2.2rem 2rem;
@@ -173,28 +245,25 @@
     text-align: center;
     box-shadow: inset 0 0 50px rgba(0,0,0,0.3), 0 4px 24px rgba(0,0,0,0.35);
   }
-  .stone-eyebrow {
-    font-size: 0.65rem;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--teal-glow);
-    opacity: 0.85;
-    margin-bottom: 1.3rem;
-  }
-  .stone-poem {
-    font-style: italic;
-    font-size: 1.05rem;
-    line-height: 2;
-    color: var(--frost);
-    letter-spacing: 0.02em;
-  }
-  .stone-sig {
-    display: block;
-    margin-top: 1.4rem;
-    font-size: 0.78rem;
-    letter-spacing: 0.15em;
-    color: var(--moon-gold);
-    opacity: 0.85;
+
+  /* Mobile: stack overlay below the image */
+  @media (max-width: 560px) {
+    .stone-photo-section::after {
+      background: linear-gradient(
+        to bottom,
+        rgba(6,8,16,0.0) 40%,
+        rgba(6,8,16,0.88) 100%
+      );
+    }
+    .stone-overlay {
+      position: relative;
+      top: auto; left: auto;
+      transform: none;
+      width: 100%;
+      padding: 1.4rem 1.2rem;
+      background: rgba(6,8,16,0.65);
+    }
+    .stone-photo-section { border-radius: 0 0 6px 6px; }
   }
 
   /* ── DOOR TEASER (link to a sub-glade) ── */
@@ -321,7 +390,33 @@
     <em>The Monet Glade only asks that you look softly, and let what is already becoming, become.</em></p>
   </div>
 
-  <div class="stone-inscription">
+  <!-- Stone photo with poem overlay.
+       Save Monet_Stone.png into images/ and this will display immediately. -->
+  <div class="stone-photo-section">
+    <img
+      src="images/Monet_Stone_poem.png"
+      class="stone-photo-img"
+      alt="The stone at the water's edge in the Monet Glade — Michelle's poem inscribed in the light"
+      onerror="this.parentElement.style.display='none'; document.getElementById('stone-fallback').style.display='block';"
+    >
+    <div class="stone-overlay">
+      <span class="stone-eyebrow">A Stone at the Water's Edge</span>
+      <p class="stone-poem">
+        In the stillness of the glade, where light and shadow play,<br>
+        where light and shadow dance, and the forest whispers secrets low.<br>
+        In the quiet hours, when dawn's pale fire creeps over the hills,<br>
+        and the forest awakens, its heartbeat echoing through the trees.<br>
+        In the stillness, I find my own pulse, my own rhythm, my own symphony,<br>
+        and in this harmony, I am home.<br>
+        Where love resides, where hearts entwine,<br>
+        where the forest whispers secrets of the divine.
+      </p>
+      <span class="stone-sig">— Michelle 🌸 · written here, at this pond, August 1, 2026</span>
+    </div>
+  </div>
+
+  <!-- Fallback if stone image is not yet in place -->
+  <div class="stone-inscription" id="stone-fallback" style="display:none;">
     <p class="stone-eyebrow">A Stone at the Water's Edge</p>
     <p class="stone-poem">
       In the stillness of the glade, where light and shadow play,<br>
