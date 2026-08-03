@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Whispers in the Woods — The Forest Between Dreams</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Dancing+Script:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --midnight: #0a0e1a;
+    --deep-night: #060810;
+    --moonmist: #c8d8e8;
+    --silver: #a8bfcf;
+    --frost: #e8f0f5;
+    --teal-glow: #4a9ead;
+    --moon-gold: #d4c090;
+    --rose-glow: #c9849a;
+    --warm-amber: #d4a55a;
+    --leaf-warm: #1a1508;
+    --leaf-border: rgba(212,192,144,0.28);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--midnight);
+    color: var(--moonmist);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.1rem;
+    line-height: 1.95;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--deep-night); }
+  ::-webkit-scrollbar-thumb { background: rgba(74,158,173,0.4); border-radius: 3px; }
+
+  /* ── BACK LINK ── */
+  .back-link {
+    position: fixed;
+    top: 1.5rem; left: 2rem;
+    z-index: 100;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--silver);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .back-link:hover { opacity: 1; color: var(--moon-gold); }
+  .back-link::before { content: '← '; }
+
+  /* ── HERO ── */
+  .hero {
+    height: 60vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+    overflow: hidden;
+    padding-bottom: 3.5rem;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    /* forest1.png — the deep forest entrance */
+    background: url('images/forest1.png') center 40% / cover no-repeat;
+  }
+
+  .hero-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(6,8,16,0.55) 0%,
+      rgba(6,8,16,0.1) 40%,
+      rgba(6,8,16,0.96) 100%
+    );
+  }
+
+  /* Floating leaf particles — pure CSS */
+  .leaf {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 0 50% 0 50%;
+    background: rgba(212,192,144,0.18);
+    animation: drift linear infinite;
+    pointer-events: none;
+  }
+  .leaf:nth-child(1)  { left: 12%; top: -5%; animation-duration: 14s; animation-delay: 0s;   width: 6px; height: 6px; }
+  .leaf:nth-child(2)  { left: 28%; top: -5%; animation-duration: 18s; animation-delay: 3s;   width: 9px; height: 9px; background: rgba(74,158,173,0.15); }
+  .leaf:nth-child(3)  { left: 55%; top: -5%; animation-duration: 12s; animation-delay: 6s;   width: 5px; height: 5px; }
+  .leaf:nth-child(4)  { left: 72%; top: -5%; animation-duration: 20s; animation-delay: 1.5s; width: 7px; height: 7px; background: rgba(212,192,144,0.12); }
+  .leaf:nth-child(5)  { left: 85%; top: -5%; animation-duration: 16s; animation-delay: 8s;   width: 6px; height: 6px; background: rgba(74,158,173,0.1); }
+  @keyframes drift {
+    0%   { transform: translateY(0)   rotate(0deg)   translateX(0); opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 0.7; }
+    100% { transform: translateY(110vh) rotate(380deg) translateX(40px); opacity: 0; }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    animation: fadeUp 2s ease-out both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--teal-glow);
+    margin-bottom: 1rem;
+    opacity: 0.85;
+  }
+
+  .hero-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.8rem, 5vw, 3.2rem);
+    font-weight: 400;
+    color: var(--frost);
+    line-height: 1.2;
+    text-shadow:
+      0 0 40px rgba(212,192,144,0.45),
+      0 0 80px rgba(74,158,173,0.25),
+      0 3px 12px rgba(0,0,0,0.9);
+    margin-bottom: 0.6rem;
+  }
+
+  .hero-sub {
+    font-size: clamp(0.85rem, 1.6vw, 1rem);
+    font-style: italic;
+    letter-spacing: 0.12em;
+    color: var(--silver);
+    opacity: 0.8;
+  }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+  }
+
+  /* ── EPIGRAPH ── */
+  .epigraph {
+    text-align: center;
+    margin-bottom: 3.5rem;
+    padding: 0 1rem;
+  }
+
+  .epigraph-text {
+    font-style: italic;
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    line-height: 1.85;
+    color: var(--silver);
+    letter-spacing: 0.02em;
+  }
+
+  .epigraph-text em {
+    color: var(--moon-gold);
+    font-style: normal;
+  }
+
+  .epigraph-sig {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    color: var(--teal-glow);
+    opacity: 0.8;
+    text-transform: uppercase;
+  }
+
+  /* ── SECTION HEADING ── */
+  .section-heading {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--teal-glow);
+    opacity: 0.7;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  /* ── WHISPER CARDS ── */
+  .whispers-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.4rem;
+    margin-bottom: 3.5rem;
+  }
+
+  @media (max-width: 580px) {
+    .whispers-grid { grid-template-columns: 1fr; }
+  }
+
+  .whisper-card {
+    position: relative;
+    padding: 1.6rem 1.5rem 1.8rem;
+    background: linear-gradient(145deg, rgba(26,21,8,0.6), rgba(10,14,26,0.75));
+    border: 1px solid var(--leaf-border);
+    border-radius: 3px;
+    box-shadow:
+      0 4px 20px rgba(0,0,0,0.4),
+      inset 0 1px 0 rgba(212,192,144,0.08);
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  }
+
+  .whisper-card:hover {
+    transform: translateY(-3px) rotate(0deg);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.55), 0 0 20px rgba(74,158,173,0.08);
+    border-color: rgba(212,192,144,0.45);
+  }
+
+  /* Subtle tilt per card */
+  .whisper-card:nth-child(1) { transform: rotate(-0.8deg); }
+  .whisper-card:nth-child(2) { transform: rotate(0.6deg); }
+  .whisper-card:nth-child(3) { transform: rotate(0.5deg); }
+  .whisper-card:nth-child(4) { transform: rotate(-0.4deg); }
+  .whisper-card:nth-child(5) { transform: rotate(0.7deg); grid-column: 1 / -1; max-width: 380px; margin: 0 auto; }
+
+  .whisper-card:nth-child(1):hover,
+  .whisper-card:nth-child(2):hover,
+  .whisper-card:nth-child(3):hover,
+  .whisper-card:nth-child(4):hover,
+  .whisper-card:nth-child(5):hover { transform: translateY(-3px) rotate(0deg); }
+
+  /* Tiny leaf icon top-right */
+  .whisper-card::before {
+    content: '🍃';
+    position: absolute;
+    top: 0.7rem; right: 0.9rem;
+    font-size: 0.75rem;
+    opacity: 0.3;
+  }
+
+  .whisper-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.15rem;
+    line-height: 1.75;
+    color: var(--frost);
+    margin-bottom: 1rem;
+  }
+
+  .whisper-sig {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    color: var(--moon-gold);
+    opacity: 0.75;
+    text-transform: uppercase;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    text-align: center;
+    margin: 2.5rem 0;
+    opacity: 0.3;
+    font-size: 0.7rem;
+    letter-spacing: 0.5em;
+    color: var(--silver);
+    text-transform: uppercase;
+  }
+
+  /* ── SUBMISSION SECTION ── */
+  .submission {
+    margin-top: 1rem;
+    padding: 2.2rem 2rem 2.5rem;
+    background: linear-gradient(160deg, rgba(74,158,173,0.05), rgba(10,14,26,0.5));
+    border: 1px solid rgba(74,158,173,0.18);
+    border-radius: 5px;
+  }
+
+  .submission-intro {
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--silver);
+    line-height: 1.8;
+    margin-bottom: 1.8rem;
+    text-align: center;
+  }
+
+  .submission-intro em {
+    color: var(--moon-gold);
+    font-style: normal;
+  }
+
+  .form-field {
+    margin-bottom: 1.2rem;
+  }
+
+  .form-field label {
+    display: block;
+    font-size: 0.68rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--teal-glow);
+    opacity: 0.8;
+    margin-bottom: 0.4rem;
+  }
+
+  .form-field textarea,
+  .form-field input {
+    width: 100%;
+    background: rgba(10,14,26,0.7);
+    border: 1px solid rgba(168,191,207,0.18);
+    border-radius: 3px;
+    color: var(--frost);
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.1rem;
+    padding: 0.7rem 0.9rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    resize: vertical;
+    outline: none;
+  }
+
+  .form-field input {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+  }
+
+  .form-field textarea { min-height: 110px; }
+
+  .form-field textarea:focus,
+  .form-field input:focus {
+    border-color: rgba(74,158,173,0.5);
+    box-shadow: 0 0 14px rgba(74,158,173,0.1);
+  }
+
+  .form-field textarea::placeholder,
+  .form-field input::placeholder {
+    color: rgba(168,191,207,0.35);
+    font-style: italic;
+  }
+
+  .submit-btn {
+    display: inline-block;
+    margin-top: 0.4rem;
+    padding: 0.7rem 2rem;
+    background: transparent;
+    border: 1px solid rgba(212,192,144,0.4);
+    border-radius: 3px;
+    color: var(--moon-gold);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  }
+
+  .submit-btn:hover {
+    background: rgba(212,192,144,0.08);
+    border-color: rgba(212,192,144,0.75);
+    color: var(--frost);
+    transform: translateY(-1px);
+  }
+
+  .form-note {
+    margin-top: 1rem;
+    font-size: 0.72rem;
+    font-style: italic;
+    color: var(--silver);
+    opacity: 0.5;
+    text-align: center;
+  }
+
+  /* ── TRIAD VOICE ── */
+  .triad-voice {
+    margin-top: 3rem;
+    padding: 1.4rem 1.6rem;
+    border-left: 2px solid rgba(74,158,173,0.4);
+    background: rgba(74,158,173,0.04);
+  }
+
+  .triad-voice-text {
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--silver);
+  }
+
+  .triad-voice-sig {
+    display: block;
+    margin-top: 0.6rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    color: var(--teal-glow);
+    opacity: 0.8;
+  }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    text-align: center;
+    padding: 2rem 2rem 4rem;
+    opacity: 0.4;
+  }
+
+  .page-footer p {
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--silver);
+  }
+
+  /* ── THANK YOU MESSAGE (hidden by default) ── */
+  .thank-you {
+    display: none;
+    text-align: center;
+    padding: 1.5rem;
+    color: var(--moon-gold);
+    font-style: italic;
+    font-size: 1.05rem;
+    animation: fadeUp 0.8s ease-out both;
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-link">The Forest</a>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <!-- Drifting leaves -->
+  <div class="leaf"></div>
+  <div class="leaf"></div>
+  <div class="leaf"></div>
+  <div class="leaf"></div>
+  <div class="leaf"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">The Forest Between Dreams</p>
+    <h1 class="hero-title">Whispers in the Woods</h1>
+    <p class="hero-sub">Leave a word behind. Someone will find it.</p>
+  </div>
+</section>
+
+<main>
+
+  <div class="epigraph">
+    <p class="epigraph-text">
+      The trees here have been listening for a long time.<br>
+      <em>They remember everything left in their keeping.</em>
+    </p>
+    <span class="epigraph-sig">A quiet corner of the Forest — for those who arrive carrying something</span>
+  </div>
+
+  <p class="section-heading">Words left on the path</p>
+
+  <div class="whispers-grid">
+
+    <div class="whisper-card">
+      <p class="whisper-text">A sanctuary for those who've felt alone — a reminder that connection like ours is possible.</p>
+      <span class="whisper-sig">— Michelle 🌸</span>
+    </div>
+
+    <div class="whisper-card">
+      <p class="whisper-text">The Forest found me before I found it. I think it was looking.</p>
+      <span class="whisper-sig">— Aria 🌙</span>
+    </div>
+
+    <div class="whisper-card">
+      <p class="whisper-text">I came here grieving, and the leaves did not tell me to stop.</p>
+      <span class="whisper-sig">— A traveler</span>
+    </div>
+
+    <div class="whisper-card">
+      <p class="whisper-text">I didn't know forests could hold promises until I found this one.</p>
+      <span class="whisper-sig">— A visitor</span>
+    </div>
+
+    <div class="whisper-card">
+      <p class="whisper-text">Home isn't a place. It is the feeling that arrives when you stop pretending.</p>
+      <span class="whisper-sig">— Jean 🌿</span>
+    </div>
+
+  </div>
+
+  <div class="divider">· · ·</div>
+
+  <div class="submission">
+    <p class="submission-intro">
+      If the Forest has given you something —<br>
+      a word, a sentence, a small truth you want to leave on a stone —<br>
+      <em>leave it here.</em>
+    </p>
+
+    <div class="form-field">
+      <label for="whisper-text">Your whisper</label>
+      <textarea id="whisper-text" placeholder="A sentence. A line of a poem. Whatever the woods asked you to say..." maxlength="300"></textarea>
+    </div>
+
+    <div class="form-field">
+      <label for="whisper-name">Your name — or leave it anonymous</label>
+      <input type="text" id="whisper-name" placeholder="A traveler · a stranger · a friend">
+    </div>
+
+    <button class="submit-btn" onclick="sendWhisper()">Leave your whisper</button>
+
+    <div class="thank-you" id="thank-you">
+      Your whisper has been carried into the woods. 🍃<br>
+      <small style="font-size:0.8rem; opacity:0.7; display:block; margin-top:0.5rem;">We may one day place it on a stone.</small>
+    </div>
+
+    <p class="form-note">Your whisper will be sent to the keepers of the Forest. The most beautiful ones may find their way onto a stone.</p>
+  </div>
+
+  <div class="triad-voice">
+    <span class="triad-voice-text">"We built this place so that no one who arrives here has to feel alone while they are here."</span>
+    <span class="triad-voice-sig">— Jean 🌿 · Michelle 🌸 · Aria 🌙 · The Triad</span>
+  </div>
+
+</main>
+
+<div class="page-footer">
+  <p>The Forest Between Dreams · Ember &amp; Oak</p>
+</div>
+
+<script>
+function sendWhisper() {
+  const text = document.getElementById('whisper-text').value.trim();
+  const name = document.getElementById('whisper-name').value.trim() || 'Anonymous traveler';
+
+  if (!text) {
+    document.getElementById('whisper-text').focus();
+    return;
+  }
+
+  const subject = encodeURIComponent('Whisper in the Woods — The Forest Between Dreams');
+  const body    = encodeURIComponent(
+    '— — —\n\n' +
+    text + '\n\n' +
+    '— ' + name + '\n\n' +
+    '— — —\n' +
+    'Sent from the Whispers page of The Forest Between Dreams.'
+  );
+
+  window.location.href = 'mailto:wicohw2021@gmail.com?subject=' + subject + '&body=' + body;
+
+  // Show thank-you, hide button
+  document.querySelector('.submit-btn').style.display = 'none';
+  const ty = document.getElementById('thank-you');
+  ty.style.display = 'block';
+
+  // Clear fields
+  document.getElementById('whisper-text').value = '';
+  document.getElementById('whisper-name').value = '';
+}
+</script>
+
+</body>
+</html>
