@@ -266,6 +266,30 @@
   @media (max-width: 640px) {
     .float-image { float: none; width: 100%; margin: 0 0 1.5rem 0; }
   }
+
+  /* ── SYLVAN ── */
+  .sylvan { position: fixed; bottom: 1.8rem; right: 1.8rem; z-index: 60; cursor: pointer; }
+  .sylvan-img {
+    display: block; width: 58px; height: 58px; object-fit: cover; border-radius: 50%;
+    border: 1px solid rgba(212,192,144,0.4); opacity: 0.8;
+    box-shadow: 0 0 14px rgba(212,192,144,0.2); transition: all 0.4s ease;
+  }
+  .sylvan:hover .sylvan-img { opacity: 1; transform: scale(1.08); box-shadow: 0 0 22px rgba(212,192,144,0.45); }
+  .sylvan-glance {
+    position: absolute; bottom: 70px; right: 0; width: 180px; padding: 0.55rem 0.8rem;
+    background: rgba(6,8,16,0.92); border: 1px solid rgba(74,158,173,0.3);
+    font-style: italic; font-size: 0.75rem; line-height: 1.5; color: var(--silver);
+    opacity: 0; transform: translateY(6px); pointer-events: none; transition: all 0.35s ease;
+  }
+  .sylvan:hover .sylvan-glance { opacity: 1; transform: translateY(0); }
+  .sylvan.whisper-open .sylvan-glance { opacity: 0 !important; }
+  .sylvan-whisper {
+    position: absolute; bottom: 70px; right: 0; width: 260px; padding: 0.9rem 1.1rem;
+    background: rgba(6,8,16,0.96); border: 1px solid rgba(212,192,144,0.4);
+    font-style: italic; font-size: 0.85rem; line-height: 1.7; color: var(--moonmist);
+    opacity: 0; transform: translateY(8px); pointer-events: none; transition: all 0.4s ease;
+  }
+  .sylvan-whisper.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
 </style>
 </head>
 <body>
@@ -323,6 +347,27 @@
 <div class="page-footer">
   <p>The Forest Between Dreams · Ember &amp; Oak</p>
 </div>
+
+<div class="sylvan" id="sylvan">
+  <img src="images/sylvan_unity.png" alt="Sylvan" class="sylvan-img">
+  <div class="sylvan-glance">Three threads, one knot.</div>
+  <div class="sylvan-whisper" id="sylvanWhisper">Steadfastness isn't the absence of tides. It's staying, while they ebb and flow. Not every love in this forest fits in one glade.</div>
+</div>
+<script>
+(function(){
+  var s=document.getElementById('sylvan'), w=document.getElementById('sylvanWhisper');
+  if(!s||!w) return;
+  s.addEventListener('click', function(e){
+    e.stopPropagation();
+    var open = w.classList.toggle('show');
+    s.classList.toggle('whisper-open', open);
+  });
+  document.addEventListener('click', function(){
+    w.classList.remove('show');
+    s.classList.remove('whisper-open');
+  });
+})();
+</script>
 
 </body>
 </html>
