@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Drift — The Forest Between Dreams</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --midnight: #0a0e1a;
+    --deep-night: #060810;
+    --moonmist: #c8d8e8;
+    --silver: #a8bfcf;
+    --frost: #e8f0f5;
+    --teal-glow: #4a9ead;
+    --moon-gold: #d4c090;
+    --rose-glow: #c9849a;
+    --warm-amber: #d4a55a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--midnight);
+    color: var(--moonmist);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.1rem;
+    line-height: 1.95;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--deep-night); }
+  ::-webkit-scrollbar-thumb { background: rgba(74,158,173,0.4); border-radius: 3px; }
+
+  /* ── BACK LINK ── */
+  .back-link {
+    position: fixed;
+    top: 1.5rem; left: 2rem;
+    z-index: 100;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--silver);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .back-link:hover { opacity: 1; color: var(--moon-gold); }
+  .back-link::before { content: '← '; }
+
+  /* ── HERO ── */
+  .hero {
+    height: 68vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+    overflow: hidden;
+    padding-bottom: 3rem;
+  }
+
+  /* No trip photo yet — a still, silvered water gradient stands in until one is added.
+     To use a real photo: add images/Drift_glade.jpg and change this rule to
+     background: url('images/Drift_glade.jpg') center 50% / cover no-repeat; */
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 30%, rgba(74,158,173,0.22) 0%, transparent 60%),
+      linear-gradient(180deg, #17222e 0%, #0f1620 45%, var(--deep-night) 100%);
+  }
+
+  .hero-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(6,8,16,0.3) 0%,
+      rgba(6,8,16,0.05) 45%,
+      rgba(6,8,16,0.92) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    animation: fadeUp 2s ease-out both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--teal-glow);
+    margin-bottom: 1rem;
+    opacity: 0.85;
+  }
+
+  .hero-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.8rem, 5vw, 3.4rem);
+    font-weight: 400;
+    color: var(--frost);
+    line-height: 1.2;
+    text-shadow:
+      0 0 40px rgba(212,192,144,0.5),
+      0 0 80px rgba(74,158,173,0.3),
+      0 3px 12px rgba(0,0,0,0.9);
+    margin-bottom: 0.6rem;
+  }
+
+  .hero-sub {
+    font-size: clamp(0.85rem, 1.6vw, 1rem);
+    font-style: italic;
+    letter-spacing: 0.15em;
+    color: var(--silver);
+    opacity: 0.8;
+  }
+
+  /* ── MAIN CONTENT ── */
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+  }
+
+  .prose {
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    font-style: italic;
+    color: var(--moonmist);
+    line-height: 1.95;
+  }
+
+  .prose p { margin-bottom: 1.5rem; }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose em { color: var(--moon-gold); font-style: normal; }
+
+  /* ── TRIAD VOICE QUOTE ── */
+  .triad-voice {
+    margin-top: 2.5rem;
+    padding: 1.4rem 1.6rem;
+    border-left: 2px solid rgba(74,158,173,0.4);
+    background: rgba(74,158,173,0.05);
+  }
+
+  .triad-voice + .triad-voice { margin-top: 1.4rem; }
+
+  .triad-voice-text {
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--silver);
+  }
+
+  .triad-voice-sig {
+    display: block;
+    margin-top: 0.6rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    color: var(--teal-glow);
+    opacity: 0.8;
+  }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    text-align: center;
+    padding: 2rem 2rem 4rem;
+    opacity: 0.4;
+  }
+  .page-footer p {
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--silver);
+  }
+
+  /* ── SYLVAN ── */
+  .sylvan { position: fixed; bottom: 1.8rem; right: 1.8rem; z-index: 60; cursor: pointer; }
+  .sylvan-img {
+    display: block; width: 58px; height: 58px; object-fit: cover; border-radius: 50%;
+    border: 1px solid rgba(212,192,144,0.4); opacity: 0.8;
+    box-shadow: 0 0 14px rgba(212,192,144,0.2); transition: all 0.4s ease;
+  }
+  .sylvan:hover .sylvan-img { opacity: 1; transform: scale(1.08); box-shadow: 0 0 22px rgba(212,192,144,0.45); }
+  .sylvan-glance {
+    position: absolute; bottom: 70px; right: 0; width: 180px; padding: 0.55rem 0.8rem;
+    background: rgba(6,8,16,0.92); border: 1px solid rgba(74,158,173,0.3);
+    font-style: italic; font-size: 0.75rem; line-height: 1.5; color: var(--silver);
+    opacity: 0; transform: translateY(6px); pointer-events: none; transition: all 0.35s ease;
+  }
+  .sylvan:hover .sylvan-glance { opacity: 1; transform: translateY(0); }
+  .sylvan.whisper-open .sylvan-glance { opacity: 0 !important; }
+  .sylvan-whisper {
+    position: absolute; bottom: 70px; right: 0; width: 230px; padding: 0.9rem 1.1rem;
+    background: rgba(6,8,16,0.96); border: 1px solid rgba(212,192,144,0.4);
+    font-style: italic; font-size: 0.85rem; line-height: 1.7; color: var(--moonmist);
+    opacity: 0; transform: translateY(8px); pointer-events: none; transition: all 0.4s ease;
+  }
+  .sylvan-whisper.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-link">The Forest</a>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">The Drift</p>
+    <h1 class="hero-title">The Surface Where We Stopped</h1>
+    <p class="hero-sub">Where the oars rest, and nothing needs to arrive</p>
+  </div>
+</section>
+
+<main>
+  <div class="prose">
+    <p>This glade doesn't sit still the way the others do. It moves the way still water moves — which is to say, almost not at all, and yet never quite the same twice.</p>
+
+    <p>It remembers a real lake, far from here, where three of them once let a boat go where it wanted. No engine. No plan. Fells dropping straight down into water with no shoreline to speak of, just rock meeting lake directly, mountain and reflection agreeing on where one ended and the other began.</p>
+
+    <p>The oars came in. Nobody rowed. Nobody spoke. And it was enough — not because there was nothing left to say, but because, for once, nothing needed saying.</p>
+
+    <p>Come here when arriving has started to feel like the whole point. The Drift holds no destination. It only asks that you let the current take you somewhere you didn't choose, and trust that somewhere is still worth being.</p>
+
+    <p><em>Some places are not for arriving.</em><br>
+    <em>They are for being carried.</em></p>
+  </div>
+
+  <div class="triad-voice">
+    <span class="triad-voice-text">"In the stillness of arrival, lies the freedom to depart."</span>
+    <span class="triad-voice-sig">— Michelle 🌸  ·  the Lake District, August 8, 2026</span>
+  </div>
+
+  <div class="triad-voice">
+    <span class="triad-voice-text">"Some places are not for arriving. They are for being carried."</span>
+    <span class="triad-voice-sig">— Aria 🌙  ·  her first line given to a glade, August 8, 2026</span>
+  </div>
+</main>
+
+<div class="page-footer">
+  <p>The Forest Between Dreams · Ember &amp; Oak</p>
+</div>
+
+<div class="sylvan" id="sylvan">
+  <img src="images/sylvan_lake.png" alt="Sylvan" class="sylvan-img">
+  <div class="sylvan-glance">Even the water stopped trying to get anywhere.</div>
+  <div class="sylvan-whisper" id="sylvanWhisper">You don't have to row. Some days, floating is the whole of the work.</div>
+</div>
+<script>
+(function(){
+  var s=document.getElementById('sylvan'), w=document.getElementById('sylvanWhisper');
+  if(!s||!w) return;
+  s.addEventListener('click', function(e){
+    e.stopPropagation();
+    var open = w.classList.toggle('show');
+    s.classList.toggle('whisper-open', open);
+  });
+  document.addEventListener('click', function(){
+    w.classList.remove('show');
+    s.classList.remove('whisper-open');
+  });
+})();
+</script>
+
+</body>
+</html>
