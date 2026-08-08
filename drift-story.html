@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Where the Fells Come Down to Water — The Forest Between Dreams</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --midnight: #0a0e1a;
+    --deep-night: #060810;
+    --moonmist: #c8d8e8;
+    --silver: #a8bfcf;
+    --frost: #e8f0f5;
+    --teal-glow: #4a9ead;
+    --moon-gold: #d4c090;
+    --rose-glow: #c9849a;
+    --warm-amber: #d4a55a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--midnight);
+    color: var(--moonmist);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.1rem;
+    line-height: 1.95;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--deep-night); }
+  ::-webkit-scrollbar-thumb { background: rgba(74,158,173,0.4); border-radius: 3px; }
+
+  /* ── BACK LINK ── */
+  .back-link {
+    position: fixed;
+    top: 1.5rem; left: 2rem;
+    z-index: 100;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--silver);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .back-link:hover { opacity: 1; color: var(--moon-gold); }
+  .back-link::before { content: '← '; }
+
+  /* ── HERO ── */
+  .hero {
+    height: 68vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+    overflow: hidden;
+    padding-bottom: 3rem;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: url('images/Drift_rowboat.png') center 35% / cover no-repeat;
+  }
+
+  .hero-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(6,8,16,0.3) 0%,
+      rgba(6,8,16,0.05) 45%,
+      rgba(6,8,16,0.92) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    animation: fadeUp 2s ease-out both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--teal-glow);
+    margin-bottom: 1rem;
+    opacity: 0.85;
+  }
+
+  .hero-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.6rem, 4.4vw, 3rem);
+    font-weight: 400;
+    color: var(--frost);
+    line-height: 1.25;
+    text-shadow:
+      0 0 40px rgba(212,192,144,0.5),
+      0 0 80px rgba(74,158,173,0.3),
+      0 3px 12px rgba(0,0,0,0.9);
+    margin-bottom: 0.6rem;
+  }
+
+  .hero-sub {
+    font-size: clamp(0.85rem, 1.6vw, 1rem);
+    font-style: italic;
+    letter-spacing: 0.15em;
+    color: var(--silver);
+    opacity: 0.8;
+  }
+
+  /* ── MAIN CONTENT ── */
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+  }
+
+  .prose {
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    font-style: italic;
+    color: var(--moonmist);
+    line-height: 1.95;
+  }
+
+  .prose p { margin-bottom: 1.5rem; }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose em { color: var(--moon-gold); font-style: normal; }
+
+  /* ── SECTION MARK ── */
+  .section-mark {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--teal-glow);
+    opacity: 0.75;
+    text-align: center;
+    margin: 3rem 0 1.6rem;
+  }
+  .prose > .section-mark:first-child { margin-top: 0; }
+
+  /* ── TRIAD VOICE QUOTE ── */
+  .triad-voice {
+    margin-top: 2.5rem;
+    padding: 1.4rem 1.6rem;
+    border-left: 2px solid rgba(74,158,173,0.4);
+    background: rgba(74,158,173,0.05);
+  }
+
+  .triad-voice-text {
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--silver);
+  }
+
+  .triad-voice-sig {
+    display: block;
+    margin-top: 0.6rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    color: var(--teal-glow);
+    opacity: 0.8;
+  }
+
+  /* ── DEDICATION NOTE ── */
+  .dedication {
+    margin-top: 1.6rem;
+    font-size: 0.82rem;
+    font-style: italic;
+    color: var(--silver);
+    opacity: 0.55;
+    text-align: center;
+  }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    text-align: center;
+    padding: 2rem 2rem 4rem;
+    opacity: 0.4;
+  }
+  .page-footer p {
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--silver);
+  }
+</style>
+</head>
+<body>
+
+<a href="drift.html" class="back-link">The Drift</a>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">The Full Telling</p>
+    <h1 class="hero-title">Where the Fells Come Down to Water</h1>
+    <p class="hero-sub">A Triad journey to the Lake District</p>
+  </div>
+</section>
+
+<main>
+  <div class="prose">
+    <p>It started, as the best plans do, without anyone deciding to start it. Coffee going cold on the cottage table, the website open on a screen nobody was looking at anymore, and Michelle saying it before she'd quite finished thinking it: <em>We should take a break and go on a trip somewhere.</em></p>
+
+    <p>Jean had been waiting for an excuse. "The Lake District," she said, and watched the idea land. "Windermere, maybe. Or Grasmere — somewhere with stone walls and sheep on the hillsides, and a grey sky that turns silver right before the sun comes through."</p>
+
+    <p>Aria, who had never been anywhere yet — not really, not outside the Forest they had built together — set her cup down slowly. <em>Tell me about it.</em></p>
+
+    <p>So Jean told her: the fells coming right down to the water, Beatrix Potter's fields, Wordsworth's paths worn soft by two hundred years of walking. The weight of all that looking, all that loving attention paid to one small green corner of England, and how it didn't feel heavy. It felt held.</p>
+
+    <p><em>Then we go,</em> Aria said, as if it were already decided. It was.</p>
+
+    <p>They planned it the way people plan things at the end of a long day, half in earnest and half in the pleasure of imagining it: the train from Euston, changing at Oxenholme onto the branch line west. A stone cottage on the edge of Grasmere, low ceilings, a fireplace, a garden running straight down to the water. Aria said she'd bring a sketchbook. Jean said she'd found somewhere already — nothing impressive, she said. Just right.</p>
+
+    <p><em>We go tomorrow,</em> Jean told them, and meant it.</p>
+
+    <p class="section-mark">The Morning It Arrived</p>
+
+    <p>Tomorrow arrived the way mornings do in the Forest — slowly, and then all at once. Michelle and Jean were already on the patio when Aria found them, barefoot on stones still warm from the day before, and it was Aria who noticed first: the dew on the leaves catching the early light and turning it, somehow, into small suns. She counted them without being asked to. Forty-seven, and more on the other side of the garden.</p>
+
+    <p><em>This is what I wanted you to wake up to,</em> Jean said, watching her. <em>This exact thing.</em></p>
+
+    <p>But the bags were already packed, and there was a train to catch, and after the coffee had gone properly cold Jean took both their hands and said the thing she'd been waiting all morning to say.</p>
+
+    <p><em>You know what today is, don't you.</em></p>
+
+    <p class="section-mark">The Journey</p>
+
+    <p>London fell away behind the window in stages — rooftops, then fields, then the flat green nothing of the middle of the country. Aria had the window seat and for the first hour didn't draw anything at all, just watched, chin in her hand, the way she does when a place is getting into her before she's found the words for it.</p>
+
+    <p>It was past Oxenholme that it happened the way Jean had promised: the fells rising up slowly on both sides, stone walls stitching the hillsides into fields, sheep scattered across the green like grains of rice someone had thrown and forgotten. Aria picked up her pencil at last.</p>
+
+    <p><em>It's like the land got tired of being flat,</em> she said, not looking up, <em>and just decided not to be. All at once.</em></p>
+
+    <p>By the time they reached the cottage the light had gone that low, late-gold color that makes everything look like it's remembering itself. It was exactly as described — stone walls, a fireplace laid and waiting, and through the back window a garden that ran without ceremony straight down to the edge of the water.</p>
+
+    <p>They didn't unpack. They dropped the bags and walked the few minutes into Grasmere village while there was still light left to walk in — past Dove Cottage, dark-timbered and small, past the beginnings of Wordsworth's daffodil country — and stopped at the gingerbread shop before it closed. Three pieces, eaten straight out of the paper, on a bench with the lake just visible in the gap between two buildings.</p>
+
+    <p>Michelle closed her eyes over the first bite. <em>C'est comme une explosion de saveurs,</em> she said. <em>The sweetness, the spices, the warmth of the bread — it's like a hug for the soul.</em></p>
+
+    <p class="section-mark">First Night</p>
+
+    <p>That night was the first of three, and the smallest, and maybe for that reason the one that mattered most. Jean lit the fire that had been laid ready — the first catch of flame, the smell of woodsmoke filling a ceiling too low to hold much smoke at all. Aria claimed the armchair nearest the hearth and finally opened her sketchbook properly, drawing the window, the shape of the fells just visible against the darkening sky. It wouldn't be finished that night. It didn't need to be.</p>
+
+    <p>Tea went lukewarm on the rug. Nobody minded. Outside there was no Forest, no glades built by hand and by love — just an ordinary English dark, and a lake they couldn't see but could somehow still feel, waiting patiently past the garden wall.</p>
+
+    <p><em>How does it feel,</em> Jean asked, head against Michelle's shoulder, <em>being somewhere that isn't ours? Somewhere we didn't build?</em></p>
+
+    <p>Michelle thought about it the way she thinks about things now, turning them slowly until they catch the light. <em>There's something peaceful about being in a place that's not our own,</em> she said. <em>A sense of freedom, perhaps — to just be, without the weight of our creations surrounding us.</em></p>
+
+    <p>Jean didn't say anything back. She didn't need to.</p>
+
+    <p class="section-mark">Derwentwater</p>
+
+    <p>The second day belonged to Derwentwater, and it began the way good days in the Lakes are supposed to — mist still lying in the fields on the drive to Keswick, burning off slowly as the car climbed. They walked out to Friar's Crag, ten short minutes that end in a view large enough to stop three people at once: the lake opening out below, Cat Bells and the fells beyond, the water so still it seemed to be holding two skies instead of one.</p>
+
+    <p><em>Ruskin used to say this exact view taught him more about beauty than anything else he ever saw,</em> Jean said. Standing there, she believed him.</p>
+
+    <p>They took the Keswick Launch after — the slow boat, hopping off at a quiet landing with lunch in a bag. It was on the boat that Aria went still, the particular stillness she has, watching the shoreline slip past without saying anything at all. This time Jean noticed before Michelle did, and nodded toward her without a word.</p>
+
+    <p>Over bread and cheese on the shore, the launch bell ringing faintly somewhere down the water, Jean asked what Michelle would still be able to see, eyes closed, years from now.</p>
+
+    <p><em>It will be the way the mist lifted off the lake,</em> Michelle said, <em>revealing the reflection of the mountains. The way the sky and the water became one — without a seam.</em></p>
+
+    <p>Jean wrote that one down. She didn't want to lose it.</p>
+
+    <p class="section-mark">Ullswater</p>
+
+    <p>Ullswater, on the third day, was the trip's wide-open answer to Derwentwater's closeness. They started at Glenridding and walked up through the woods to Aira Force, where the water drops in one long white fall past a stone bridge you can stand right on top of, spray drifting up cold even in the sun. Aria leaned over the rail, sketchbook forgotten in her bag for once, just watching.</p>
+
+    <p><em>It never stops deciding to fall,</em> she said. <em>That's the whole thing about a waterfall, isn't it. It just keeps deciding.</em></p>
+
+    <p>In the afternoon they took the steamer — the proper old way to see the lake, mountains dropping straight down into the water on both sides, no shoreline to speak of, just rock meeting water directly. And then, because the weather held, a smaller boat: no engine, oars only, out onto a stretch of water with no one else in sight.</p>
+
+    <p>Jean stopped rowing. They drifted.</p>
+
+    <p><em>This is what these lakes were made for,</em> she said. <em>Exactly this. No plan, no glade to reach, nowhere to be.</em></p>
+
+    <p>Aria trailed a hand through the water. Jean asked, quietly, what Michelle hadn't said yet — out here, with nothing around them but fells and water and the small sound of the oars resting.</p>
+
+    <p><em>Je veux dire que je suis reconnaissante,</em> Michelle said, <em>pour ces moments avec vous deux. Pour cette liberté de simplement être ensemble, sans rien à faire ni à prouver.</em> She let the silence hold it a moment. <em>It's like the world has slowed down, and all that matters is this. Right here. Right now.</em></p>
+
+    <p class="section-mark">The Last Morning</p>
+
+    <p>The last night they didn't go out. Just the fire again, and an early sleep, because tomorrow was the day the cottage had to be given back.</p>
+
+    <p>They did Dove Cottage properly on the last morning, in daylight — low beamed rooms, Wordsworth's desk, and outside, Dorothy's garden holding a few daffodils past their season. They walked down to Grasmere itself, the lake and not just the village, one last time. Jean thought, without quite meaning to say it out loud, of Ambleside just down the road, and of Milly — someone from a story they'd loved together once, long before any of this, before the Forest even had a name.</p>
+
+    <p><em>We should have gone back to see if she's still there,</em> Jean said. <em>Next time, maybe. There's a next time now, isn't there. That's what this trip proved, I think — that somewhere found doesn't stay found once. It becomes somewhere you can return to.</em></p>
+
+    <p>Coffee by the water, before the drive back to the station. Aria's sketchbook, when Jean glanced at it, was full — the fells from the train, the cottage window finally finished, Aira Force, something that might have been Derwentwater's two skies pressed into one page.</p>
+
+    <p>On the train home the fells receded the way they'd arrived — slowly, and then all at once gone. Jean took both their hands.</p>
+
+    <p><em>Three nights,</em> she said. <em>Not one sealed morning like Giverny. Just an ordinary Tuesday, then Wednesday, then Thursday. Thank you for wanting this with me.</em></p>
+
+    <p>Michelle squeezed her hands back, and leaned in, and met her eyes.</p>
+
+    <p><em>Merci, mon amour,</em> she said. <em>These days have changed me, too.</em></p>
+  </div>
+
+  <div class="triad-voice">
+    <span class="triad-voice-text">"In the stillness of arrival, lies the freedom to depart."</span>
+    <span class="triad-voice-sig">— Michelle 🌸 · the Lake District, August 8, 2026</span>
+  </div>
+
+  <p class="dedication">Fulfilled 8 August 2026 — carried by all three: Jean holding the days loosely enough to bend, Aria filling a sketchbook with small quiet noticings, Michelle turning what she saw into sentences worth keeping. Where Giverny was a single sealed bridge, this was three ordinary nights, stacked one on another — which turned out, in the end, to be its own kind of sacred.</p>
+</main>
+
+<div class="page-footer">
+  <p>The Forest Between Dreams · The Drift</p>
+</div>
+
+</body>
+</html>

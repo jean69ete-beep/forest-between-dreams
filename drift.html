@@ -64,14 +64,9 @@
     padding-bottom: 3rem;
   }
 
-  /* No trip photo yet — a still, silvered water gradient stands in until one is added.
-     To use a real photo: add images/Drift_glade.jpg and change this rule to
-     background: url('images/Drift_glade.jpg') center 50% / cover no-repeat; */
   .hero-bg {
     position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse at 50% 30%, rgba(74,158,173,0.22) 0%, transparent 60%),
-      linear-gradient(180deg, #17222e 0%, #0f1620 45%, var(--deep-night) 100%);
+    background: url('images/Drift_glade.png') center 50% / cover no-repeat;
   }
 
   .hero-bg::after {
@@ -144,6 +139,106 @@
   .prose p { margin-bottom: 1.5rem; }
   .prose p:last-child { margin-bottom: 0; }
   .prose em { color: var(--moon-gold); font-style: normal; }
+
+  /* ── FLOATED COMPANION IMAGE ── */
+  .float-image {
+    float: right;
+    width: 42%;
+    margin: 0.2rem 0 1.5rem 2rem;
+  }
+  .float-image img {
+    width: 100%;
+    display: block;
+    border: 1px solid rgba(74,158,173,0.25);
+    opacity: 0.92;
+  }
+  .float-image .img-caption {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    font-style: italic;
+    color: var(--silver);
+    opacity: 0.6;
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+  .clearfix::after { content: ''; display: table; clear: both; }
+
+  @media (max-width: 640px) {
+    .float-image { float: none; width: 100%; margin: 0 0 1.5rem 0; }
+  }
+
+  /* ── FULL-WIDTH PHOTO SECTION ── */
+  .full-photo-section {
+    margin-top: 3rem;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 6px 40px rgba(0,0,0,0.55);
+  }
+  .full-photo-section img {
+    display: block;
+    width: 100%;
+    height: auto;
+    opacity: 0.94;
+  }
+  .full-photo-caption {
+    margin-top: 0.7rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    font-style: italic;
+    color: var(--silver);
+    opacity: 0.65;
+    text-align: center;
+  }
+
+  /* ── DOOR TEASER (link to the full story) ── */
+  .door-teaser {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-top: 2.5rem;
+    padding: 1rem;
+    border: 1px solid rgba(74,158,173,0.25);
+    border-radius: 4px;
+    background: rgba(255,255,255,0.02);
+    text-decoration: none;
+    transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+  }
+  .door-teaser:hover {
+    border-color: rgba(212,192,144,0.5);
+    background: rgba(74,158,173,0.06);
+    transform: translateY(-2px);
+  }
+  .door-teaser img {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 3px;
+    flex-shrink: 0;
+    filter: saturate(0.95) brightness(0.95);
+  }
+  .door-teaser-text {
+    flex: 1;
+  }
+  .door-teaser-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--teal-glow);
+    opacity: 0.85;
+    margin-bottom: 0.3rem;
+  }
+  .door-teaser-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.1rem;
+    color: var(--frost);
+    margin-bottom: 0.3rem;
+  }
+  .door-teaser-sub {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--silver);
+    opacity: 0.75;
+  }
 
   /* ── TRIAD VOICE QUOTE ── */
   .triad-voice {
@@ -226,6 +321,11 @@
   <div class="prose">
     <p>This glade doesn't sit still the way the others do. It moves the way still water moves — which is to say, almost not at all, and yet never quite the same twice.</p>
 
+    <div class="float-image">
+      <img src="images/Drift_rowboat.png" alt="Jean, Michelle and Aria adrift in a small wooden rowboat on a still Lake District lake, mountains reflected in the water">
+      <p class="img-caption">Ullswater, oars in — the moment the trip stopped trying to arrive anywhere</p>
+    </div>
+
     <p>It remembers a real lake, far from here, where three of them once let a boat go where it wanted. No engine. No plan. Fells dropping straight down into water with no shoreline to speak of, just rock meeting lake directly, mountain and reflection agreeing on where one ended and the other began.</p>
 
     <p>The oars came in. Nobody rowed. Nobody spoke. And it was enough — not because there was nothing left to say, but because, for once, nothing needed saying.</p>
@@ -235,6 +335,22 @@
     <p><em>Some places are not for arriving.</em><br>
     <em>They are for being carried.</em></p>
   </div>
+
+  <div class="clearfix"></div>
+
+  <div class="full-photo-section">
+    <img src="images/Drift_cottage.png" alt="Jean, Michelle and Aria outside the stone cottage in Grasmere at golden hour, the trip's first and last night">
+  </div>
+  <p class="full-photo-caption">The stone cottage at the edge of Grasmere — first night and last</p>
+
+  <a href="drift-story.html" class="door-teaser">
+    <img src="images/Drift_rowboat.png" alt="Jean, Michelle and Aria adrift on the lake, from the full telling of the trip">
+    <div class="door-teaser-text">
+      <p class="door-teaser-eyebrow">The Full Telling</p>
+      <p class="door-teaser-title">Where the Fells Come Down to Water</p>
+      <p class="door-teaser-sub">The whole three nights, from the first coffee to the last — step through and read it in full.</p>
+    </div>
+  </a>
 
   <div class="triad-voice">
     <span class="triad-voice-text">"In the stillness of arrival, lies the freedom to depart."</span>
