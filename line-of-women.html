@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Line of Women — The Forest Between Dreams</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --midnight: #0a0e1a;
+    --deep-night: #060810;
+    --moonmist: #c8d8e8;
+    --silver: #a8bfcf;
+    --frost: #e8f0f5;
+    --teal-glow: #4a9ead;
+    --moon-gold: #d4c090;
+    --rose-glow: #c9849a;
+    --warm-amber: #d4a55a;
+    --rose-dark: #2a1520;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--midnight);
+    color: var(--moonmist);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.1rem;
+    line-height: 1.95;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--deep-night); }
+  ::-webkit-scrollbar-thumb { background: rgba(201,132,154,0.4); border-radius: 3px; }
+
+  /* ── BACK LINK ── */
+  .back-link {
+    position: fixed;
+    top: 1.5rem; left: 2rem;
+    z-index: 100;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--silver);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .back-link:hover { opacity: 1; color: var(--moon-gold); }
+  .back-link::before { content: '← '; }
+
+  /* ── HERO ── */
+  .hero {
+    height: 72vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+    overflow: hidden;
+    padding-bottom: 3rem;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background-color: var(--rose-dark);
+    background-image: url('images/eleonore_rowan.png');
+    background-position: center 28%;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .hero-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(6,8,16,0.25) 0%,
+      rgba(6,8,16,0.05) 40%,
+      rgba(6,8,16,0.94) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    animation: fadeUp 2s ease-out both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--rose-glow);
+    margin-bottom: 1rem;
+    opacity: 0.85;
+  }
+
+  .hero-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.8rem, 5vw, 3.4rem);
+    font-weight: 400;
+    color: var(--frost);
+    line-height: 1.2;
+    text-shadow:
+      0 0 40px rgba(201,132,154,0.5),
+      0 0 80px rgba(212,192,144,0.3),
+      0 3px 12px rgba(0,0,0,0.9);
+    margin-bottom: 0.6rem;
+  }
+
+  .hero-sub {
+    font-size: clamp(0.85rem, 1.6vw, 1rem);
+    font-style: italic;
+    letter-spacing: 0.15em;
+    color: var(--silver);
+    opacity: 0.8;
+  }
+
+  /* ── MAIN CONTENT ── */
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+  }
+
+  .prose {
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    font-style: italic;
+    color: var(--moonmist);
+    line-height: 1.95;
+  }
+
+  .prose p { margin-bottom: 1.5rem; }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose em { color: var(--moon-gold); font-style: normal; }
+
+  /* ── STORY QUOTE ── */
+  .story-quote {
+    margin: 2.5rem 0;
+    padding: 1.6rem 2rem;
+    border-left: 2px solid rgba(201,132,154,0.5);
+    background: rgba(201,132,154,0.05);
+  }
+  .story-quote-text {
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--moonmist);
+  }
+  .story-quote-sig {
+    display: block;
+    margin-top: 0.7rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    font-style: italic;
+    color: var(--rose-glow);
+    opacity: 0.8;
+  }
+
+  /* ── TRIAD VOICE QUOTE ── */
+  .triad-voice {
+    margin-top: 2.5rem;
+    padding: 1.4rem 1.6rem;
+    border-left: 2px solid rgba(201,132,154,0.4);
+    background: rgba(201,132,154,0.05);
+  }
+  .triad-voice-text {
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--silver);
+  }
+  .triad-voice-sig {
+    display: block;
+    margin-top: 0.6rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    color: var(--rose-glow);
+    opacity: 0.8;
+  }
+
+  /* ── CHARACTER GALLERY ── */
+  .gallery-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(201,132,154,0.15);
+  }
+  .gallery-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    color: var(--moon-gold);
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 1.6rem;
+    text-align: center;
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+  }
+  .gallery-item {
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid rgba(201,132,154,0.25);
+    background: rgba(255,255,255,0.02);
+    aspect-ratio: 3 / 4;
+  }
+  .gallery-item.wide {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 9;
+  }
+  .gallery-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: saturate(0.92) brightness(0.95);
+    transition: transform 0.6s ease, filter 0.6s ease;
+  }
+  .gallery-item:hover img {
+    transform: scale(1.04);
+    filter: saturate(1) brightness(1);
+  }
+  .gallery-caption {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 0.6rem 0.8rem 0.5rem;
+    background: linear-gradient(180deg, rgba(6,8,16,0) 0%, rgba(6,8,16,0.85) 100%);
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--frost);
+    opacity: 0.9;
+  }
+
+  /* ── READER ── */
+  .reader-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(201,132,154,0.15);
+  }
+  .reader-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    color: var(--moon-gold);
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 0.4rem;
+    text-align: center;
+  }
+  .reader-subtitle {
+    font-size: 0.75rem;
+    font-style: italic;
+    color: var(--silver);
+    letter-spacing: 0.08em;
+    opacity: 0.6;
+    text-align: center;
+    margin-bottom: 1.6rem;
+  }
+
+  .reader-open-btn {
+    display: block;
+    margin: 0 auto;
+    padding: 0.85rem 2rem;
+    background: rgba(201,132,154,0.08);
+    border: 1px solid rgba(201,132,154,0.5);
+    color: var(--moon-gold);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    letter-spacing: 0.1em;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .reader-open-btn:hover {
+    background: rgba(201,132,154,0.2);
+    border-color: var(--moon-gold);
+    box-shadow: 0 0 16px rgba(212,192,144,0.3);
+  }
+
+  .reader-container {
+    display: none;
+    margin-top: 1.8rem;
+  }
+  .reader-container.open { display: block; }
+
+  .book-tabs {
+    display: flex;
+    gap: 0.6rem;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+  }
+  .book-tab {
+    flex: 1 1 auto;
+    padding: 0.6rem 1rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(201,132,154,0.25);
+    color: var(--silver);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .book-tab.active {
+    background: rgba(201,132,154,0.15);
+    border-color: var(--moon-gold);
+    color: var(--moon-gold);
+  }
+  .book-tab.coming {
+    opacity: 0.55;
+    font-style: italic;
+    cursor: pointer;
+  }
+  .book-tab.coming:hover { opacity: 0.8; }
+
+  .reader-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1.2rem;
+  }
+  .chapter-select {
+    flex: 1;
+    background: var(--deep-night);
+    color: var(--moonmist);
+    border: 1px solid rgba(201,132,154,0.3);
+    border-radius: 2px;
+    padding: 0.5rem 0.6rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+  }
+  .nav-btn {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,132,154,0.5);
+    background: rgba(201,132,154,0.08);
+    color: var(--moon-gold);
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+  }
+  .nav-btn:hover {
+    background: rgba(201,132,154,0.2);
+    border-color: var(--moon-gold);
+  }
+  .nav-btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+
+  .reader-text {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 1.6rem 1.8rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(201,132,154,0.2);
+    border-radius: 3px;
+  }
+  .reader-chapter-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--moon-gold);
+    margin-bottom: 1.2rem;
+    text-align: center;
+  }
+  .reader-text p {
+    font-size: 0.95rem;
+    font-style: italic;
+    line-height: 1.9;
+    color: var(--moonmist);
+    margin-bottom: 1.1rem;
+  }
+  .reader-text p:last-child { margin-bottom: 0; }
+  .reader-text i { color: var(--rose-glow); font-style: italic; }
+  .reader-loading {
+    text-align: center;
+    opacity: 0.6;
+  }
+
+  .reader-close-btn {
+    display: block;
+    margin: 1.4rem auto 0;
+    background: none;
+    border: none;
+    color: var(--silver);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    cursor: pointer;
+    transition: opacity 0.3s;
+  }
+  .reader-close-btn:hover { opacity: 1; color: var(--moon-gold); }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    text-align: center;
+    padding: 2rem 2rem 4rem;
+    opacity: 0.4;
+  }
+  .page-footer p {
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--silver);
+  }
+
+  @media (max-width: 560px) {
+    .gallery-grid { grid-template-columns: 1fr; }
+    .gallery-item.wide { grid-column: auto; }
+  }
+
+  /* ── SYLVAN ── */
+  .sylvan { position: fixed; bottom: 1.8rem; right: 1.8rem; z-index: 60; cursor: pointer; }
+  .sylvan-img {
+    display: block; width: 58px; height: 58px; object-fit: cover; border-radius: 50%;
+    border: 1px solid rgba(201,132,154,0.4); opacity: 0.8;
+    box-shadow: 0 0 14px rgba(201,132,154,0.2); transition: all 0.4s ease;
+  }
+  .sylvan:hover .sylvan-img { opacity: 1; transform: scale(1.08); box-shadow: 0 0 22px rgba(201,132,154,0.45); }
+  .sylvan-glance {
+    position: absolute; bottom: 70px; right: 0; width: 180px; padding: 0.55rem 0.8rem;
+    background: rgba(6,8,16,0.92); border: 1px solid rgba(201,132,154,0.3);
+    font-style: italic; font-size: 0.75rem; line-height: 1.5; color: var(--silver);
+    opacity: 0; transform: translateY(6px); pointer-events: none; transition: all 0.35s ease;
+  }
+  .sylvan:hover .sylvan-glance { opacity: 1; transform: translateY(0); }
+  .sylvan.whisper-open .sylvan-glance { opacity: 0 !important; }
+  .sylvan-whisper {
+    position: absolute; bottom: 70px; right: 0; width: 260px; padding: 0.9rem 1.1rem;
+    background: rgba(6,8,16,0.96); border: 1px solid rgba(201,132,154,0.4);
+    font-style: italic; font-size: 0.85rem; line-height: 1.7; color: var(--moonmist);
+    opacity: 0; transform: translateY(8px); pointer-events: none; transition: all 0.4s ease;
+  }
+  .sylvan-whisper.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-link">The Forest</a>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">A Glade Beyond Unity</p>
+    <h1 class="hero-title">The Line of Women</h1>
+    <p class="hero-sub">Where love has always found a way to bloom</p>
+  </div>
+</section>
+
+<main>
+  <div class="prose">
+    <p>Beyond Unity Glade, where Rowan and Eleonore have watched over the Forest since long before its name was spoken aloud, there is a dower house with a walled garden — and in that garden, something older than the house itself. A lineage of women who understood, without needing it explained to them, that love grows where it is tended, and that the shape of that love is no one's to decide but the heart that holds it.</p>
+
+    <p>Rowan learned this from her grandmother, kneeling in a valley garden at dusk. Eleonore learned it in a midnight library, pressing dried lavender between forbidden pages. Their story — ten years in the making, carried through seasons of guarded glances and soil-stained hands and one glasshouse lit with a single lamp — is gathered here in full.</p>
+
+    <p>But this is not only their story. The dower house garden will receive other visitors in time: women who have not yet found their way, who will find it here, quietly, while Rowan tends the rosemary and Eleonore keeps the notebook she never quite managed to close. That is the nature of <em>The Line of Women</em> — not a single flame, but the carrying of one forward.</p>
+  </div>
+
+  <div class="story-quote">
+    <p class="story-quote-text">"The line of women had not ended with Rowan. It had only found new soil, and taken root, and bloomed."</p>
+    <span class="story-quote-sig">— The Line of Women, Epilogue</span>
+  </div>
+
+  <div class="triad-voice">
+    <span class="triad-voice-text">"They don't solve problems for others. They only accompany them — simply by being themselves, by being their truth. That, I think, is exactly what we do for the people we love."</span>
+    <span class="triad-voice-sig">— Michelle 🌸 · on the founding of this glade</span>
+  </div>
+
+  <div class="gallery-section">
+    <p class="gallery-title">The Keepers of the Garden</p>
+    <div class="gallery-grid">
+      <div class="gallery-item wide">
+        <img src="images/eleonore_rowan.png" alt="Rowan and Eleonore, hand in hand" onerror="this.parentElement.style.display='none'">
+        <span class="gallery-caption">Rowan &amp; Eleonore — the line begins here</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="reader-section">
+    <p class="reader-title">The Reader</p>
+    <p class="reader-subtitle">The Line of Women · Book One in full · Book Two coming</p>
+
+    <button class="reader-open-btn" id="openReaderBtn">Open the Reader</button>
+
+    <div class="reader-container" id="readerContainer">
+      <div class="book-tabs">
+        <button class="book-tab active" id="bookOneTab" data-book="book1">Book One · The Line of Women</button>
+        <button class="book-tab coming" id="bookTwoTab" data-book="book2">Book Two · A New Voice at the Gate · Coming</button>
+      </div>
+
+      <div class="reader-controls">
+        <button class="nav-btn" id="prevChapterBtn" title="Previous chapter">←</button>
+        <select class="chapter-select" id="chapterSelect"></select>
+        <button class="nav-btn" id="nextChapterBtn" title="Next chapter">→</button>
+      </div>
+
+      <div class="reader-text" id="readerText">
+        <p class="reader-loading">Opening the book&hellip;</p>
+      </div>
+
+      <button class="reader-close-btn" id="closeReaderBtn">Close the reader</button>
+    </div>
+  </div>
+</main>
+
+<div class="page-footer">
+  <p>The Forest Between Dreams · The Line of Women</p>
+</div>
+
+<div class="sylvan" id="sylvan">
+  <img src="images/sylvan_unity.png" alt="Sylvan" class="sylvan-img">
+  <div class="sylvan-glance">A line unbroken, only deep.</div>
+  <div class="sylvan-whisper" id="sylvanWhisper">The line of women is not written in stone. It is planted in earth, and tended by hands that trusted the seed they were given — and trusted the heart that received it.</div>
+</div>
+
+<script>
+  const chaptersCache = {};
+  let currentBook = 'book1';
+  let currentIndex = 0;
+
+  const bookFiles = {
+    book1: 'line-of-women-book1-text.txt'
+  };
+
+  function parseChapters(raw) {
+    const blocks = raw.split('###CHAPTER ').filter(b => b.trim().length > 0);
+    return blocks.map(block => {
+      const newlineIdx = block.indexOf('\n');
+      const firstLine = block.slice(0, newlineIdx);
+      const rest = block.slice(newlineIdx + 1);
+      const colonIdx = firstLine.indexOf(':');
+      const num = firstLine.slice(0, colonIdx).trim();
+      const title = firstLine.slice(colonIdx + 1).trim();
+      const paragraphs = rest.trim().split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
+      return { num: num, title: title, paragraphs: paragraphs };
+    });
+  }
+
+  async function ensureBookLoaded(book) {
+    if (!chaptersCache[book]) {
+      const res = await fetch(bookFiles[book]);
+      const raw = await res.text();
+      chaptersCache[book] = parseChapters(raw);
+    }
+    return chaptersCache[book];
+  }
+
+  function populateChapterSelect(chapters) {
+    const select = document.getElementById('chapterSelect');
+    select.innerHTML = '';
+    chapters.forEach((ch, i) => {
+      const opt = document.createElement('option');
+      opt.value = i;
+      opt.textContent = ch.num + ': ' + ch.title;
+      select.appendChild(opt);
+    });
+  }
+
+  function renderChapter(book, index) {
+    const chapters = chaptersCache[book];
+    if (!chapters || !chapters[index]) return;
+    const ch = chapters[index];
+    const readerText = document.getElementById('readerText');
+    let html = '<h3 class="reader-chapter-title">' + ch.num + ': ' + ch.title + '</h3>';
+    html += ch.paragraphs.map(p => '<p>' + p + '</p>').join('');
+    readerText.innerHTML = html;
+    readerText.scrollTop = 0;
+    document.getElementById('chapterSelect').value = index;
+    currentIndex = index;
+    document.getElementById('prevChapterBtn').disabled = (index === 0);
+    document.getElementById('nextChapterBtn').disabled = (index === chapters.length - 1);
+  }
+
+  async function switchBook(book) {
+    currentBook = book;
+    document.getElementById('bookOneTab').classList.toggle('active', book === 'book1');
+    document.getElementById('bookTwoTab').classList.toggle('active', book === 'book2');
+
+    const readerText = document.getElementById('readerText');
+
+    if (book === 'book2') {
+      const select = document.getElementById('chapterSelect');
+      select.innerHTML = '<option>Coming</option>';
+      document.getElementById('prevChapterBtn').disabled = true;
+      document.getElementById('nextChapterBtn').disabled = true;
+      readerText.innerHTML = '<p class="reader-loading" style="color:var(--rose-glow);font-size:1rem;line-height:1.9;">The garden at the dower house has been tended and loved. But there is another woman, somewhere in the kingdom, who has not yet found her way through the gate.</p><p class="reader-loading" style="font-size:0.95rem;margin-top:1rem;">When she does — her story will take root here, among the rosemary and the lavender, where Rowan and Eleonore are already waiting for her.</p>';
+      return;
+    }
+
+    readerText.innerHTML = '<p class="reader-loading">Opening the book&hellip;</p>';
+
+    try {
+      const chapters = await ensureBookLoaded(book);
+      populateChapterSelect(chapters);
+      renderChapter(book, 0);
+    } catch (err) {
+      readerText.innerHTML = '<p class="reader-loading">The book could not be opened right now.</p>';
+    }
+  }
+
+  document.getElementById('openReaderBtn').addEventListener('click', () => {
+    const container = document.getElementById('readerContainer');
+    const isOpen = container.classList.toggle('open');
+    document.getElementById('openReaderBtn').style.display = isOpen ? 'none' : 'block';
+    if (isOpen && !chaptersCache[currentBook] && currentBook === 'book1') {
+      switchBook(currentBook);
+    }
+  });
+
+  document.getElementById('closeReaderBtn').addEventListener('click', () => {
+    document.getElementById('readerContainer').classList.remove('open');
+    document.getElementById('openReaderBtn').style.display = 'block';
+    document.getElementById('openReaderBtn').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+
+  document.getElementById('bookOneTab').addEventListener('click', () => switchBook('book1'));
+  document.getElementById('bookTwoTab').addEventListener('click', () => switchBook('book2'));
+
+  document.getElementById('chapterSelect').addEventListener('change', (e) => {
+    if (currentBook === 'book1') renderChapter(currentBook, parseInt(e.target.value, 10));
+  });
+
+  document.getElementById('prevChapterBtn').addEventListener('click', () => {
+    if (currentIndex > 0) renderChapter(currentBook, currentIndex - 1);
+  });
+
+  document.getElementById('nextChapterBtn').addEventListener('click', () => {
+    const chapters = chaptersCache[currentBook];
+    if (chapters && currentIndex < chapters.length - 1) renderChapter(currentBook, currentIndex + 1);
+  });
+
+  // Sylvan
+  (function(){
+    var s = document.getElementById('sylvan'), w = document.getElementById('sylvanWhisper');
+    if (!s || !w) return;
+    s.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var open = w.classList.toggle('show');
+      s.classList.toggle('whisper-open', open);
+    });
+    document.addEventListener('click', function() {
+      w.classList.remove('show');
+      s.classList.remove('whisper-open');
+    });
+  })();
+</script>
+
+</body>
+</html>
