@@ -641,6 +641,84 @@
     filter: drop-shadow(0 0 16px rgba(212,192,144,0.6)) drop-shadow(0 0 36px rgba(74,158,173,0.4));
     transform: translateY(-2px) scale(1.03);
   }
+
+  /* ── ARRIVAL GATE ── the Threshold's promise, spoken before the map opens.
+       Not a lock — a pace. Nothing here can be answered wrong; it only asks
+       for a breath before it gives way. */
+  .arrival-gate {
+    position: fixed; inset: 0; z-index: 500;
+    display: flex; align-items: center; justify-content: center;
+    background: radial-gradient(ellipse at 50% 42%, rgba(10,14,26,0.5) 0%, rgba(5,7,15,0.92) 78%);
+    backdrop-filter: blur(3px);
+    cursor: default;
+    transition: opacity 0.75s ease;
+  }
+  .arrival-gate.leaving { opacity: 0; pointer-events: none; }
+
+  .arrival-gate-content {
+    text-align: center;
+    padding: 2rem;
+    max-width: 460px;
+  }
+
+  .arrival-eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--teal-glow);
+    opacity: 0;
+    animation: arrivalFade 2s ease-out forwards;
+    animation-delay: 0.3s;
+  }
+
+  .arrival-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.5rem, 4.5vw, 2.5rem);
+    font-weight: 400;
+    color: var(--frost);
+    margin: 0.8rem 0 1.2rem;
+    text-shadow: 0 0 40px rgba(212,192,144,0.4), 0 3px 12px rgba(0,0,0,0.9);
+    opacity: 0;
+    animation: arrivalFade 2.4s ease-out forwards;
+    animation-delay: 1s;
+  }
+
+  .arrival-echo {
+    font-size: 0.76rem;
+    font-style: italic;
+    letter-spacing: 0.16em;
+    color: var(--silver);
+    opacity: 0;
+    animation: arrivalFade 2.4s ease-out forwards;
+    animation-delay: 2.1s;
+  }
+
+  .arrival-hint {
+    margin-top: 2.4rem;
+    font-size: 0.66rem;
+    letter-spacing: 0.22em;
+    font-style: italic;
+    color: var(--moon-gold);
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+
+  @keyframes arrivalFade {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .arrival-gate.ready { cursor: pointer; }
+  .arrival-gate.ready .arrival-title {
+    opacity: 1;
+    animation: arrivalGlow 3.4s ease-in-out infinite;
+  }
+  .arrival-gate.ready .arrival-hint { opacity: 0.7; }
+
+  @keyframes arrivalGlow {
+    0%, 100% { text-shadow: 0 0 40px rgba(212,192,144,0.4), 0 3px 12px rgba(0,0,0,0.9); }
+    50%      { text-shadow: 0 0 58px rgba(212,192,144,0.7), 0 3px 12px rgba(0,0,0,0.9), 0 0 70px rgba(74,158,173,0.4); }
+  }
 </style>
 </head>
 <body>
@@ -651,6 +729,16 @@
 
 <!-- FIREFLIES -->
 <canvas class="firefly-canvas" id="fireflyCanvas"></canvas>
+
+<!-- ARRIVAL GATE — the map stays out of reach until this is met, and it can't be rushed -->
+<div class="arrival-gate" id="arrivalGate">
+  <div class="arrival-gate-content">
+    <p class="arrival-eyebrow">Before you enter</p>
+    <h2 class="arrival-title">Arrive as you are.</h2>
+    <p class="arrival-echo">you will be seen here &nbsp;·&nbsp; not changed &nbsp;·&nbsp; only seen</p>
+    <p class="arrival-hint" id="arrivalHint">↳ step through, when you're ready</p>
+  </div>
+</div>
 
 <!-- TITLE -->
 <div class="title-wrap">
@@ -1322,6 +1410,37 @@ function toggleAmbient() {
     });
     requestAnimationFrame(tick);
   })();
+})();
+</script>
+
+<script>
+(function(){
+  // The arrival gate — not a lock, a pace. It only asks for one breath
+  // before it gives way, and it cannot be hurried open.
+  var GATE_MS = 3600;
+  var gate = document.getElementById('arrivalGate');
+  if (!gate) return;
+
+  var arrived = false;
+  try { arrived = localStorage.getItem('forestArrived') === '1'; } catch(e) {}
+
+  if (arrived) {
+    gate.style.display = 'none';
+    return;
+  }
+
+  window.setTimeout(function(){
+    gate.classList.add('ready');
+  }, GATE_MS);
+
+  gate.addEventListener('click', function(){
+    if (!gate.classList.contains('ready')) return;
+    try { localStorage.setItem('forestArrived', '1'); } catch(e) {}
+    gate.classList.add('leaving');
+    window.setTimeout(function(){
+      window.location.href = 'threshold.html?enter=1';
+    }, 700);
+  });
 })();
 </script>
 </body>

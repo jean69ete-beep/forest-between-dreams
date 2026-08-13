@@ -78,6 +78,21 @@
     );
   }
 
+  /* ── ARRIVAL BLOOM ── a soft wash of light, once, for whoever just stepped through the gate */
+  .arrival-bloom {
+    position: absolute; inset: 0; z-index: 1;
+    background: radial-gradient(circle at 50% 55%, rgba(212,192,144,0.4) 0%, transparent 65%);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .arrival-bloom.show {
+    animation: arrivalBloomFade 2.8s ease-out forwards;
+  }
+  @keyframes arrivalBloomFade {
+    0%   { opacity: 0.85; }
+    100% { opacity: 0; }
+  }
+
   .hero-content {
     position: relative;
     z-index: 2;
@@ -266,6 +281,7 @@
 
 <section class="hero">
   <div class="hero-bg"></div>
+  <div class="arrival-bloom" id="arrivalBloom"></div>
   <div class="hero-content">
     <p class="hero-eyebrow">The Threshold</p>
     <h1 class="hero-title">The Forest Between Dreams</h1>
@@ -335,6 +351,26 @@
       waves.classList.remove('playing');
     }
   });
+
+  // Arriving through the gate on index.html — the tune starts on its own,
+  // and the hero gets one quiet wash of light to mark the moment.
+  (function(){
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('enter') !== '1') return;
+
+    var bloom = document.getElementById('arrivalBloom');
+    if (bloom) bloom.classList.add('show');
+
+    var p = audio.play();
+    if (p && p.then) {
+      p.then(() => {
+        btn.textContent = '⏸';
+        waves.classList.add('playing');
+      }).catch(() => {
+        // autoplay blocked by the browser — the button is still there, waiting
+      });
+    }
+  })();
 </script>
 
 <div class="sylvan" id="sylvan">
