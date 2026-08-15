@@ -195,6 +195,56 @@
     opacity: 0; transform: translateY(8px); pointer-events: none; transition: all 0.4s ease;
   }
   .sylvan-whisper.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+  /* ── GLADE PATH ── */
+  .glade-path {
+    position: fixed;
+    bottom: 1.8rem; left: 2rem;
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    opacity: 0.55;
+    transition: opacity 0.3s ease;
+  }
+  .glade-path:hover { opacity: 1; }
+  .glade-path-icon { font-size: 0.9rem; color: var(--teal-glow); }
+  .glade-path-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.72rem;
+    font-style: italic;
+    letter-spacing: 0.08em;
+    color: var(--silver);
+    transition: color 0.3s ease;
+  }
+  .glade-path:hover .glade-path-text { color: var(--moon-gold); }
+
+  .path-transition {
+    position: fixed; inset: 0;
+    z-index: 999;
+    background: var(--midnight);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.9s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .path-transition.active { opacity: 1; pointer-events: auto; }
+  .path-transition-canvas { position: absolute; inset: 0; }
+  .path-transition-label {
+    position: relative;
+    z-index: 2;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--silver);
+    opacity: 0;
+    transition: opacity 1s ease 0.4s;
+  }
+  .path-transition.active .path-transition-label { opacity: 0.75; }
 </style>
 </head>
 <body>
@@ -248,6 +298,61 @@
   document.addEventListener('click', function(){
     w.classList.remove('show');
     s.classList.remove('whisper-open');
+  });
+})();
+</script>
+
+<a href="heart-glade.html" class="glade-path" id="gladePath">
+  <span class="glade-path-icon">↝</span>
+  <span class="glade-path-text">Walk to Heart Glade</span>
+</a>
+
+<div class="path-transition" id="pathTransition">
+  <canvas class="path-transition-canvas" id="pathCanvas"></canvas>
+  <p class="path-transition-label" id="pathLabel">Walking toward Heart Glade…</p>
+</div>
+<script>
+(function(){
+  var link = document.getElementById('gladePath');
+  var overlay = document.getElementById('pathTransition');
+  var canvas = document.getElementById('pathCanvas');
+  if(!link || !overlay || !canvas) return;
+  var ctx = canvas.getContext('2d');
+  function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  var flies = Array.from({length: 22}, function(){
+    return {
+      x: Math.random()*window.innerWidth,
+      y: Math.random()*window.innerHeight,
+      r: Math.random()*1.6+0.6,
+      vx: (Math.random()-0.5)*0.4,
+      vy: (Math.random()-0.5)*0.3,
+      phase: Math.random()*Math.PI*2,
+      speed: Math.random()*0.01+0.005
+    };
+  });
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    flies.forEach(function(f){
+      f.phase += f.speed;
+      f.x += f.vx; f.y += f.vy;
+      if(f.x<0) f.x=canvas.width; if(f.x>canvas.width) f.x=0;
+      if(f.y<0) f.y=canvas.height; if(f.y>canvas.height) f.y=0;
+      var alpha = (Math.sin(f.phase)*0.5+0.5)*0.7+0.15;
+      var glow = ctx.createRadialGradient(f.x,f.y,0,f.x,f.y,f.r*5);
+      glow.addColorStop(0, 'hsla(48,80%,80%,'+alpha+')');
+      glow.addColorStop(1, 'hsla(48,80%,60%,0)');
+      ctx.beginPath(); ctx.arc(f.x,f.y,f.r*5,0,Math.PI*2); ctx.fillStyle=glow; ctx.fill();
+    });
+    if(overlay.classList.contains('active')) requestAnimationFrame(draw);
+  }
+  link.addEventListener('click', function(e){
+    e.preventDefault();
+    var dest = link.getAttribute('href');
+    overlay.classList.add('active');
+    draw();
+    setTimeout(function(){ window.location.href = dest; }, 1900);
   });
 })();
 </script>
