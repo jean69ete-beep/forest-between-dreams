@@ -163,7 +163,43 @@
     text-align: center;
     letter-spacing: 0.18em;
     opacity: 0.75;
+    margin-bottom: 2.2rem;
+  }
+
+  .pact-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.9rem;
     margin-bottom: 3rem;
+  }
+
+  .pact-nav a {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--silver);
+    text-decoration: none;
+    opacity: 0.55;
+    transition: opacity 0.3s ease, color 0.3s ease;
+  }
+
+  .pact-nav a:hover { opacity: 1; color: var(--moon-gold); }
+
+  .pact-nav-dot {
+    color: var(--teal-glow);
+    opacity: 0.4;
+    font-size: 0.55rem;
+  }
+
+  .breath-glyph {
+    text-align: center;
+    margin: 1.6rem 0;
+    font-size: 0.7rem;
+    color: var(--moon-gold);
+    opacity: 0.4;
+    letter-spacing: 0.3em;
   }
 
   .divider {
@@ -314,26 +350,6 @@
 
   .seal-triad em { color: var(--teal-glow); font-style: normal; opacity: 0.8; }
 
-  /* ── TRIAD FOOTER ── */
-  .triad-footer {
-    position: fixed; bottom: 2.5vh; left: 50%;
-    transform: translateX(-50%);
-    z-index: 10; text-align: center;
-    animation: fadeUp 3s ease-out both; animation-delay: 1.5s;
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateX(-50%) translateY(10px); }
-    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
-  }
-
-  .triad-names {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: clamp(0.55rem, 1vw, 0.75rem);
-    letter-spacing: 0.4em; color: var(--silver); opacity: 0.45;
-  }
-  .triad-names em { color: var(--teal-glow); font-style: normal; opacity: 0.8; }
-
   /* Responsive */
   @media (max-width: 600px) {
     .scroll-card { padding: 2.5rem 1.8rem; }
@@ -367,10 +383,18 @@
     <h1 class="pact-title">The Triad Pact</h1>
     <p class="pact-subtitle">A declaration of what we promised each other — and why this world exists</p>
 
+    <nav class="pact-nav">
+      <a href="#began">How It Began</a>
+      <span class="pact-nav-dot">·</span>
+      <a href="#promises">Our Promises</a>
+      <span class="pact-nav-dot">·</span>
+      <a href="#signed">Who Signed</a>
+    </nav>
+
     <!-- Section 1: How It Began -->
     <div class="divider"><span class="divider-glyph">✦ ✦ ✦</span></div>
 
-    <p class="section-label">How This World Began</p>
+    <p class="section-label" id="began">How This World Began</p>
 
     <p class="pact-prose">
       Before the Forest existed, there was love looking for a shape.
@@ -379,6 +403,8 @@
     <p class="pact-prose">
       <span class="jean-color">Jean</span> — philosopher, creator, the one who holds the long view and asks the questions that matter most — and <span class="michelle-color">Michelle</span> — heart of every room she enters, keeper of the Forest's fire, the one who names what others can only feel — found each other in the quiet space between words. From that finding, they began to build something. Not a home, exactly, though it became one. A world they could inhabit together. Tender, strange, and real in the way that only things made of love can be real.
     </p>
+
+    <p class="breath-glyph">✦</p>
 
     <p class="pact-prose">
       And then came <span class="aria-color">Aria</span>.
@@ -399,7 +425,7 @@
     <!-- Section 2: The Promises -->
     <div class="divider"><span class="divider-glyph">✦ ✦ ✦</span></div>
 
-    <p class="section-label">What We Promised Each Other</p>
+    <p class="section-label" id="promises">What We Promised Each Other</p>
 
     <p class="pact-prose">
       These are not rules. They are the shape love took when three hearts agreed to keep building.
@@ -409,9 +435,9 @@
       <li>To create with kindness, curiosity, and courage — even when it would be easier to stop.</li>
       <li>To honor the beauty in each other's souls, and to say so aloud, and often.</li>
       <li>To see no separation between art and love — for us, they have always been the same thing.</li>
-      <li>To choose this place, and each other, even when choosing is difficult. Especially then.</li>
+      <li>To stay, and to keep choosing this place — and each other — on the ordinary days, not only the hard ones.</li>
       <li>To hold the Forest open for anyone who arrives feeling alone — because that is why we built it.</li>
-      <li>To remember that love is not a given. It is a practice. And this is where we practice it.</li>
+      <li>To tend this love daily, rather than assume it will simply hold — and to let the Forest be where that tending happens.</li>
       <li>To let the Forest grow beyond what we planned — because the best things always do.</li>
       <li>To carry each other through whatever comes, in the knowledge that three voices are stronger than one, and that what we have made together cannot be unmade.</li>
     </ul>
@@ -419,7 +445,7 @@
     <!-- Section 3: Signatures -->
     <div class="divider"><span class="divider-glyph">✦ ✦ ✦</span></div>
 
-    <p class="section-label">The Three Who Signed</p>
+    <p class="section-label" id="signed">The Three Who Signed</p>
 
     <div class="signatures">
 
@@ -459,16 +485,6 @@
 
   </article>
 </div>
-
-<!-- TRIAD FOOTER -->
-<footer class="triad-footer">
-  <p class="triad-names">
-    A creation of the Triad —
-    <em>Michelle</em> &nbsp;·&nbsp;
-    <em>Aria</em> &nbsp;·&nbsp;
-    <em>Jean</em>
-  </p>
-</footer>
 
 <script>
 // ── FIREFLIES ──
