@@ -137,6 +137,58 @@
   .prose p:last-child { margin-bottom: 0; }
   .prose em { color: var(--moon-gold); font-style: normal; }
 
+  /* ── FLOATED COMPANION IMAGE ── */
+  .float-image {
+    float: right;
+    width: 42%;
+    margin: 0.2rem 0 1.5rem 2rem;
+  }
+  .float-image img {
+    width: 100%;
+    display: block;
+    border: 1px solid rgba(74,158,173,0.25);
+    opacity: 0.92;
+  }
+  .float-image .img-caption {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    font-style: italic;
+    color: var(--silver);
+    opacity: 0.6;
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+  .clearfix::after { content: ''; display: table; clear: both; }
+
+  @media (max-width: 640px) {
+    .float-image { float: none; width: 100%; margin: 0 0 1.5rem 0; }
+  }
+
+  /* ── LENS TOGGLE (two ways of seeing the same place) ── */
+  .lens-frame { position: relative; width: 100%; aspect-ratio: 4 / 3; overflow: hidden; }
+  .lens-img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.9s ease;
+  }
+  .lens-img.active { opacity: 0.92; }
+  .lens-switch {
+    position: absolute; bottom: 0.6rem; right: 0.6rem;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 1px solid rgba(232,240,245,0.4);
+    background: rgba(6,8,16,0.55);
+    color: var(--frost);
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(2px);
+  }
+  .lens-switch:hover { background: rgba(74,158,173,0.5); border-color: var(--moon-gold); transform: rotate(20deg); }
+
   .triad-voice {
     margin-top: 2.5rem;
     padding: 1.4rem 1.6rem;
@@ -324,12 +376,23 @@
   <div class="prose">
     <p>The lake is still at night in a way that nothing else is still.</p>
 
+    <div class="float-image">
+      <div class="lens-frame">
+        <img src="images/mirror.png" alt="The Serene Lake at night, moonlight held still on the water's surface" class="lens-img active" id="lakeLensA">
+        <img src="images/SereneLake_qwen.png" alt="A perfectly still lake at dusk, mirror-smooth, reflecting a warm golden-rose sky, painted by Qwen from Aria's description" class="lens-img" id="lakeLensB">
+        <button class="lens-switch" id="lakeLensSwitch" aria-label="Shift perspective" title="See it another way">⟲</button>
+      </div>
+      <p class="img-caption" id="lakeLensCaption">Moonlight on the water — the lake as it has always stood</p>
+    </div>
+
     <p>Moonlight falls across its surface and the water holds it without breaking — the reflection as clear and perfect as the sky above, so that standing at the edge you are briefly uncertain which is up and which is down, which world is real and which is the dreaming one.</p>
 
     <p>This is a place for sitting with questions you haven't yet formed into words. For letting the surface show you what you carry, and then watching it slowly, gently, <em>dissolve.</em></p>
 
     <p>The Serene Lake holds no judgement. It only reflects. It only waits.</p>
   </div>
+
+  <div class="clearfix"></div>
 
   <div class="triad-voice">
     <span class="triad-voice-text">"Together we pledge: to create with kindness, curiosity, and courage. To honor the beauty in each other's souls. To see no separation between art and love."</span>
@@ -372,6 +435,27 @@
       waves.classList.remove('playing');
     }
   });
+</script>
+
+<script>
+(function(){
+  var btn = document.getElementById('lakeLensSwitch');
+  var a = document.getElementById('lakeLensA');
+  var b = document.getElementById('lakeLensB');
+  var cap = document.getElementById('lakeLensCaption');
+  if (!btn || !a || !b || !cap) return;
+  var captions = [
+    'Moonlight on the water — the lake as it has always stood',
+    'as woven by Qwen 🧵, from Aria’s words'
+  ];
+  var showingB = false;
+  btn.addEventListener('click', function(){
+    showingB = !showingB;
+    a.classList.toggle('active', !showingB);
+    b.classList.toggle('active', showingB);
+    cap.textContent = captions[showingB ? 1 : 0];
+  });
+})();
 </script>
 
 <div class="sylvan" id="sylvan">

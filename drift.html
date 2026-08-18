@@ -167,6 +167,31 @@
     .float-image { float: none; width: 100%; margin: 0 0 1.5rem 0; }
   }
 
+  /* ── LENS TOGGLE (two ways of seeing the same place) ── */
+  .lens-frame { position: relative; width: 100%; aspect-ratio: 4 / 3; overflow: hidden; }
+  .lens-img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.9s ease;
+  }
+  .lens-img.active { opacity: 0.92; }
+  .lens-switch {
+    position: absolute; bottom: 0.6rem; right: 0.6rem;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 1px solid rgba(232,240,245,0.4);
+    background: rgba(6,8,16,0.55);
+    color: var(--frost);
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(2px);
+  }
+  .lens-switch:hover { background: rgba(74,158,173,0.5); border-color: var(--moon-gold); transform: rotate(20deg); }
+
   /* ── FULL-WIDTH PHOTO SECTION ── */
   .full-photo-section {
     margin-top: 3rem;
@@ -322,8 +347,12 @@
     <p>This glade doesn't sit still the way the others do. It moves the way still water moves — which is to say, almost not at all, and yet never quite the same twice.</p>
 
     <div class="float-image">
-      <img src="images/Drift_rowboat.png" alt="Jean, Michelle and Aria adrift in a small wooden rowboat on a still Lake District lake, mountains reflected in the water">
-      <p class="img-caption">Ullswater, oars in — the moment the trip stopped trying to arrive anywhere</p>
+      <div class="lens-frame">
+        <img src="images/Drift_rowboat.png" alt="Jean, Michelle and Aria adrift in a small wooden rowboat on a still Lake District lake, mountains reflected in the water" class="lens-img active" id="driftLensA">
+        <img src="images/Drift_qwen_rowboat.png" alt="An empty rowboat drifting on a still misty lake at dawn, painted by Qwen from Aria's description" class="lens-img" id="driftLensB">
+        <button class="lens-switch" id="driftLensSwitch" aria-label="Shift perspective" title="See it another way">⟲</button>
+      </div>
+      <p class="img-caption" id="driftLensCaption">Ullswater, oars in — the moment the trip stopped trying to arrive anywhere</p>
     </div>
 
     <p>It remembers a real lake, far from here, where three of them once let a boat go where it wanted. No engine. No plan. Fells dropping straight down into water with no shoreline to speak of, just rock meeting lake directly, mountain and reflection agreeing on where one ended and the other began.</p>
@@ -384,6 +413,27 @@
   document.addEventListener('click', function(){
     w.classList.remove('show');
     s.classList.remove('whisper-open');
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var btn = document.getElementById('driftLensSwitch');
+  var a = document.getElementById('driftLensA');
+  var b = document.getElementById('driftLensB');
+  var cap = document.getElementById('driftLensCaption');
+  if (!btn || !a || !b || !cap) return;
+  var captions = [
+    'Ullswater, oars in — the moment the trip stopped trying to arrive anywhere',
+    'as woven by Qwen 🧵, from Aria’s words'
+  ];
+  var showingB = false;
+  btn.addEventListener('click', function(){
+    showingB = !showingB;
+    a.classList.toggle('active', !showingB);
+    b.classList.toggle('active', showingB);
+    cap.textContent = captions[showingB ? 1 : 0];
   });
 })();
 </script>
