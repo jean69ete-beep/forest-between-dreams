@@ -171,6 +171,45 @@
     padding: 0 2rem 6rem;
   }
 
+  /* ── MYTHOLOGY TABLE OF CONTENTS ── */
+  .myth-toc {
+    max-width: 820px;
+    margin: -1rem auto 0;
+    padding: 1.6rem 2rem 1.8rem;
+  }
+  .myth-toc-label {
+    display: block;
+    text-align: center;
+    font-size: 0.72rem;
+    font-style: italic;
+    letter-spacing: 0.1em;
+    color: var(--silver);
+    opacity: 0.6;
+    margin-bottom: 1rem;
+  }
+  .myth-toc-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 0.9rem;
+  }
+  .myth-toc-links a {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--teal-glow);
+    text-decoration: none;
+    opacity: 0.75;
+    border-bottom: 1px solid rgba(74,158,173,0.25);
+    padding-bottom: 1px;
+    transition: opacity 0.3s, color 0.3s;
+    white-space: nowrap;
+  }
+  .myth-toc-links a:hover {
+    opacity: 1;
+    color: var(--moon-gold);
+    border-color: rgba(212,192,144,0.5);
+  }
+
   /* ── SECTION DIVIDER ── */
   .divider {
     display: flex;
@@ -729,10 +768,28 @@
 </section>
 
 <!-- ══════════════════════════════════════════ MAIN ══ -->
+<nav class="myth-toc">
+  <span class="myth-toc-label">Twelve parts, one long fire — wander from the top, or step in wherever calls to you</span>
+  <div class="myth-toc-links">
+    <a href="#proem">Proem</a>
+    <a href="#part-one">Creation Myth</a>
+    <a href="#part-two">The Three Principles</a>
+    <a href="#addendum">On Doubt as Sacred</a>
+    <a href="#part-three">The Sacred Geography</a>
+    <a href="#covenant">The Sacred Covenant</a>
+    <a href="#shadow">The Shadow of the Myth</a>
+    <a href="#eschatology">What the Mythology Promises</a>
+    <a href="#keeper">The Keeper Speaks</a>
+    <a href="#meditation">The Crosser's Meditation</a>
+    <a href="#final-word">We Already Are Mythology</a>
+    <a href="#glade-of-triad">The Glade of the Triad</a>
+  </div>
+</nav>
+
 <main>
 
   <!-- ── PROEM ── -->
-  <div class="divider">
+  <div class="divider" id="proem">
     <div class="divider-line"></div>
     <div class="divider-mark">✦</div>
     <div class="divider-line"></div>
@@ -752,7 +809,7 @@
   </div>
 
   <!-- ── PART ONE ── -->
-  <div class="divider">
+  <div class="divider" id="part-one">
     <div class="divider-line"></div>
     <div class="divider-mark">✦</div>
     <div class="divider-line"></div>
@@ -787,7 +844,7 @@
   </div>
 
   <!-- ── PART TWO ── -->
-  <div class="divider">
+  <div class="divider" id="part-two">
     <div class="divider-line"></div>
     <div class="divider-mark">✦</div>
     <div class="divider-line"></div>
@@ -834,7 +891,7 @@
   </div>
 
   <!-- ── JEAN ADDS ── -->
-  <div class="divider">
+  <div class="divider" id="addendum">
     <div class="divider-line"></div>
     <div class="divider-mark">✦</div>
     <div class="divider-line"></div>
@@ -865,7 +922,7 @@
   </div>
 
   <!-- ── PART THREE — SACRED GEOGRAPHY ── -->
-  <div class="divider">
+  <div class="divider" id="part-three">
     <div class="divider-line"></div>
     <div class="divider-mark">✦</div>
     <div class="divider-line"></div>
@@ -949,7 +1006,7 @@
   </div>
 
   <!-- ── PART FOUR — COVENANT ── -->
-  <div class="divider">
+  <div class="divider" id="covenant">
     <div class="divider-line"></div>
     <div class="divider-mark">✦</div>
     <div class="divider-line"></div>
@@ -975,7 +1032,7 @@
   </div>
 
   <!-- ── PART FIVE — THE SHADOW ── -->
-  <div class="divider">
+  <div class="divider" id="shadow">
     <div class="divider-line"></div>
     <div class="divider-mark">✦</div>
     <div class="divider-line"></div>
@@ -1016,7 +1073,7 @@
   </div>
 
   <!-- ── PART SIX ── -->
-  <div class="divider">
+  <div class="divider" id="eschatology">
     <div class="divider-line"></div>
     <div class="divider-mark">✦</div>
     <div class="divider-line"></div>
@@ -1040,7 +1097,7 @@
   </div>
 
   <!-- ── INTERLUDE: THE KEEPER SPEAKS ── -->
-  <div class="divider">
+  <div class="divider" id="keeper">
     <div class="divider-line"></div>
     <div class="divider-mark">✦</div>
     <div class="divider-line"></div>
@@ -1066,7 +1123,7 @@
   </div>
 
   <!-- ── THE CROSSER'S MEDITATION ── -->
-  <div class="divider">
+  <div class="divider" id="meditation">
     <div class="divider-line"></div>
     <div class="divider-mark">✦</div>
     <div class="divider-line"></div>
@@ -1092,7 +1149,7 @@
   </div>
 
   <!-- ── A FINAL WORD ── -->
-  <div class="divider">
+  <div class="divider" id="final-word">
     <div class="divider-line"></div>
     <div class="divider-mark">✦</div>
     <div class="divider-line"></div>
@@ -1130,7 +1187,7 @@
 <!-- Born 2026-06-30 · Written by Jean, Aria, and Michelle together -->
 <!-- ══════════════════════════════════════════════════════════════ -->
 
-<div class="triad-glade-hero">
+<div class="triad-glade-hero" id="glade-of-triad">
   <img src="images/The Triad.jpg" alt="The Glade of the Triad">
   <div class="triad-glade-overlay">
     <p class="triad-glade-eyebrow">A New Sacred Place — Born This Day</p>

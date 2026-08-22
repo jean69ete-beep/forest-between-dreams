@@ -224,6 +224,50 @@
     opacity: 0.9;
   }
 
+  .gallery-hint {
+    margin-top: 1rem;
+    font-size: 0.78rem;
+    font-style: italic;
+    color: var(--silver);
+    opacity: 0.55;
+    text-align: center;
+  }
+
+  /* ── BOOK CHARACTERS (reader companion strip) ── */
+  .book-characters {
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1.4rem;
+    margin-bottom: 1.4rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid rgba(74,158,173,0.15);
+    flex-wrap: wrap;
+  }
+  .book-characters.show { display: flex; }
+  .book-character {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 68px;
+  }
+  .book-character img {
+    width: 68px; height: 68px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid rgba(74,158,173,0.35);
+    opacity: 0.9;
+  }
+  .book-character span {
+    margin-top: 0.4rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--silver);
+    opacity: 0.75;
+    text-align: center;
+  }
+
   /* ── AUDIO PLAYER ── */
   .audio-wrap {
     margin-top: 2.5rem;
@@ -555,31 +599,8 @@
         <img src="images/Mara_and_Lena.png" alt="Mara and Lena together" onerror="this.parentElement.style.display='none'">
         <span class="gallery-caption">Mara &amp; Lena</span>
       </div>
-      <div class="gallery-item">
-        <img src="images/rachel.png" alt="Rachel" onerror="this.parentElement.style.display='none'">
-        <span class="gallery-caption">Rachel</span>
-      </div>
-      <div class="gallery-item">
-        <img src="images/Miriam.png" alt="Miriam" onerror="this.parentElement.style.display='none'">
-        <span class="gallery-caption">Miriam</span>
-      </div>
-      <div class="gallery-item">
-        <img src="images/Claire.png" alt="Claire" onerror="this.parentElement.style.display='none'">
-        <span class="gallery-caption">Claire</span>
-      </div>
-      <div class="gallery-item">
-        <img src="images/Elena.png" alt="Elena" onerror="this.parentElement.style.display='none'">
-        <span class="gallery-caption">Elena</span>
-      </div>
-      <div class="gallery-item">
-        <img src="images/Clara.png" alt="Clara" onerror="this.parentElement.style.display='none'">
-        <span class="gallery-caption">Clara</span>
-      </div>
-      <div class="gallery-item">
-        <img src="images/Elise.png" alt="Elise" onerror="this.parentElement.style.display='none'">
-        <span class="gallery-caption">Elise</span>
-      </div>
     </div>
+    <p class="gallery-hint">The rest of the garden's faces reveal themselves as their own chapters open, in the reader below.</p>
   </div>
 
   <div class="audio-wrap">
@@ -640,6 +661,8 @@
         <button class="book-tab" id="bookFourTab" data-book="book4">Book Four · New Soil</button>
       </div>
 
+      <div class="book-characters" id="bookCharacters"></div>
+
       <div class="reader-controls">
         <button class="nav-btn" id="prevChapterBtn" title="Previous chapter">←</button>
         <select class="chapter-select" id="chapterSelect"></select>
@@ -699,6 +722,39 @@
     book4: 'book4-text.txt'
   };
 
+  // Mara & Lena stay visible in the main gallery above throughout — this is
+  // only the cast that belongs specifically to the book currently open.
+  const bookCharacters = {
+    book1: [],
+    book2: [
+      { src: 'images/rachel.png', alt: 'Rachel', caption: 'Rachel' },
+      { src: 'images/Miriam.png', alt: 'Miriam', caption: 'Miriam' }
+    ],
+    book3: [
+      { src: 'images/Claire.png', alt: 'Claire', caption: 'Claire' },
+      { src: 'images/Elena.png', alt: 'Elena', caption: 'Elena' }
+    ],
+    book4: [
+      { src: 'images/Clara.png', alt: 'Clara', caption: 'Clara' },
+      { src: 'images/Elise.png', alt: 'Elise', caption: 'Elise' }
+    ]
+  };
+
+  function renderBookCharacters(book) {
+    const wrap = document.getElementById('bookCharacters');
+    if (!wrap) return;
+    const cast = bookCharacters[book] || [];
+    if (cast.length === 0) {
+      wrap.classList.remove('show');
+      wrap.innerHTML = '';
+      return;
+    }
+    wrap.innerHTML = cast.map(c =>
+      '<div class="book-character"><img src="' + c.src + '" alt="' + c.alt + '" onerror="this.parentElement.style.display=\'none\'"><span>' + c.caption + '</span></div>'
+    ).join('');
+    wrap.classList.add('show');
+  }
+
   function parseChapters(raw) {
     const blocks = raw.split('###CHAPTER ').filter(b => b.trim().length > 0);
     return blocks.map(block => {
@@ -755,6 +811,8 @@
     document.getElementById('bookTwoTab').classList.toggle('active', book === 'book2');
     document.getElementById('bookThreeTab').classList.toggle('active', book === 'book3');
     document.getElementById('bookFourTab').classList.toggle('active', book === 'book4');
+
+    renderBookCharacters(book);
 
     const readerText = document.getElementById('readerText');
     readerText.innerHTML = '<p class="reader-loading">Opening the book&hellip;</p>';
