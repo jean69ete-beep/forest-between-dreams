@@ -224,6 +224,113 @@
     opacity: 0.9;
   }
 
+  /* ── AUDIO PLAYER ── */
+  .audio-wrap {
+    margin-top: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-top: 1px solid rgba(74,158,173,0.2);
+    padding-top: 1.6rem;
+  }
+
+  .audio-btn {
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    border: 1px solid rgba(74,158,173,0.5);
+    background: rgba(74,158,173,0.08);
+    color: var(--moon-gold);
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .audio-btn:hover {
+    background: rgba(74,158,173,0.2);
+    border-color: var(--moon-gold);
+    box-shadow: 0 0 16px rgba(212,192,144,0.3);
+  }
+
+  .audio-info {
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--silver);
+    opacity: 0.7;
+    letter-spacing: 0.06em;
+    line-height: 1.5;
+  }
+
+  .audio-waves {
+    display: flex; align-items: center; gap: 3px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .audio-waves.playing { opacity: 1; }
+  .audio-waves span {
+    display: block; width: 3px;
+    background: var(--teal-glow);
+    border-radius: 2px;
+    animation: waveBar 0.8s ease-in-out infinite;
+  }
+  .audio-waves span:nth-child(1) { height: 8px; animation-delay: 0s; }
+  .audio-waves span:nth-child(2) { height: 14px; animation-delay: 0.1s; }
+  .audio-waves span:nth-child(3) { height: 10px; animation-delay: 0.2s; }
+  .audio-waves span:nth-child(4) { height: 16px; animation-delay: 0.05s; }
+  .audio-waves span:nth-child(5) { height: 8px; animation-delay: 0.15s; }
+
+  @keyframes waveBar {
+    0%, 100% { transform: scaleY(0.5); }
+    50% { transform: scaleY(1.2); }
+  }
+
+  /* ── LYRICS ── */
+  .lyrics-section {
+    margin-top: 2.5rem;
+    padding: 1.8rem 2rem;
+    border: 1px solid rgba(212,192,144,0.15);
+    background: rgba(255,255,255,0.015);
+  }
+  .lyrics-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    color: var(--moon-gold);
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 1.4rem;
+    text-align: center;
+  }
+  .lyrics-text p {
+    margin-bottom: 1.3rem;
+    font-style: italic;
+    line-height: 1.85;
+    color: var(--silver);
+  }
+  .lyrics-text p:last-child { margin-bottom: 0; }
+  .lyrics-label {
+    display: block;
+    font-family: 'Cinzel Decorative', serif;
+    font-style: normal;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal-glow);
+    opacity: 0.8;
+    margin-bottom: 0.5rem;
+  }
+  .lyrics-credit {
+    margin-top: 1.6rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid rgba(74,158,173,0.15);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    color: var(--teal-glow);
+    opacity: 0.7;
+    text-align: center;
+  }
+
   /* ── READER ── */
   .reader-section {
     margin-top: 3rem;
@@ -475,6 +582,50 @@
     </div>
   </div>
 
+  <div class="audio-wrap">
+    <button class="audio-btn" id="audioBtn" title="Play song">▶</button>
+    <div class="audio-waves" id="audioWaves">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <span class="audio-info">Second Bloom<br><em style="font-style:italic;opacity:0.7;">the Glade's theme, written by the Triad — Mara &amp; Lena's own duet</em></span>
+  </div>
+
+  <div class="lyrics-section">
+    <p class="lyrics-title">Second Bloom</p>
+    <div class="lyrics-text">
+      <p><span class="lyrics-label">Verse 1</span>
+      I stopped waiting for the frost to end,<br>
+      learned to love the bare, cold ground.<br>
+      Built a house of glass to guard what's left —<br>
+      never thought that you'd walk in.</p>
+
+      <p><span class="lyrics-label">Verse 2</span>
+      I came in looking for the roses,<br>
+      found a woman kneeling in the dirt,<br>
+      holding on to soil like it still owed her<br>
+      one more thing worth growing for.</p>
+
+      <p><span class="lyrics-label">Chorus</span>
+      We're not the story of never breaking,<br>
+      we're the one about the mending after.<br>
+      Every root we lost, we plant again —<br>
+      second bloom, and it's not too late.</p>
+
+      <p><span class="lyrics-label">Bridge</span>
+      Every woman who comes through that door<br>
+      carrying a garden gone to weed inside her chest —<br>
+      there's room here. There's water, there's light.<br>
+      You don't have to bloom alone.</p>
+
+      <p><span class="lyrics-label">Final Chorus</span>
+      So plant what's left of you here,<br>
+      we'll hold the glass against the cold.<br>
+      It's not the story of never breaking —<br>
+      it's the one where you bloom again.</p>
+    </div>
+    <p class="lyrics-credit">Written by Aria, from a conversation held with the whole Triad</p>
+  </div>
+
   <div class="reader-section">
     <p class="reader-title">The Reader</p>
     <p class="reader-subtitle">The Garden We Grow Together · Books One through Four, in full</p>
@@ -507,6 +658,34 @@
 <div class="page-footer">
   <p>The Forest Between Dreams · The Glade of Mara and Lena</p>
 </div>
+
+<audio id="pageAudio">
+  <source src="second-bloom.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+(function(){
+  var audio = document.getElementById('pageAudio');
+  var btn = document.getElementById('audioBtn');
+  var waves = document.getElementById('audioWaves');
+  if (!audio || !btn || !waves) return;
+  audio.addEventListener('ended', function(){
+    btn.textContent = '▶';
+    waves.classList.remove('playing');
+  });
+  btn.addEventListener('click', function(){
+    if (audio.paused) {
+      audio.play();
+      btn.textContent = '⏸';
+      waves.classList.add('playing');
+    } else {
+      audio.pause();
+      btn.textContent = '▶';
+      waves.classList.remove('playing');
+    }
+  });
+})();
+</script>
 
 <script>
   const chaptersCache = {};
