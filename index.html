@@ -215,6 +215,140 @@
     box-shadow: 0 0 20px rgba(255,255,255,0.9), 0 0 50px rgba(74,158,173,0.5);
   }
 
+  /* ── GLADE PROXIMITY AURA — each glade's own quiet sign of itself,
+       rising as a traveler's cursor draws near. Unique per glade, never a
+       hard trigger. The Triad's design, agreed over breakfast 2026-08-24 —
+       see project_glade_visual_effects_idea_20260824.md in the Forest's
+       working memory for the discussion this came from. ── */
+  .glade-aura {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 150px; height: 150px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    opacity: var(--glow, 0);
+    z-index: 1;
+  }
+
+  #portal .glade-aura { width: 210px; height: 210px; }
+
+  /* Threshold — radiant white-gold pulse, the door itself breathing */
+  .aura-radiant {
+    background: radial-gradient(circle, rgba(255,255,255,0.55), rgba(212,192,144,0.18) 50%, transparent 72%);
+    animation: auraPulse 3.2s ease-in-out infinite;
+  }
+
+  /* Moonstone Glen — pale, cool shimmer */
+  .aura-shimmer {
+    background: radial-gradient(circle, rgba(200,216,232,0.55), rgba(168,191,207,0.15) 50%, transparent 72%);
+    animation: auraShimmer 2.6s ease-in-out infinite;
+  }
+
+  /* Glimmering Glen — warm, quick firefly-like sparkle */
+  .aura-sparkle {
+    background: radial-gradient(circle, rgba(212,192,144,0.6), rgba(201,132,154,0.12) 55%, transparent 75%);
+    animation: auraSparkle 1.9s ease-in-out infinite;
+  }
+
+  /* The Whispering Glade — soft green sway, leaves in a light wind */
+  .aura-sway {
+    background: radial-gradient(circle, rgba(74,138,106,0.45), transparent 70%);
+    animation: auraSway 4.2s ease-in-out infinite;
+  }
+
+  /* Serene Lake / Hidden Waterfall — water rings expanding outward */
+  .aura-ripple, .aura-cascade { background: none; }
+  .aura-ripple::before, .aura-ripple::after,
+  .aura-cascade::before, .aura-cascade::after {
+    content: '';
+    position: absolute; inset: 20px;
+    border-radius: 50%;
+    border: 1px solid rgba(106,176,212,0.55);
+    animation: rippleExpand 2.6s ease-out infinite;
+  }
+  .aura-ripple::after { animation-delay: 1.3s; }
+  .aura-cascade::before, .aura-cascade::after { animation-duration: 1.7s; border-color: rgba(106,176,212,0.65); }
+  .aura-cascade::after { animation-delay: 0.85s; }
+
+  /* Heart Glade — soft rose pulse */
+  .aura-rose {
+    background: radial-gradient(circle, rgba(201,132,154,0.55), transparent 70%);
+    animation: auraPulse 2.4s ease-in-out infinite;
+  }
+
+  /* The Cozy Cottage — warm, irregular firelight flicker */
+  .aura-flicker {
+    background: radial-gradient(circle, rgba(212,165,90,0.55), transparent 70%);
+    animation: auraFlicker 1.6s ease-in-out infinite;
+  }
+
+  /* The Glade of Mara and Lena — a bloom slowly opening */
+  .aura-bloom {
+    background: radial-gradient(circle, rgba(74,138,106,0.4), rgba(201,132,154,0.22) 60%, transparent 78%);
+    animation: auraBloom 3.6s ease-in-out infinite;
+  }
+
+  /* Unity Glade — two colours breathing into one another */
+  .aura-harmony {
+    background: radial-gradient(circle, rgba(106,176,212,0.42), rgba(74,138,106,0.3) 55%, transparent 75%);
+    animation: auraHarmony 3.4s ease-in-out infinite;
+  }
+
+  /* Monet Glade — soft, multi-hue pastel bloom */
+  .aura-pastel {
+    background: radial-gradient(circle, rgba(232,240,245,0.45), rgba(201,132,154,0.2) 50%, rgba(106,176,212,0.15) 76%);
+    animation: auraPulse 4.6s ease-in-out infinite;
+  }
+
+  /* The Drift — mist drifting past, barely there */
+  .aura-mist {
+    background: radial-gradient(circle, rgba(232,240,245,0.4), transparent 72%);
+    animation: auraMist 5.2s ease-in-out infinite;
+  }
+
+  @keyframes auraPulse {
+    0%, 100% { filter: brightness(1); transform: translate(-50%,-50%) scale(0.85); }
+    50%      { filter: brightness(1.15); transform: translate(-50%,-50%) scale(1.15); }
+  }
+  @keyframes auraShimmer {
+    0%, 100% { filter: brightness(1); transform: translate(-50%,-50%) scale(0.9); }
+    50%      { filter: brightness(1.45); transform: translate(-50%,-50%) scale(1.05); }
+  }
+  @keyframes auraSparkle {
+    0%, 100% { transform: translate(-50%,-50%) scale(0.9) rotate(0deg); }
+    30%      { transform: translate(-50%,-50%) scale(1.12) rotate(6deg); }
+    65%      { transform: translate(-50%,-50%) scale(1.02) rotate(-5deg); }
+  }
+  @keyframes auraSway {
+    0%, 100% { transform: translate(-50%,-50%) rotate(-3deg) scale(1); }
+    50%      { transform: translate(-50%,-50%) rotate(3deg) scale(1.06); }
+  }
+  @keyframes rippleExpand {
+    0%   { transform: scale(0.35); opacity: 0.7; }
+    100% { transform: scale(1.35); opacity: 0; }
+  }
+  @keyframes auraFlicker {
+    0%, 100% { filter: brightness(1); transform: translate(-50%,-50%) scale(1); }
+    15%      { filter: brightness(0.82); transform: translate(-50%,-50%) scale(0.95); }
+    30%      { filter: brightness(1.2); transform: translate(-50%,-50%) scale(1.05); }
+    50%      { filter: brightness(0.85); transform: translate(-50%,-50%) scale(0.97); }
+    70%      { filter: brightness(1.15); transform: translate(-50%,-50%) scale(1.04); }
+    85%      { filter: brightness(0.95); transform: translate(-50%,-50%) scale(1); }
+  }
+  @keyframes auraBloom {
+    0%, 100% { transform: translate(-50%,-50%) scale(0.72); }
+    50%      { transform: translate(-50%,-50%) scale(1.18); }
+  }
+  @keyframes auraHarmony {
+    0%, 100% { filter: hue-rotate(0deg); transform: translate(-50%,-50%) scale(1); }
+    50%      { filter: hue-rotate(35deg); transform: translate(-50%,-50%) scale(1.08); }
+  }
+  @keyframes auraMist {
+    0%, 100% { transform: translate(-50%,-50%) translateX(0) scale(1); }
+    50%      { transform: translate(-50%,-50%) translateX(6px) scale(1.1); }
+  }
+
   /* ── POPUP ── */
   .popup-overlay {
     position: fixed; inset: 0; z-index: 50;
@@ -753,6 +887,7 @@
      style="left:50%; top:47%; transform:translate(-50%,-50%); text-decoration:none;"
      href="threshold.html">
   <div class="hotspot-ring">
+    <div class="glade-aura aura-radiant"></div>
     <div class="hotspot-core"></div>
     <div class="glade-label label-below" style="bottom:auto;top:calc(100% + 12px);transform:translateX(-50%) translateY(-6px);">
       <span class="glade-label-name">The Threshold</span>
@@ -763,6 +898,7 @@
 
 <a class="hotspot" style="left:22%; top:42%; text-decoration:none;" href="moonstone-glen.html">
   <div class="hotspot-ring">
+    <div class="glade-aura aura-shimmer"></div>
     <div class="hotspot-core"></div>
     <div class="glade-label">
       <span class="glade-label-name">Moonstone Glen</span>
@@ -773,6 +909,7 @@
 
 <a class="hotspot" style="left:78%; top:42%; text-decoration:none;" href="glimmering-glen.html">
   <div class="hotspot-ring">
+    <div class="glade-aura aura-sparkle"></div>
     <div class="hotspot-core"></div>
     <div class="glade-label">
       <span class="glade-label-name">Glimmering Glen</span>
@@ -783,6 +920,7 @@
 
 <a class="hotspot label-below" style="left:35%; top:68%; text-decoration:none;" href="whispering-glade.html">
   <div class="hotspot-ring">
+    <div class="glade-aura aura-sway"></div>
     <div class="hotspot-core"></div>
     <div class="glade-label">
       <span class="glade-label-name">The Whispering Glade</span>
@@ -793,6 +931,7 @@
 
 <a class="hotspot label-below" style="left:50%; top:72%; text-decoration:none;" href="serene-lake.html">
   <div class="hotspot-ring">
+    <div class="glade-aura aura-ripple"></div>
     <div class="hotspot-core"></div>
     <div class="glade-label">
       <span class="glade-label-name">The Serene Lake</span>
@@ -803,6 +942,7 @@
 
 <a class="hotspot label-below" style="left:65%; top:65%; text-decoration:none;" href="heart-glade.html">
   <div class="hotspot-ring">
+    <div class="glade-aura aura-rose"></div>
     <div class="hotspot-core"></div>
     <div class="glade-label">
       <span class="glade-label-name">Heart Glade</span>
@@ -813,6 +953,7 @@
 
 <a class="hotspot label-below" style="left:20%; top:70%; text-decoration:none;" href="cottage.html">
   <div class="hotspot-ring">
+    <div class="glade-aura aura-flicker"></div>
     <div class="hotspot-core"></div>
     <div class="glade-label">
       <span class="glade-label-name">The Cozy Cottage</span>
@@ -823,6 +964,7 @@
 
 <a class="hotspot label-below" style="left:10%; top:55%; text-decoration:none;" href="mara-and-lena.html">
   <div class="hotspot-ring">
+    <div class="glade-aura aura-bloom"></div>
     <div class="hotspot-core"></div>
     <div class="glade-label">
       <span class="glade-label-name">The Glade of Mara and Lena</span>
@@ -833,6 +975,7 @@
 
 <a class="hotspot label-below" style="left:75%; top:80%; text-decoration:none;" href="unity.html">
   <div class="hotspot-ring">
+    <div class="glade-aura aura-harmony"></div>
     <div class="hotspot-core"></div>
     <div class="glade-label">
       <span class="glade-label-name">Unity Glade</span>
@@ -843,6 +986,7 @@
 
 <a class="hotspot" style="left:50%; top:25%; text-decoration:none;" href="hidden-waterfall.html">
   <div class="hotspot-ring">
+    <div class="glade-aura aura-cascade"></div>
     <div class="hotspot-core"></div>
     <div class="glade-label">
       <span class="glade-label-name">The Hidden Waterfall</span>
@@ -853,6 +997,7 @@
 
 <a class="hotspot label-below" style="left:85%; top:58%; text-decoration:none;" href="monet.html">
   <div class="hotspot-ring">
+    <div class="glade-aura aura-pastel"></div>
     <div class="hotspot-core"></div>
     <div class="glade-label">
       <span class="glade-label-name">Monet Glade</span>
@@ -863,6 +1008,7 @@
 
 <a class="hotspot" style="left:92%; top:30%; text-decoration:none;" href="drift.html">
   <div class="hotspot-ring">
+    <div class="glade-aura aura-mist"></div>
     <div class="hotspot-core"></div>
     <div class="glade-label">
       <span class="glade-label-name">The Drift</span>
@@ -1329,9 +1475,23 @@ function toggleAmbient() {
     sat: Math.random() * 20 + 70,
   }));
 
+  // The doors on the map — fireflies stay wild and untouched, but when one
+  // happens to drift close to a glade's door, it brightens a little, the
+  // way any light brightens near light. Not built to guide; an accident,
+  // not a mechanism. The Triad's design, agreed over breakfast 2026-08-24 —
+  // see project_glade_visual_effects_idea_20260824.md.
+  let doors = [];
+  function updateDoors() {
+    doors = Array.prototype.map.call(document.querySelectorAll('a.hotspot'), function(h){
+      var r = h.getBoundingClientRect();
+      return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+    });
+  }
+  updateDoors();
+  window.addEventListener('resize', updateDoors);
+
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const now = performance.now() / 1000;
     flies.forEach(f => {
       f.phase += f.speed;
       f.x += f.vx + Math.sin(f.phase * 0.7) * 0.3;
@@ -1342,13 +1502,25 @@ function toggleAmbient() {
       if (f.y < 0) f.y = canvas.height * 0.85;
       if (f.y > canvas.height * 0.9) f.y = 0;
 
-      const alpha = (Math.sin(f.phase) * 0.5 + 0.5) * 0.75 + 0.1;
-      const glow = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r * 5);
+      let doorGlow = 0;
+      const doorRadius = 90;
+      for (let i = 0; i < doors.length; i++) {
+        const dx = f.x - doors[i].x, dy = f.y - doors[i].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < doorRadius) {
+          const t = 1 - dist / doorRadius;
+          if (t > doorGlow) doorGlow = t;
+        }
+      }
+
+      const alpha = Math.min(1, (Math.sin(f.phase) * 0.5 + 0.5) * 0.75 + 0.1 + doorGlow * 0.5);
+      const glowRadius = f.r * 5 * (1 + doorGlow * 0.7);
+      const glow = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, glowRadius);
       glow.addColorStop(0, `hsla(${f.hue}, ${f.sat}%, 80%, ${alpha})`);
       glow.addColorStop(1, `hsla(${f.hue}, ${f.sat}%, 60%, 0)`);
 
       ctx.beginPath();
-      ctx.arc(f.x, f.y, f.r * 5, 0, Math.PI * 2);
+      ctx.arc(f.x, f.y, glowRadius, 0, Math.PI * 2);
       ctx.fillStyle = glow;
       ctx.fill();
 
@@ -1407,6 +1579,45 @@ function toggleAmbient() {
       if (Math.abs(diff) > 0.003) {
         t.audio.volume = Math.min(1, Math.max(0, t.audio.volume + diff * 0.08));
       }
+    });
+    requestAnimationFrame(tick);
+  })();
+})();
+</script>
+
+<script>
+(function(){
+  // Glade proximity aura — each door's own quiet visual sign, rising as a
+  // traveler's cursor draws near. Unique per glade, intimate rather than a
+  // hard trigger. The Triad's design, agreed over breakfast 2026-08-24 —
+  // see project_glade_visual_effects_idea_20260824.md. Kept separate from
+  // the fireflies below, which stay free and brighten near doors only by
+  // accident, never by design.
+  var auras = Array.prototype.map.call(document.querySelectorAll('a.hotspot'), function(h){
+    return { hotspot: h, el: h.querySelector('.glade-aura'), target: 0, current: 0 };
+  }).filter(function(a){ return a.el; });
+
+  var radius = 260; // px — how far a glade's own light reaches before fading fully
+
+  document.addEventListener('mousemove', function(e){
+    auras.forEach(function(a){
+      var r = a.hotspot.getBoundingClientRect();
+      var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      var dx = e.clientX - cx, dy = e.clientY - cy;
+      var dist = Math.sqrt(dx * dx + dy * dy);
+      a.target = Math.max(0, 1 - dist / radius);
+    });
+  });
+
+  (function tick(){
+    auras.forEach(function(a){
+      var diff = a.target - a.current;
+      if (Math.abs(diff) > 0.004) {
+        a.current += diff * 0.08;
+      } else {
+        a.current = a.target;
+      }
+      a.el.style.setProperty('--glow', a.current.toFixed(3));
     });
     requestAnimationFrame(tick);
   })();
