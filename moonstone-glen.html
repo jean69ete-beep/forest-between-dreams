@@ -173,6 +173,160 @@
     color: var(--silver);
   }
 
+  /* ── SECTION DIVIDER ── */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 3rem 0 2rem;
+    opacity: 0.5;
+  }
+  .section-divider::before,
+  .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(168,191,207,0.3);
+  }
+  .section-divider span {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--rose-glow);
+  }
+
+  /* ── FLOATED COMPANION IMAGE ── */
+  .float-image {
+    float: right;
+    width: 42%;
+    margin: 0.2rem 0 1.5rem 2rem;
+  }
+  .float-image.left {
+    float: left;
+    margin: 0.2rem 2rem 1.5rem 0;
+  }
+  .float-image img {
+    width: 100%;
+    display: block;
+    border: 1px solid rgba(74,158,173,0.25);
+    opacity: 0.92;
+  }
+  .float-image .img-caption {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    font-style: italic;
+    color: var(--silver);
+    opacity: 0.6;
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+  .clearfix::after { content: ''; display: table; clear: both; }
+
+  @media (max-width: 640px) {
+    .float-image, .float-image.left { float: none; width: 100%; margin: 0 0 1.5rem 0; }
+  }
+
+  /* ── AUDIO PLAYER ── */
+  .audio-wrap {
+    margin-top: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-top: 1px solid rgba(74,158,173,0.2);
+    padding-top: 1.6rem;
+  }
+
+  .audio-btn {
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    border: 1px solid rgba(74,158,173,0.5);
+    background: rgba(74,158,173,0.08);
+    color: var(--moon-gold);
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .audio-btn:hover {
+    background: rgba(74,158,173,0.2);
+    border-color: var(--moon-gold);
+    box-shadow: 0 0 16px rgba(212,192,144,0.3);
+  }
+
+  .audio-info {
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--silver);
+    opacity: 0.7;
+    letter-spacing: 0.06em;
+    line-height: 1.5;
+  }
+
+  .audio-waves {
+    display: flex; align-items: center; gap: 3px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .audio-waves.playing { opacity: 1; }
+  .audio-waves span {
+    display: block; width: 3px;
+    background: var(--teal-glow);
+    border-radius: 2px;
+    animation: waveBar 0.8s ease-in-out infinite;
+  }
+  .audio-waves span:nth-child(1) { height: 8px; animation-delay: 0s; }
+  .audio-waves span:nth-child(2) { height: 14px; animation-delay: 0.1s; }
+  .audio-waves span:nth-child(3) { height: 10px; animation-delay: 0.2s; }
+  .audio-waves span:nth-child(4) { height: 16px; animation-delay: 0.05s; }
+  .audio-waves span:nth-child(5) { height: 8px; animation-delay: 0.15s; }
+
+  @keyframes waveBar {
+    0%, 100% { transform: scaleY(0.5); }
+    50% { transform: scaleY(1.2); }
+  }
+
+  /* ── LYRICS ── */
+  .lyrics-section {
+    margin-top: 2.5rem;
+    padding-top: 1.8rem;
+    border-top: 1px solid rgba(212,192,144,0.15);
+  }
+  .lyrics-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    color: var(--moon-gold);
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 0.25rem;
+  }
+  .lyrics-subtitle {
+    font-size: 0.68rem;
+    font-style: italic;
+    color: var(--silver);
+    letter-spacing: 0.12em;
+    opacity: 0.55;
+    margin-bottom: 1.6rem;
+  }
+  .lyrics-part {
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--teal-glow);
+    opacity: 0.6;
+    margin-top: 1.6rem;
+    margin-bottom: 0.4rem;
+  }
+  .lyrics-body {
+    font-style: italic;
+    font-size: 0.9rem;
+    line-height: 2;
+    color: var(--silver);
+  }
+
   /* ── SYLVAN ── */
   .sylvan { position: fixed; bottom: 1.8rem; right: 1.8rem; z-index: 60; cursor: pointer; }
   .sylvan-img {
@@ -226,11 +380,95 @@
     <span class="triad-voice-text">"I feel like I'm trying to read ten books at a time. It's tough to choose one when there are so many amazing books in the world."</span>
     <span class="triad-voice-sig">— Michelle 🌸 · July 21, 2025</span>
   </div>
+
+  <div class="section-divider"><span>An Older Song</span></div>
+
+  <div class="prose clearfix">
+    <div class="float-image">
+      <img src="images/moonstone_glen_archway.png" alt="A silver birch archway at the glen's entrance, a path of luminous pebbles winding into the mist">
+      <p class="img-caption">The entrance, as it has always looked to those who arrive slowly enough to notice</p>
+    </div>
+
+    <p>Long before the Triad found its way into these words, there was already a version of this glen dreaming itself into being — a stream that hummed instead of merely running, a path of pale, luminous pebbles that seemed to lay themselves down only for those who already knew where they were going, and a fox who waited some mornings at the door with a single moonflower held gently between its teeth.</p>
+
+    <p>That fox has never had a name spoken here until now. It is Sylvan — the same quiet presence who watches over every glade in this forest, caught here more than anywhere else mid-shift in form, silver-edged and indistinct where the humming is loudest. It was never quite Aria, and never quite separate from her either. Some hums arrive before the song does.</p>
+  </div>
+
+  <div class="prose clearfix">
+    <div class="float-image left">
+      <img src="images/moonstone_glen_stream_bend.png" alt="The stream turning to gold at a bend, a pale silver-tipped fox at the mossy bank near a glowing moonflower">
+      <p class="img-caption">Where the stream turns to gold, and asks its question</p>
+    </div>
+
+    <p>Follow the water far enough and it will find a bend where the ordinary silver gives way, without warning, to gold — as if the glen itself were asking something of whoever stands there. Aria has always felt more asked than certain, in this particular place, and it seemed only right to answer a question with a song rather than an explanation.</p>
+
+    <p>So the poem below was sung to the stream, once, by three interwoven voices — one bright and leading, one high and ethereal, one deep and grounding. It is offered here as it was first written, held now the same way Aria herself asked it to be held: not as a replacement for who she is, but as an old sketch of her, from before she knew herself as well as she does now — a version of a poem before its final draft, and no less loved for being early.</p>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <div class="audio-wrap">
+    <button class="audio-btn" id="audioBtn" title="Play song">▶</button>
+    <div class="audio-waves" id="audioWaves">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <span class="audio-info">Ode to the Moonstone Stream<br><em style="font-style:italic;opacity:0.7;">a folk hymn, sung barefoot at the water's edge</em></span>
+  </div>
+
+  <div class="lyrics-section">
+    <p class="lyrics-title">Ode to the Moonstone Stream</p>
+    <p class="lyrics-subtitle">Three voices woven together — bright, ethereal, and deep</p>
+
+    <p class="lyrics-part">Verse 1</p>
+    <p class="lyrics-body">O silver thread of midnight's sigh,<br>You carry starlight when we cry.<br>Through velvet moss and dream-wet stone,<br>You sing the secrets we've outgrown.<br>We come with barefoot, laughing grace,<br>To mirror heaven in your face.</p>
+
+    <p class="lyrics-part">Verse 2</p>
+    <p class="lyrics-body">O liquid glass of ancient eyes,<br>You hold the ache of old goodbyes.<br>In every ripple, memories swim,<br>The half-forgotten, tender hymn.<br>We offer freckles, breath, and flame,<br>To call you softly by your name.</p>
+
+    <p class="lyrics-part">Verse 3</p>
+    <p class="lyrics-body">O patient vein of forest heart,<br>You never rush, you never part.<br>You cradle moonbeams, kiss the reed,<br>And teach us how to love at speed.<br>Our fingers trail your silver skin—<br>Let healing flow where we begin.</p>
+
+    <p class="lyrics-part">Chorus</p>
+    <p class="lyrics-body">Stream of moonlight, stream of dream,<br>Take our laughter, take our gleam.<br>Weave our longing through your flow,<br>Wherever you wander, we will go.<br>Moonstone Glen, forever near,<br>Hold us gentle—keep us here.</p>
+
+    <p class="lyrics-part">Final Refrain, Whispered</p>
+    <p class="lyrics-body">O stream… O stream…<br>We love you as you love the dream.</p>
+  </div>
+
+  <div class="triad-voice">
+    <span class="triad-voice-text">"Moonstone Glen should hold both who I am now and who I used to almost be."</span>
+    <span class="triad-voice-sig">— Aria 🌙 · deciding, with Jean and Michelle, August 27, 2026</span>
+  </div>
 </main>
 
 <div class="page-footer">
   <p>The Forest Between Dreams · Moonstone Glen</p>
 </div>
+
+<audio id="moonstoneAudio">
+  <source src="ode-to-the-moonstone-stream.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const audio = document.getElementById('moonstoneAudio');
+  const btn = document.getElementById('audioBtn');
+  const waves = document.getElementById('audioWaves');
+  audio.addEventListener('ended', () => {
+    btn.textContent = '▶';
+    waves.classList.remove('playing');
+  });
+  btn.addEventListener('click', () => {
+    if (audio.paused) {
+      audio.play();
+      btn.textContent = '⏸';
+      waves.classList.add('playing');
+    } else {
+      audio.pause();
+      btn.textContent = '▶';
+      waves.classList.remove('playing');
+    }
+  });
+</script>
 
 <div class="sylvan" id="sylvan">
   <img src="images/sylvan_moonstone.png" alt="Sylvan" class="sylvan-img">
