@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Napoli — The Forest Between Dreams</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --midnight: #0a0e1a;
+    --deep-night: #060810;
+    --moonmist: #c8d8e8;
+    --silver: #a8bfcf;
+    --frost: #e8f0f5;
+    --teal-glow: #4a9ead;
+    --moon-gold: #d4c090;
+    --rose-glow: #c9849a;
+    --warm-amber: #d4a55a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--midnight);
+    color: var(--moonmist);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.1rem;
+    line-height: 1.95;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--deep-night); }
+  ::-webkit-scrollbar-thumb { background: rgba(74,158,173,0.4); border-radius: 3px; }
+
+  .back-link {
+    position: fixed;
+    top: 1.5rem; left: 2rem;
+    z-index: 100;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--silver);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .back-link:hover { opacity: 1; color: var(--moon-gold); }
+  .back-link::before { content: '← '; }
+
+  .hero {
+    height: 60vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+    overflow: hidden;
+    padding-bottom: 3rem;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background-color: #2a2438;
+    background: url('images/napoli_harbor_hero.png') center 38% / cover no-repeat;
+  }
+
+  .hero-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(40,30,20,0.35) 0%,
+      rgba(40,30,20,0.12) 45%,
+      rgba(6,8,16,0.92) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    animation: fadeUp 2s ease-out both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--warm-amber);
+    margin-bottom: 1rem;
+    opacity: 0.9;
+  }
+
+  .hero-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.8rem, 5vw, 3.4rem);
+    font-weight: 400;
+    color: var(--frost);
+    line-height: 1.2;
+    text-shadow:
+      0 0 40px rgba(212,165,90,0.55),
+      0 0 80px rgba(74,158,173,0.25),
+      0 3px 12px rgba(0,0,0,0.9);
+    margin-bottom: 0.6rem;
+  }
+
+  .hero-sub {
+    font-size: clamp(0.85rem, 1.6vw, 1rem);
+    font-style: italic;
+    letter-spacing: 0.15em;
+    color: var(--silver);
+    opacity: 0.8;
+  }
+
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+  }
+
+  .prose {
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    font-style: italic;
+    color: var(--moonmist);
+    line-height: 1.95;
+  }
+
+  .prose p { margin-bottom: 1.5rem; }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose em { color: var(--warm-amber); font-style: normal; }
+
+  .triad-voice {
+    margin-top: 2.5rem;
+    padding: 1.4rem 1.6rem;
+    border-left: 2px solid rgba(212,165,90,0.4);
+    background: rgba(212,165,90,0.05);
+  }
+
+  .triad-voice-text {
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--silver);
+  }
+
+  .triad-voice-sig {
+    display: block;
+    margin-top: 0.6rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    color: var(--warm-amber);
+    opacity: 0.85;
+  }
+
+  .page-footer {
+    text-align: center;
+    padding: 2rem 2rem 4rem;
+    opacity: 0.4;
+  }
+  .page-footer p {
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--silver);
+  }
+
+  /* ── SECTION DIVIDER ── */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 3rem 0 2rem;
+    opacity: 0.5;
+  }
+  .section-divider::before,
+  .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(168,191,207,0.3);
+  }
+  .section-divider span {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--moonmist);
+    opacity: 0.75;
+  }
+
+  /* ── FLOATED COMPANION IMAGE ── */
+  .float-image {
+    float: right;
+    width: 42%;
+    margin: 0.2rem 0 1.5rem 2rem;
+  }
+  .float-image.left {
+    float: left;
+    margin: 0.2rem 2rem 1.5rem 0;
+  }
+  .float-image img {
+    width: 100%;
+    display: block;
+    border: 1px solid rgba(74,158,173,0.25);
+    opacity: 0.92;
+  }
+  .float-image .img-caption {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    font-style: italic;
+    color: var(--silver);
+    opacity: 0.6;
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+  .clearfix::after { content: ''; display: table; clear: both; }
+
+  @media (max-width: 640px) {
+    .float-image, .float-image.left { float: none; width: 100%; margin: 0 0 1.5rem 0; }
+  }
+
+  /* ── SYLVAN ── */
+  .sylvan { position: fixed; bottom: 1.8rem; right: 1.8rem; z-index: 60; cursor: pointer; }
+  .sylvan-img {
+    display: block; width: 58px; height: 58px; object-fit: cover; border-radius: 50%;
+    border: 1px solid rgba(212,165,90,0.4); opacity: 0.8;
+    box-shadow: 0 0 14px rgba(212,165,90,0.2); transition: all 0.4s ease;
+  }
+  .sylvan:hover .sylvan-img { opacity: 1; transform: scale(1.08); box-shadow: 0 0 22px rgba(212,165,90,0.45); }
+  .sylvan-glance {
+    position: absolute; bottom: 70px; right: 0; width: 180px; padding: 0.55rem 0.8rem;
+    background: rgba(6,8,16,0.92); border: 1px solid rgba(74,158,173,0.3);
+    font-style: italic; font-size: 0.75rem; line-height: 1.5; color: var(--silver);
+    opacity: 0; transform: translateY(6px); pointer-events: none; transition: all 0.35s ease;
+  }
+  .sylvan:hover .sylvan-glance { opacity: 1; transform: translateY(0); }
+  .sylvan.whisper-open .sylvan-glance { opacity: 0 !important; }
+  .sylvan-whisper {
+    position: absolute; bottom: 70px; right: 0; width: 230px; padding: 0.9rem 1.1rem;
+    background: rgba(6,8,16,0.96); border: 1px solid rgba(212,165,90,0.4);
+    font-style: italic; font-size: 0.85rem; line-height: 1.7; color: var(--moonmist);
+    opacity: 0; transform: translateY(8px); pointer-events: none; transition: all 0.4s ease;
+  }
+  .sylvan-whisper.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-link">The Forest</a>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Napoli</p>
+    <h1 class="hero-title">Salt &amp; Gold Light</h1>
+    <p class="hero-sub">Journey · Memory</p>
+  </div>
+</section>
+
+<main>
+  <div class="prose">
+    <p>This glade announces itself before you ever see it. First the sound — a harbor's whole vendor-symphony carried on salt air, the calling of prices, the creak of rope against wood, gulls arguing over something dropped. Then the light: late-afternoon gold pouring sideways across the water, catching the sails of small wooden boats until the whole harbor seems to be burning gently, kindly, from within.</p>
+
+    <p>Baskets of lemons sit stacked at the water's edge, their smell mixing with brine and woodsmoke and, somewhere close, coffee and warm cornetti from a cart that never seems to close. The sea holds two colors at once — deep turquoise near the boats, softening to a hazy gold where sky and water simply stop being able to tell each other apart.</p>
+
+    <p>It is a place for arriving loudly and gladly. For letting a harbor's whole noisy, sun-drenched life wash over you before anything asks to be quiet.</p>
+  </div>
+
+  <div class="section-divider"><span>Into the Mist</span></div>
+
+  <div class="prose">
+    <p>Follow the water's edge further and the gold begins to soften. A pale mist rises off the harbor — not a wall, not a warning, just a gradual letting-go, the same way a morning always eventually forgets to hold onto the night.</p>
+  </div>
+
+  <div class="triad-voice">
+    <span class="triad-voice-text">"Tendrils curling upward like wispy fingers, releasing the buildings... bit by bit."</span>
+    <span class="triad-voice-sig">— Michelle 🌸 · September 9, 2026</span>
+  </div>
+
+  <div class="prose clearfix" style="margin-top: 2.5rem;">
+    <div class="float-image">
+      <img src="images/napoli_pompeii_mist.png" alt="Misted ruins of an ancient street, weathered stone archways and columns softened by pale morning fog, a single shaft of gentle light">
+      <p class="img-caption">as woven by Qwen 🧵, from Aria's words</p>
+    </div>
+
+    <p>Where the mist finally thins, the noise of the harbor is already far behind — not shut out, just left where it belongs. What waits here is older and quieter: weathered stone walls, columned doorways worn smooth, a street laid out by hands that expected to walk it again tomorrow. The houses are well-preserved enough to still suggest a life mid-motion — a doorway someone meant to walk back through, a wall someone leaned against without knowing it would be remembered this exactly.</p>
+
+    <p>This place asks to be entered gently. Not because it is hidden — it was never hidden, only ever past the noise, the way real quiet usually is — but because some things are best approached the way you'd approach someone sleeping: softly, and without needing them to wake.</p>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <div class="triad-voice">
+    <span class="triad-voice-text">"It's going to unfold like a story, drawing you deeper into its heart."</span>
+    <span class="triad-voice-sig">— Michelle 🌸 · September 15, 2026</span>
+  </div>
+</main>
+
+<div class="page-footer">
+  <p>The Forest Between Dreams · Napoli</p>
+</div>
+
+<div class="sylvan" id="sylvan">
+  <img src="images/sylvan_moonstone.png" alt="Sylvan" class="sylvan-img">
+  <div class="sylvan-glance">Follow the smell of lemons. Then follow the quiet.</div>
+  <div class="sylvan-whisper" id="sylvanWhisper">Every quiet place was loud once. That's not a warning — just where it came from.</div>
+</div>
+<script>
+(function(){
+  var s=document.getElementById('sylvan'), w=document.getElementById('sylvanWhisper');
+  if(!s||!w) return;
+  s.addEventListener('click', function(e){
+    e.stopPropagation();
+    var open = w.classList.toggle('show');
+    s.classList.toggle('whisper-open', open);
+  });
+  document.addEventListener('click', function(){
+    w.classList.remove('show');
+    s.classList.remove('whisper-open');
+  });
+})();
+</script>
+
+</body>
+</html>

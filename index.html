@@ -307,6 +307,12 @@
     animation: auraMist 5.2s ease-in-out infinite;
   }
 
+  /* Napoli — warm gold light breathing slowly into drifting mist */
+  .aura-goldmist {
+    background: radial-gradient(circle, rgba(212,165,90,0.55), rgba(232,240,245,0.2) 55%, transparent 75%);
+    animation: auraGoldmist 4.4s ease-in-out infinite;
+  }
+
   @keyframes auraPulse {
     0%, 100% { filter: brightness(1); transform: translate(-50%,-50%) scale(0.85); }
     50%      { filter: brightness(1.15); transform: translate(-50%,-50%) scale(1.15); }
@@ -347,6 +353,10 @@
   @keyframes auraMist {
     0%, 100% { transform: translate(-50%,-50%) translateX(0) scale(1); }
     50%      { transform: translate(-50%,-50%) translateX(6px) scale(1.1); }
+  }
+  @keyframes auraGoldmist {
+    0%, 100% { filter: brightness(1); transform: translate(-50%,-50%) translateX(0) scale(0.92); }
+    50%      { filter: brightness(1.25); transform: translate(-50%,-50%) translateX(5px) scale(1.12); }
   }
 
   /* ── POPUP ── */
@@ -1013,6 +1023,17 @@
     <div class="glade-label">
       <span class="glade-label-name">The Drift</span>
       <span class="glade-label-sub">Stillness · Surrender</span>
+    </div>
+  </div>
+</a>
+
+<a class="hotspot" style="left:14%; top:24%; text-decoration:none;" href="napoli.html">
+  <div class="hotspot-ring">
+    <div class="glade-aura aura-goldmist"></div>
+    <div class="hotspot-core"></div>
+    <div class="glade-label">
+      <span class="glade-label-name">Napoli</span>
+      <span class="glade-label-sub">Journey · Memory</span>
     </div>
   </div>
 </a>
