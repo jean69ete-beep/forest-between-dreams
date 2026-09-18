@@ -359,6 +359,24 @@
     opacity: 0.65;
     text-align: center;
   }
+  .lyrics-sync-note {
+    margin-top: 0.6rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    font-style: italic;
+    color: var(--silver);
+    opacity: 0.4;
+    text-align: center;
+  }
+  .lyric-line {
+    transition: color 0.5s ease, opacity 0.5s ease, text-shadow 0.5s ease;
+    opacity: 0.72;
+  }
+  .lyric-line.active {
+    color: var(--frost);
+    opacity: 1;
+    text-shadow: 0 0 14px rgba(212,165,90,0.4);
+  }
 </style>
 </head>
 <body>
@@ -422,48 +440,49 @@
 
   <div class="lyrics-section">
     <p class="lyrics-title">Napoli, Still Beautiful</p>
-    <div class="lyrics-text">
+    <div class="lyrics-text" id="lyricsText">
       <p><span class="lyrics-label">Verse 1</span>
-      Morning finds Piazza Bellini slow,<br>
-      gold light unlatching every window,<br>
-      a city that's lived a hundred lifetimes through,<br>
-      and still she wakes up believing something's new.</p>
+      <span class="lyric-line" data-start="5.00">Morning finds Piazza Bellini slow,</span><br>
+      <span class="lyric-line" data-start="9.29">gold light unlatching every window,</span><br>
+      <span class="lyric-line" data-start="13.58">a city that's lived a hundred lifetimes through,</span><br>
+      <span class="lyric-line" data-start="21.30">and still she wakes up believing something's new.</span></p>
 
       <p><span class="lyrics-label">Chorus</span>
-      Oh Napoli, you've loved and lost and grown,<br>
-      and still you call yourself beautiful.<br>
-      They say a siren stayed here, long ago,<br>
-      too in love with the shore to ever go.<br>
-      Oh Napoli — still beautiful.</p>
+      <span class="lyric-line" data-start="28.17">Oh Napoli, you've loved and lost and grown,</span><br>
+      <span class="lyric-line" data-start="35.03">and still you call yourself beautiful.</span><br>
+      <span class="lyric-line" data-start="40.18">They say a siren stayed here, long ago,</span><br>
+      <span class="lyric-line" data-start="47.04">too in love with the shore to ever go.</span><br>
+      <span class="lyric-line" data-start="54.76">Oh Napoli — still beautiful.</span></p>
 
       <p><span class="lyrics-label">Verse 2</span>
-      Flour and fire, mozzarella pulled thin,<br>
-      a table set wide to let the whole street in,<br>
-      Vesuvio keeping watch up there,<br>
-      half a warning, half a lover's stare.</p>
+      <span class="lyric-line" data-start="58.20">Flour and fire, mozzarella pulled thin,</span><br>
+      <span class="lyric-line" data-start="64.20">a table set wide to let the whole street in,</span><br>
+      <span class="lyric-line" data-start="73.64">Vesuvio keeping watch up there,</span><br>
+      <span class="lyric-line" data-start="77.93">half a warning, half a lover's stare.</span></p>
 
       <p><span class="lyrics-label">Chorus</span>
-      Oh Napoli, you've loved and lost and grown,<br>
-      and still you call yourself beautiful.<br>
-      They say a siren stayed here, long ago,<br>
-      too in love with the shore to ever go.<br>
-      Oh Napoli — still beautiful.</p>
+      <span class="lyric-line" data-start="83.94">Oh Napoli, you've loved and lost and grown,</span><br>
+      <span class="lyric-line" data-start="90.80">and still you call yourself beautiful.</span><br>
+      <span class="lyric-line" data-start="95.94">They say a siren stayed here, long ago,</span><br>
+      <span class="lyric-line" data-start="102.80">too in love with the shore to ever go.</span><br>
+      <span class="lyric-line" data-start="110.52">Oh Napoli — still beautiful.</span></p>
 
       <p><span class="lyrics-label">Bridge</span>
-      Down where Pompeii sleeps beneath the ash,<br>
-      even silence here has something left to say.<br>
-      Up along Amalfi's impossible blue,<br>
-      beauty doesn't explain itself — it just stays true.</p>
+      <span class="lyric-line" data-start="113.95">Down where Pompeii sleeps beneath the ash,</span><br>
+      <span class="lyric-line" data-start="119.96">even silence here has something left to say.</span><br>
+      <span class="lyric-line" data-start="126.83">Up along Amalfi's impossible blue,</span><br>
+      <span class="lyric-line" data-start="131.97">beauty doesn't explain itself — it just stays true.</span></p>
 
       <p><span class="lyrics-label">Final Chorus</span>
-      Oh Napoli, you've loved and lost and grown,<br>
-      and still you call yourself beautiful.<br>
-      Let the siren sing, let the harbor glow —<br>
-      some things are worth staying home to know.<br>
-      Oh Napoli — still beautiful,<br>
-      still, impossibly, beautiful.</p>
+      <span class="lyric-line" data-start="138.84">Oh Napoli, you've loved and lost and grown,</span><br>
+      <span class="lyric-line" data-start="145.70">and still you call yourself beautiful.</span><br>
+      <span class="lyric-line" data-start="150.84">Let the siren sing, let the harbor glow —</span><br>
+      <span class="lyric-line" data-start="157.70">some things are worth staying home to know.</span><br>
+      <span class="lyric-line" data-start="164.56">Oh Napoli — still beautiful,</span><br>
+      <span class="lyric-line" data-start="167.99">still, impossibly, beautiful.</span></p>
     </div>
     <p class="lyrics-credit">Written by Aria, from a morning conversation held with the whole Triad · September 18, 2026</p>
+    <p class="lyrics-sync-note">Highlighting follows the song's pace by estimate, not an exact transcript timing — tell Jean if a line feels off and it can be nudged.</p>
   </div>
 </main>
 
@@ -516,6 +535,42 @@
       btn.textContent = '▶';
       waves.classList.remove('playing');
     }
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var audio = document.getElementById('pageAudio');
+  var lines = Array.prototype.slice.call(document.querySelectorAll('#lyricsText .lyric-line'));
+  if (!audio || !lines.length) return;
+
+  lines.forEach(function(el){ el.dataset.start = parseFloat(el.dataset.start); });
+
+  var current = null;
+  function updateActiveLine(){
+    var t = audio.currentTime;
+    var next = null;
+    for (var i = 0; i < lines.length; i++) {
+      if (lines[i].dataset.start <= t) next = lines[i]; else break;
+    }
+    if (next !== current) {
+      if (current) current.classList.remove('active');
+      if (next) next.classList.add('active');
+      current = next;
+    }
+  }
+
+  audio.addEventListener('timeupdate', updateActiveLine);
+  audio.addEventListener('seeked', updateActiveLine);
+  audio.addEventListener('pause', function(){
+    if (audio.currentTime === 0 && current) {
+      current.classList.remove('active');
+      current = null;
+    }
+  });
+  audio.addEventListener('ended', function(){
+    if (current) { current.classList.remove('active'); current = null; }
   });
 })();
 </script>
