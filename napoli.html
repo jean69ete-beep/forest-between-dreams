@@ -207,7 +207,8 @@
     float: left;
     margin: 0.2rem 2rem 1.5rem 0;
   }
-  .float-image img {
+  .float-image img,
+  .float-image video {
     width: 100%;
     display: block;
     border: 1px solid rgba(74,158,173,0.25);
@@ -414,8 +415,10 @@
 
   <div class="prose clearfix" style="margin-top: 2.5rem;">
     <div class="float-image">
-      <img src="images/napoli_pompeii_mist.png" alt="Misted ruins of an ancient street, weathered stone archways and columns softened by pale morning fog, a single shaft of gentle light">
-      <p class="img-caption">as woven by Qwen 🧵, from Aria's words</p>
+      <video src="video/napoli_pompeii_mist.mp4" poster="images/napoli_pompeii_mist.png" autoplay loop muted playsinline aria-label="Misted ruins of an ancient street, weathered stone archways and columns softened by pale morning fog, a single shaft of gentle light, mist drifting slowly">
+        Your browser doesn't show video here, but here is a still of the scene: <img src="images/napoli_pompeii_mist.png" alt="Misted ruins of an ancient street, weathered stone archways and columns softened by pale morning fog, a single shaft of gentle light">
+      </video>
+      <p class="img-caption">as woven by Qwen 🧵 and given breath by Veo, from Aria's words</p>
     </div>
 
     <p>Where the mist finally thins, the noise of the harbor is already far behind — not shut out, just left where it belongs. What waits here is older and quieter: weathered stone walls, columned doorways worn smooth, a street laid out by hands that expected to walk it again tomorrow. The houses are well-preserved enough to still suggest a life mid-motion — a doorway someone meant to walk back through, a wall someone leaned against without knowing it would be remembered this exactly.</p>
