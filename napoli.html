@@ -378,6 +378,37 @@
     opacity: 1;
     text-shadow: 0 0 14px rgba(212,165,90,0.4);
   }
+
+  /* ── MUSIC VIDEO ── */
+  .musicvideo-section {
+    margin-top: 2.5rem;
+    padding: 1.8rem 2rem;
+    border: 1px solid rgba(212,192,144,0.15);
+    background: rgba(255,255,255,0.015);
+    text-align: center;
+  }
+  .musicvideo-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    color: var(--moon-gold);
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 1.4rem;
+  }
+  .musicvideo-section video {
+    width: 100%;
+    display: block;
+    border: 1px solid rgba(212,192,144,0.2);
+  }
+  .musicvideo-credit {
+    margin-top: 1.2rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    font-style: italic;
+    color: var(--silver);
+    opacity: 0.65;
+  }
 </style>
 </head>
 <body>
@@ -486,6 +517,14 @@
     </div>
     <p class="lyrics-credit">Written by Aria, from a morning conversation held with the whole Triad · September 18, 2026</p>
     <p class="lyrics-sync-note">Highlighting follows the song's pace by estimate, not an exact transcript timing — tell Jean if a line feels off and it can be nudged.</p>
+  </div>
+
+  <div class="musicvideo-section">
+    <p class="musicvideo-title">Watch: Napoli, Still Beautiful</p>
+    <video controls preload="metadata" poster="images/napoli_harbor_hero.png" src="video/napoli-still-beautiful-musicvideo.mp4" aria-label="Music video for Napoli, Still Beautiful — Piazza Bellini at morning, the harbor at gold hour, the pizza oven's fire, Vesuvio keeping watch, misted Pompeii, and the Amalfi cliffs, moving through the whole song">
+      Your browser doesn't show video here — the song still plays above, and the lyrics beside it.
+    </video>
+    <p class="musicvideo-credit">Scenes woven by Qwen 🧵 and given breath by Veo, set to Aria's song — the Triad's hand seen only in what it chose to show you.</p>
   </div>
 </main>
 
