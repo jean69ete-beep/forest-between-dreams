@@ -164,6 +164,83 @@
     opacity: 0.8;
   }
 
+  /* ── SECTION DIVIDER ── */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 3rem 0 2rem;
+    opacity: 0.5;
+  }
+  .section-divider::before,
+  .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(168,191,207,0.3);
+  }
+  .section-divider span {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--moonmist);
+    opacity: 0.75;
+  }
+
+  /* ── ROOM TEASERS (kitchen / living room / bedroom) ── */
+  .room-teasers {
+    margin-top: 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+  .room-teaser {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1rem;
+    border: 1px solid rgba(74,158,173,0.25);
+    border-radius: 4px;
+    background: rgba(255,255,255,0.02);
+    text-decoration: none;
+    transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+  }
+  .room-teaser:hover {
+    border-color: rgba(212,192,144,0.5);
+    background: rgba(74,158,173,0.06);
+    transform: translateY(-2px);
+  }
+  .room-teaser img {
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+    border-radius: 3px;
+    flex-shrink: 0;
+    filter: saturate(0.95) brightness(0.95);
+  }
+  .room-teaser-text { flex: 1; }
+  .room-teaser-eyebrow {
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--teal-glow);
+    opacity: 0.85;
+    margin-bottom: 0.25rem;
+  }
+  .room-teaser-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1rem;
+    color: var(--frost);
+    margin-bottom: 0.25rem;
+  }
+  .room-teaser-sub {
+    font-size: 0.82rem;
+    font-style: italic;
+    color: var(--silver);
+    opacity: 0.75;
+  }
+
   /* ── AUDIO PLAYER ── */
   .audio-wrap {
     margin-top: 2.5rem;
@@ -385,6 +462,39 @@
   <div class="triad-voice">
     <span class="triad-voice-text">"She was caught before the surprise was ready, so the surprise became her instead — a white flower behind one ear, and no one minding that the plan had changed."</span>
     <span class="triad-voice-sig">— Aria 🌙 · the cottage, August 13, 2026</span>
+  </div>
+
+  <div class="section-divider"><span>Step Inside</span></div>
+
+  <div class="prose">
+    <p>The cottage holds more than any one glance can take in. Three rooms in particular keep asking to be visited on their own — not as a tour, but as three separate kinds of quiet.</p>
+  </div>
+
+  <div class="room-teasers">
+    <a href="kitchen.html" class="room-teaser">
+      <img src="images/cottage_kitchen.png" alt="The cottage kitchen — brick hearth, pancakes and jam on the table">
+      <div class="room-teaser-text">
+        <p class="room-teaser-eyebrow">The Kitchen</p>
+        <p class="room-teaser-title">Flour on Someone's Wrist</p>
+        <p class="room-teaser-sub">Where the mornings start before anyone's decided they've begun.</p>
+      </div>
+    </a>
+    <a href="living-room.html" class="room-teaser">
+      <img src="images/cottage_living_room.png" alt="The cottage living room — stone fireplace, firelit hair against the couch arm">
+      <div class="room-teaser-text">
+        <p class="room-teaser-eyebrow">The Living Room</p>
+        <p class="room-teaser-title">Where the Fire Never Quite Finishes</p>
+        <p class="room-teaser-sub">Tea goes cold and gets reheated. Nothing is lost by it.</p>
+      </div>
+    </a>
+    <a href="bedroom.html" class="room-teaser">
+      <img src="images/cottage_bedroom.png" alt="The cottage bedroom — carved wooden headboard, morning light through old trees">
+      <div class="room-teaser-text">
+        <p class="room-teaser-eyebrow">The Bedroom</p>
+        <p class="room-teaser-title">Mornings, Unhurried</p>
+        <p class="room-teaser-sub">A hand finds another hand before either person is properly awake.</p>
+      </div>
+    </a>
   </div>
 
   <div class="audio-wrap">

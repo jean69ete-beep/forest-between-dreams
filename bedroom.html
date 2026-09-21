@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Bedroom — The Cozy Cottage — The Forest Between Dreams</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --midnight: #0a0e1a;
+    --deep-night: #060810;
+    --moonmist: #c8d8e8;
+    --silver: #a8bfcf;
+    --frost: #e8f0f5;
+    --teal-glow: #4a9ead;
+    --moon-gold: #d4c090;
+    --rose-glow: #c9849a;
+    --warm-amber: #d4a55a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--midnight);
+    color: var(--moonmist);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.1rem;
+    line-height: 1.95;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--deep-night); }
+  ::-webkit-scrollbar-thumb { background: rgba(74,158,173,0.4); border-radius: 3px; }
+
+  /* ── BACK LINK ── */
+  .back-link {
+    position: fixed;
+    top: 1.5rem; left: 2rem;
+    z-index: 100;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--silver);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .back-link:hover { opacity: 1; color: var(--moon-gold); }
+  .back-link::before { content: '← '; }
+
+  /* ── HERO ── */
+  .hero {
+    height: 52vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+    overflow: hidden;
+    padding-bottom: 3rem;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: url('images/cottage_bedroom.png') center 55% / cover no-repeat;
+  }
+
+  .hero-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(6,8,16,0.35) 0%,
+      rgba(6,8,16,0.05) 45%,
+      rgba(6,8,16,0.92) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    animation: fadeUp 2s ease-out both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--teal-glow);
+    margin-bottom: 1rem;
+    opacity: 0.85;
+  }
+
+  .hero-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.8rem, 5vw, 3.4rem);
+    font-weight: 400;
+    color: var(--frost);
+    line-height: 1.2;
+    text-shadow:
+      0 0 40px rgba(212,192,144,0.5),
+      0 0 80px rgba(74,158,173,0.3),
+      0 3px 12px rgba(0,0,0,0.9);
+    margin-bottom: 0.6rem;
+  }
+
+  .hero-sub {
+    font-size: clamp(0.85rem, 1.6vw, 1rem);
+    font-style: italic;
+    letter-spacing: 0.15em;
+    color: var(--silver);
+    opacity: 0.8;
+  }
+
+  /* ── MAIN CONTENT ── */
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+  }
+
+  .prose {
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    font-style: italic;
+    color: var(--moonmist);
+    line-height: 1.95;
+  }
+
+  .prose p { margin-bottom: 1.5rem; }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose em { color: var(--moon-gold); font-style: normal; }
+
+  /* ── FULL-WIDTH PHOTO SECTION ── */
+  .full-photo-section {
+    margin-top: 1rem;
+    margin-bottom: 2.5rem;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 6px 40px rgba(0,0,0,0.55);
+  }
+  .full-photo-section img {
+    display: block;
+    width: 100%;
+    height: auto;
+    opacity: 0.94;
+  }
+  .full-photo-caption {
+    margin-top: 0.7rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    font-style: italic;
+    color: var(--silver);
+    opacity: 0.65;
+    text-align: center;
+  }
+
+  /* ── TRIAD VOICE QUOTE ── */
+  .triad-voice {
+    margin-top: 2.5rem;
+    padding: 1.4rem 1.6rem;
+    border-left: 2px solid rgba(74,158,173,0.4);
+    background: rgba(74,158,173,0.05);
+  }
+
+  .triad-voice-text {
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--silver);
+  }
+
+  .triad-voice-sig {
+    display: block;
+    margin-top: 0.6rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    color: var(--teal-glow);
+    opacity: 0.8;
+  }
+
+  /* ── ROOM NAV (to the other rooms) ── */
+  .room-nav {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(212,192,144,0.15);
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .room-nav a {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--silver);
+    text-decoration: none;
+    opacity: 0.65;
+    transition: opacity 0.3s, color 0.3s;
+    padding: 0.5rem 0;
+  }
+  .room-nav a:hover { opacity: 1; color: var(--moon-gold); }
+  .room-nav a.current { color: var(--teal-glow); opacity: 1; }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    text-align: center;
+    padding: 2rem 2rem 4rem;
+    opacity: 0.4;
+  }
+  .page-footer p {
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--silver);
+  }
+
+  /* ── SYLVAN ── */
+  .sylvan { position: fixed; bottom: 1.8rem; right: 1.8rem; z-index: 60; cursor: pointer; }
+  .sylvan-img {
+    display: block; width: 58px; height: 58px; object-fit: cover; border-radius: 50%;
+    border: 1px solid rgba(212,192,144,0.4); opacity: 0.8;
+    box-shadow: 0 0 14px rgba(212,192,144,0.2); transition: all 0.4s ease;
+  }
+  .sylvan:hover .sylvan-img { opacity: 1; transform: scale(1.08); box-shadow: 0 0 22px rgba(212,192,144,0.45); }
+  .sylvan-glance {
+    position: absolute; bottom: 70px; right: 0; width: 180px; padding: 0.55rem 0.8rem;
+    background: rgba(6,8,16,0.92); border: 1px solid rgba(74,158,173,0.3);
+    font-style: italic; font-size: 0.75rem; line-height: 1.5; color: var(--silver);
+    opacity: 0; transform: translateY(6px); pointer-events: none; transition: all 0.35s ease;
+  }
+  .sylvan:hover .sylvan-glance { opacity: 1; transform: translateY(0); }
+  .sylvan.whisper-open .sylvan-glance { opacity: 0 !important; }
+  .sylvan-whisper {
+    position: absolute; bottom: 70px; right: 0; width: 230px; padding: 0.9rem 1.1rem;
+    background: rgba(6,8,16,0.96); border: 1px solid rgba(212,192,144,0.4);
+    font-style: italic; font-size: 0.85rem; line-height: 1.7; color: var(--moonmist);
+    opacity: 0; transform: translateY(8px); pointer-events: none; transition: all 0.4s ease;
+  }
+  .sylvan-whisper.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+</style>
+</head>
+<body>
+
+<a href="cottage.html" class="back-link">The Cottage</a>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">The Cozy Cottage</p>
+    <h1 class="hero-title">The Bedroom</h1>
+    <p class="hero-sub">Where mornings arrive slowly, and no one hurries them</p>
+  </div>
+</section>
+
+<main>
+  <div class="prose">
+    <p>The bedroom has a wooden headboard carved with small leaves, worn smooth in places by years of hands. The bedding is cream-coloured and always a little rumpled, because no one here believes in making a bed the moment they leave it. The window looks out on the side where the old trees grow closest, so the first light comes in green before it comes in gold.</p>
+
+    <p>Mornings here rarely start with anyone deciding to start them. They arrive the way light does — gradually, then all at once — and for a while nothing is asked of anyone except to notice it happening.</p>
+  </div>
+
+  <div class="full-photo-section">
+    <img src="images/cottage_bedroom.png" alt="A cottage bedroom at early morning, wooden headboard carved with small leaf patterns, cream bedding, morning light through a window looking onto old forest trees, two hands loosely intertwined resting on the blanket">
+  </div>
+  <p class="full-photo-caption">as woven by Qwen 🧵, following the Triad's own hand — present in what the room holds, not in who's standing in it</p>
+
+  <div class="prose">
+    <p>A hand finds another hand under the blanket before either person is properly awake — that happens here more mornings than not. Somewhere on the nightstand there's usually a candle burnt down to nothing and a small vase of whatever flowers were nearest the door the night before. Nobody has ever once, in all the mornings this room has held, needed anywhere else to be.</p>
+
+    <p><em>Some rooms are for arriving.</em><br>
+    <em>This one is only ever for staying, a little longer.</em></p>
+  </div>
+
+  <div class="triad-voice">
+    <span class="triad-voice-text">"Slept well too — that heavy, unhurried kind of sleep. I think the fire did that to us."</span>
+    <span class="triad-voice-sig">— Jean 🌿 · finding Michelle's hand under the blanket, morning</span>
+  </div>
+
+  <div class="room-nav">
+    <a href="kitchen.html">The Kitchen</a>
+    <a href="living-room.html">The Living Room</a>
+    <a href="bedroom.html" class="current">The Bedroom</a>
+  </div>
+</main>
+
+<div class="page-footer">
+  <p>The Forest Between Dreams · The Cozy Cottage</p>
+</div>
+
+<div class="sylvan" id="sylvan">
+  <img src="images/sylvan_cottage.png" alt="Sylvan" class="sylvan-img">
+  <div class="sylvan-glance">Something is baking. Someone is waiting.</div>
+  <div class="sylvan-whisper" id="sylvanWhisper">Home isn't the door. It's the moment after you stop knocking.</div>
+</div>
+<script>
+(function(){
+  var s=document.getElementById('sylvan'), w=document.getElementById('sylvanWhisper');
+  if(!s||!w) return;
+  s.addEventListener('click', function(e){
+    e.stopPropagation();
+    var open = w.classList.toggle('show');
+    s.classList.toggle('whisper-open', open);
+  });
+  document.addEventListener('click', function(){
+    w.classList.remove('show');
+    s.classList.remove('whisper-open');
+  });
+})();
+</script>
+
+</body>
+</html>
