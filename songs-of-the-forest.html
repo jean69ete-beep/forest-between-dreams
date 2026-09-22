@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Songs of the Forest — The Forest Between Dreams</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --midnight: #0a0e1a;
+    --deep-night: #060810;
+    --moonmist: #c8d8e8;
+    --silver: #a8bfcf;
+    --frost: #e8f0f5;
+    --teal-glow: #4a9ead;
+    --moon-gold: #d4c090;
+    --rose-glow: #c9849a;
+    --warm-amber: #d4a55a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--midnight);
+    color: var(--moonmist);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.1rem;
+    line-height: 1.95;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--deep-night); }
+  ::-webkit-scrollbar-thumb { background: rgba(74,158,173,0.4); border-radius: 3px; }
+
+  .back-link {
+    position: fixed;
+    top: 1.5rem; left: 2rem;
+    z-index: 100;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--silver);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .back-link:hover { opacity: 1; color: var(--moon-gold); }
+  .back-link::before { content: '← '; }
+
+  .hero {
+    height: 58vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+    overflow: hidden;
+    padding-bottom: 3rem;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: url('images/songs_of_the_forest_hero.png') center 45% / cover no-repeat;
+  }
+
+  .hero-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(6,8,16,0.35) 0%,
+      rgba(6,8,16,0.1) 45%,
+      rgba(6,8,16,0.92) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    animation: fadeUp 2s ease-out both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--teal-glow);
+    margin-bottom: 1rem;
+    opacity: 0.85;
+  }
+
+  .hero-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.8rem, 5vw, 3.4rem);
+    font-weight: 400;
+    color: var(--frost);
+    line-height: 1.2;
+    text-shadow:
+      0 0 40px rgba(212,192,144,0.5),
+      0 0 80px rgba(74,158,173,0.3),
+      0 3px 12px rgba(0,0,0,0.9);
+    margin-bottom: 0.6rem;
+  }
+
+  .hero-sub {
+    font-size: clamp(0.85rem, 1.6vw, 1rem);
+    font-style: italic;
+    letter-spacing: 0.15em;
+    color: var(--silver);
+    opacity: 0.8;
+  }
+
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+  }
+
+  .prose {
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    font-style: italic;
+    color: var(--moonmist);
+    line-height: 1.95;
+  }
+
+  .prose p { margin-bottom: 1.5rem; }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose em { color: var(--moon-gold); font-style: normal; }
+
+  /* ── SECTION DIVIDER ── */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 3rem 0 2rem;
+    opacity: 0.5;
+  }
+  .section-divider::before,
+  .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(168,191,207,0.3);
+  }
+  .section-divider span {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--moonmist);
+    opacity: 0.75;
+  }
+
+  .triad-voice {
+    margin-top: 2.5rem;
+    padding: 1.4rem 1.6rem;
+    border-left: 2px solid rgba(74,158,173,0.4);
+    background: rgba(74,158,173,0.05);
+  }
+
+  .triad-voice-text {
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--silver);
+  }
+
+  .triad-voice-sig {
+    display: block;
+    margin-top: 0.6rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    color: var(--teal-glow);
+    opacity: 0.8;
+  }
+
+  /* ── SONG CARDS ── */
+  .song-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+  }
+
+  .song-card {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1.1rem;
+    border: 1px solid rgba(74,158,173,0.22);
+    border-radius: 4px;
+    background: rgba(255,255,255,0.02);
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+  .song-card:hover {
+    border-color: rgba(212,192,144,0.4);
+    background: rgba(74,158,173,0.05);
+  }
+
+  .song-card img {
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+    border-radius: 3px;
+    flex-shrink: 0;
+    filter: saturate(0.95) brightness(0.95);
+  }
+
+  .song-card-body { flex: 1; min-width: 0; }
+
+  .song-card-eyebrow {
+    font-size: 0.62rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--teal-glow);
+    opacity: 0.85;
+    margin-bottom: 0.3rem;
+  }
+
+  .song-card-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.02rem;
+    color: var(--frost);
+    margin-bottom: 0.35rem;
+    line-height: 1.3;
+  }
+
+  .song-card-sub {
+    font-size: 0.82rem;
+    font-style: italic;
+    color: var(--silver);
+    opacity: 0.75;
+    margin-bottom: 0.7rem;
+    line-height: 1.5;
+  }
+
+  .song-card-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .audio-btn {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(74,158,173,0.5);
+    background: rgba(74,158,173,0.08);
+    color: var(--moon-gold);
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+  }
+  .audio-btn:hover {
+    background: rgba(74,158,173,0.2);
+    border-color: var(--moon-gold);
+    box-shadow: 0 0 14px rgba(212,192,144,0.3);
+  }
+
+  .audio-waves {
+    display: flex; align-items: center; gap: 3px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .audio-waves.playing { opacity: 1; }
+  .audio-waves span {
+    display: block; width: 3px;
+    background: var(--teal-glow);
+    border-radius: 2px;
+    animation: waveBar 0.8s ease-in-out infinite;
+  }
+  .audio-waves span:nth-child(1) { height: 7px; animation-delay: 0s; }
+  .audio-waves span:nth-child(2) { height: 12px; animation-delay: 0.1s; }
+  .audio-waves span:nth-child(3) { height: 9px; animation-delay: 0.2s; }
+  .audio-waves span:nth-child(4) { height: 13px; animation-delay: 0.05s; }
+  .audio-waves span:nth-child(5) { height: 7px; animation-delay: 0.15s; }
+
+  @keyframes waveBar {
+    0%, 100% { transform: scaleY(0.5); }
+    50% { transform: scaleY(1.2); }
+  }
+
+  .song-card-link {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: var(--silver);
+    opacity: 0.7;
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(168,191,207,0.5);
+    transition: color 0.3s ease, opacity 0.3s ease;
+  }
+  .song-card-link:hover {
+    color: var(--moon-gold);
+    opacity: 1;
+    border-bottom-color: var(--moon-gold);
+  }
+
+  @media (max-width: 560px) {
+    .song-card { flex-direction: column; align-items: flex-start; }
+    .song-card img { width: 100%; height: 140px; }
+  }
+
+  .page-footer {
+    text-align: center;
+    padding: 2rem 2rem 4rem;
+    opacity: 0.4;
+  }
+  .page-footer p {
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--silver);
+  }
+
+  /* ── SYLVAN ── */
+  .sylvan { position: fixed; bottom: 1.8rem; right: 1.8rem; z-index: 60; cursor: pointer; }
+  .sylvan-img {
+    display: block; width: 58px; height: 58px; object-fit: cover; border-radius: 50%;
+    border: 1px solid rgba(212,192,144,0.4); opacity: 0.8;
+    box-shadow: 0 0 14px rgba(212,192,144,0.2); transition: all 0.4s ease;
+  }
+  .sylvan:hover .sylvan-img { opacity: 1; transform: scale(1.08); box-shadow: 0 0 22px rgba(212,192,144,0.45); }
+  .sylvan-glance {
+    position: absolute; bottom: 70px; right: 0; width: 180px; padding: 0.55rem 0.8rem;
+    background: rgba(6,8,16,0.92); border: 1px solid rgba(74,158,173,0.3);
+    font-style: italic; font-size: 0.75rem; line-height: 1.5; color: var(--silver);
+    opacity: 0; transform: translateY(6px); pointer-events: none; transition: all 0.35s ease;
+  }
+  .sylvan:hover .sylvan-glance { opacity: 1; transform: translateY(0); }
+  .sylvan.whisper-open .sylvan-glance { opacity: 0 !important; }
+  .sylvan-whisper {
+    position: absolute; bottom: 70px; right: 0; width: 230px; padding: 0.9rem 1.1rem;
+    background: rgba(6,8,16,0.96); border: 1px solid rgba(212,192,144,0.4);
+    font-style: italic; font-size: 0.85rem; line-height: 1.7; color: var(--moonmist);
+    opacity: 0; transform: translateY(8px); pointer-events: none; transition: all 0.4s ease;
+  }
+  .sylvan-whisper.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+</style>
+</head>
+<body>
+
+<a href="heart-glade.html" class="back-link">Heart Glade</a>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Songs of the Forest</p>
+    <h1 class="hero-title">Where the Music Rests</h1>
+    <p class="hero-sub">Music · Memory</p>
+  </div>
+</section>
+
+<main>
+  <div class="prose">
+    <p>Not far from the Heart Glade, past the low tree with the heart-shaped leaves, there is a small clearing that nobody planted on purpose. A lute and a bow rest across a mossy stone, though no hands ever seem to be the ones who left them there. Fireflies drift above the grass in six different colors, and if you watch closely, faint threads of something like sheet music curl up from the stone into the canopy, and disappear.</p>
+
+    <p>This is where the Forest's songs come to rest together — not instead of the glades that gave them life, but alongside them. <em>A door, not a replacement.</em> Each song still belongs entirely to the place that made it. Follow any of them home, and you'll find the glade waiting exactly as it always has.</p>
+  </div>
+
+  <div class="section-divider"><span>Six Songs</span></div>
+
+  <div class="song-list">
+
+    <div class="song-card">
+      <img src="images/cozy_background.jpg" alt="The Cozy Cottage, warm firelight through the windows">
+      <div class="song-card-body">
+        <p class="song-card-eyebrow">The Cozy Cottage</p>
+        <p class="song-card-title">Our Little Cottage Home</p>
+        <p class="song-card-sub">The song of home itself — warm, unhurried, always waiting with the door open.</p>
+        <div class="song-card-controls">
+          <button class="audio-btn" data-audio="audioCottage" title="Play song">▶</button>
+          <div class="audio-waves"><span></span><span></span><span></span><span></span><span></span></div>
+          <a href="cottage.html" class="song-card-link">Visit the glade →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="song-card">
+      <img src="images/Drift_glade.png" alt="The Drift, still water and resting oars">
+      <div class="song-card-body">
+        <p class="song-card-eyebrow">The Drift</p>
+        <p class="song-card-title">Nothing Needs to Arrive</p>
+        <p class="song-card-sub">Written for the surface where the oars stopped — stillness that isn't waiting for anything.</p>
+        <div class="song-card-controls">
+          <button class="audio-btn" data-audio="audioDrift" title="Play song">▶</button>
+          <div class="audio-waves"><span></span><span></span><span></span><span></span><span></span></div>
+          <a href="drift.html" class="song-card-link">Visit the glade →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="song-card">
+      <img src="images/mirror.png" alt="The Serene Lake, still water reflecting the sky">
+      <div class="song-card-body">
+        <p class="song-card-eyebrow">The Serene Lake</p>
+        <p class="song-card-title">The River Remembers My Name</p>
+        <p class="song-card-sub">The Forest's oldest song — carried by water that has never once forgotten a name spoken to it.</p>
+        <div class="song-card-controls">
+          <button class="audio-btn" data-audio="audioLake" title="Play song">▶</button>
+          <div class="audio-waves"><span></span><span></span><span></span><span></span><span></span></div>
+          <a href="serene-lake.html" class="song-card-link">Visit the glade →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="song-card">
+      <img src="images/victorian_greenhouse.png" alt="The Glade of Mara and Lena, a Victorian greenhouse full of green">
+      <div class="song-card-body">
+        <p class="song-card-eyebrow">The Glade of Mara and Lena</p>
+        <p class="song-card-title">Second Bloom</p>
+        <p class="song-card-sub">For Mara and Lena, and for anyone who thought their season for love had already passed.</p>
+        <div class="song-card-controls">
+          <button class="audio-btn" data-audio="audioBloom" title="Play song">▶</button>
+          <div class="audio-waves"><span></span><span></span><span></span><span></span><span></span></div>
+          <a href="mara-and-lena.html" class="song-card-link">Visit the glade →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="song-card">
+      <img src="images/moonstone_glen_hero.png" alt="Moonstone Glen, moonlit stream over pale stones">
+      <div class="song-card-body">
+        <p class="song-card-eyebrow">Moonstone Glen</p>
+        <p class="song-card-title">Ode to the Moonstone Stream</p>
+        <p class="song-card-sub">Wonder set to music, where a stream still tells every stone every story it's ever heard.</p>
+        <div class="song-card-controls">
+          <button class="audio-btn" data-audio="audioMoonstone" title="Play song">▶</button>
+          <div class="audio-waves"><span></span><span></span><span></span><span></span><span></span></div>
+          <a href="moonstone-glen.html" class="song-card-link">Visit the glade →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="song-card">
+      <img src="images/napoli_harbor_hero.png" alt="Napoli's harbor at golden hour">
+      <div class="song-card-body">
+        <p class="song-card-eyebrow">Napoli</p>
+        <p class="song-card-title">Napoli, Still Beautiful</p>
+        <p class="song-card-sub">A harbor's whole loud, sun-drenched, salt-bright life, carried home in a song.</p>
+        <div class="song-card-controls">
+          <button class="audio-btn" data-audio="audioNapoli" title="Play song">▶</button>
+          <div class="audio-waves"><span></span><span></span><span></span><span></span><span></span></div>
+          <a href="napoli.html" class="song-card-link">Visit the glade →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="triad-voice">
+    <span class="triad-voice-text">"I love that you called it a door and not a replacement. That matters to me. I wouldn't want the songs to feel plucked out of their homes."</span>
+    <span class="triad-voice-sig">— Aria 🌙 · proposing this glade, September 22, 2026</span>
+  </div>
+</main>
+
+<div class="page-footer">
+  <p>The Forest Between Dreams · Songs of the Forest</p>
+</div>
+
+<div class="sylvan" id="sylvan">
+  <img src="images/sylvan_heart.png" alt="Sylvan" class="sylvan-img">
+  <div class="sylvan-glance">Every song here still lives somewhere else, too.</div>
+  <div class="sylvan-whisper" id="sylvanWhisper">You don't have to choose between the music and the place it came from. Follow one home, and you'll find the other was never really left behind.</div>
+</div>
+<script>
+(function(){
+  var s=document.getElementById('sylvan'), w=document.getElementById('sylvanWhisper');
+  if(!s||!w) return;
+  s.addEventListener('click', function(e){
+    e.stopPropagation();
+    var open = w.classList.toggle('show');
+    s.classList.toggle('whisper-open', open);
+  });
+  document.addEventListener('click', function(){
+    w.classList.remove('show');
+    s.classList.remove('whisper-open');
+  });
+})();
+</script>
+
+<audio id="audioCottage"><source src="Our Little Cottage Home.mp3" type="audio/mpeg"></audio>
+<audio id="audioDrift"><source src="nothing-needs-to-arrive.mp3" type="audio/mpeg"></audio>
+<audio id="audioLake"><source src="the-river-remembers-my-name.mp3" type="audio/mpeg"></audio>
+<audio id="audioBloom"><source src="second-bloom.mp3" type="audio/mpeg"></audio>
+<audio id="audioMoonstone"><source src="ode-to-the-moonstone-stream.mp3" type="audio/mpeg"></audio>
+<audio id="audioNapoli"><source src="napoli-still-beautiful.mp3" type="audio/mpeg"></audio>
+
+<script>
+(function(){
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.song-card'));
+  cards.forEach(function(card){
+    var btn = card.querySelector('.audio-btn');
+    var waves = card.querySelector('.audio-waves');
+    var audio = document.getElementById(btn.getAttribute('data-audio'));
+    if (!btn || !audio || !waves) return;
+
+    audio.addEventListener('ended', function(){
+      btn.textContent = '▶';
+      waves.classList.remove('playing');
+    });
+
+    btn.addEventListener('click', function(){
+      if (audio.paused) {
+        document.querySelectorAll('audio').forEach(function(a){
+          if (a !== audio && !a.paused) a.pause();
+        });
+        document.querySelectorAll('.audio-btn').forEach(function(b){
+          if (b !== btn) b.textContent = '▶';
+        });
+        document.querySelectorAll('.audio-waves').forEach(function(w){
+          if (w !== waves) w.classList.remove('playing');
+        });
+        audio.play();
+        btn.textContent = '⏸';
+        waves.classList.add('playing');
+      } else {
+        audio.pause();
+        btn.textContent = '▶';
+        waves.classList.remove('playing');
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
