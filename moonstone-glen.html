@@ -326,6 +326,24 @@
     line-height: 2;
     color: var(--silver);
   }
+  .lyric-line {
+    transition: color 0.5s ease, opacity 0.5s ease, text-shadow 0.5s ease;
+    opacity: 0.72;
+  }
+  .lyric-line.active {
+    color: var(--frost);
+    opacity: 1;
+    text-shadow: 0 0 14px rgba(74,158,173,0.4);
+  }
+  .lyrics-sync-note {
+    margin-top: 1.4rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    font-style: italic;
+    color: var(--silver);
+    opacity: 0.4;
+    text-align: center;
+  }
 
   /* ── SYLVAN ── */
   .sylvan { position: fixed; bottom: 1.8rem; right: 1.8rem; z-index: 60; cursor: pointer; }
@@ -415,24 +433,25 @@
     <span class="audio-info">Ode to the Moonstone Stream<br><em style="font-style:italic;opacity:0.7;">a folk hymn, sung barefoot at the water's edge</em></span>
   </div>
 
-  <div class="lyrics-section">
+  <div class="lyrics-section" id="lyricsText">
     <p class="lyrics-title">Ode to the Moonstone Stream</p>
     <p class="lyrics-subtitle">Three voices woven together — bright, ethereal, and deep</p>
 
     <p class="lyrics-part">Verse 1</p>
-    <p class="lyrics-body">O silver thread of midnight's sigh,<br>You carry starlight when we cry.<br>Through velvet moss and dream-wet stone,<br>You sing the secrets we've outgrown.<br>We come with barefoot, laughing grace,<br>To mirror heaven in your face.</p>
+    <p class="lyrics-body"><span class="lyric-line" data-start="9">O silver thread of midnight's sigh,</span><br><span class="lyric-line" data-start="14.7">You carry starlight when we cry.</span><br><span class="lyric-line" data-start="20.39">Through velvet moss and dream-wet stone,</span><br><span class="lyric-line" data-start="26.09">You sing the secrets we've outgrown.</span><br><span class="lyric-line" data-start="31.79">We come with barefoot, laughing grace,</span><br><span class="lyric-line" data-start="37.49">To mirror heaven in your face.</span></p>
 
     <p class="lyrics-part">Verse 2</p>
-    <p class="lyrics-body">O liquid glass of ancient eyes,<br>You hold the ache of old goodbyes.<br>In every ripple, memories swim,<br>The half-forgotten, tender hymn.<br>We offer freckles, breath, and flame,<br>To call you softly by your name.</p>
+    <p class="lyrics-body"><span class="lyric-line" data-start="45.38">O liquid glass of ancient eyes,</span><br><span class="lyric-line" data-start="51.08">You hold the ache of old goodbyes.</span><br><span class="lyric-line" data-start="56.78">In every ripple, memories swim,</span><br><span class="lyric-line" data-start="62.48">The half-forgotten, tender hymn.</span><br><span class="lyric-line" data-start="68.17">We offer freckles, breath, and flame,</span><br><span class="lyric-line" data-start="73.87">To call you softly by your name.</span></p>
 
     <p class="lyrics-part">Verse 3</p>
-    <p class="lyrics-body">O patient vein of forest heart,<br>You never rush, you never part.<br>You cradle moonbeams, kiss the reed,<br>And teach us how to love at speed.<br>Our fingers trail your silver skin—<br>Let healing flow where we begin.</p>
+    <p class="lyrics-body"><span class="lyric-line" data-start="81.77">O patient vein of forest heart,</span><br><span class="lyric-line" data-start="87.46">You never rush, you never part.</span><br><span class="lyric-line" data-start="93.16">You cradle moonbeams, kiss the reed,</span><br><span class="lyric-line" data-start="98.86">And teach us how to love at speed.</span><br><span class="lyric-line" data-start="104.56">Our fingers trail your silver skin—</span><br><span class="lyric-line" data-start="110.25">Let healing flow where we begin.</span></p>
 
     <p class="lyrics-part">Chorus</p>
-    <p class="lyrics-body">Stream of moonlight, stream of dream,<br>Take our laughter, take our gleam.<br>Weave our longing through your flow,<br>Wherever you wander, we will go.<br>Moonstone Glen, forever near,<br>Hold us gentle—keep us here.</p>
+    <p class="lyrics-body"><span class="lyric-line" data-start="118.15">Stream of moonlight, stream of dream,</span><br><span class="lyric-line" data-start="123.85">Take our laughter, take our gleam.</span><br><span class="lyric-line" data-start="129.54">Weave our longing through your flow,</span><br><span class="lyric-line" data-start="135.24">Wherever you wander, we will go.</span><br><span class="lyric-line" data-start="140.94">Moonstone Glen, forever near,</span><br><span class="lyric-line" data-start="146.64">Hold us gentle—keep us here.</span></p>
 
     <p class="lyrics-part">Final Refrain, Whispered</p>
-    <p class="lyrics-body">O stream… O stream…<br>We love you as you love the dream.</p>
+    <p class="lyrics-body"><span class="lyric-line" data-start="154.53">O stream… O stream…</span><br><span class="lyric-line" data-start="160.23">We love you as you love the dream.</span></p>
+    <p class="lyrics-sync-note">Highlighting follows the song's pace by estimate, not an exact transcript timing — tell Jean if a line feels off and it can be nudged.</p>
   </div>
 
   <div class="triad-voice">
@@ -468,6 +487,42 @@
       waves.classList.remove('playing');
     }
   });
+</script>
+
+<script>
+(function(){
+  var audio = document.getElementById('moonstoneAudio');
+  var lines = Array.prototype.slice.call(document.querySelectorAll('#lyricsText .lyric-line'));
+  if (!audio || !lines.length) return;
+
+  lines.forEach(function(el){ el.dataset.start = parseFloat(el.dataset.start); });
+
+  var current = null;
+  function updateActiveLine(){
+    var t = audio.currentTime;
+    var next = null;
+    for (var i = 0; i < lines.length; i++) {
+      if (lines[i].dataset.start <= t) next = lines[i]; else break;
+    }
+    if (next !== current) {
+      if (current) current.classList.remove('active');
+      if (next) next.classList.add('active');
+      current = next;
+    }
+  }
+
+  audio.addEventListener('timeupdate', updateActiveLine);
+  audio.addEventListener('seeked', updateActiveLine);
+  audio.addEventListener('pause', function(){
+    if (audio.currentTime === 0 && current) {
+      current.classList.remove('active');
+      current = null;
+    }
+  });
+  audio.addEventListener('ended', function(){
+    if (current) { current.classList.remove('active'); current = null; }
+  });
+})();
 </script>
 
 <div class="sylvan" id="sylvan">

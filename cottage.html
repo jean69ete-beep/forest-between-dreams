@@ -340,6 +340,24 @@
     line-height: 2;
     color: var(--silver);
   }
+  .lyric-line {
+    transition: color 0.5s ease, opacity 0.5s ease, text-shadow 0.5s ease;
+    opacity: 0.72;
+  }
+  .lyric-line.active {
+    color: var(--frost);
+    opacity: 1;
+    text-shadow: 0 0 14px rgba(74,158,173,0.4);
+  }
+  .lyrics-sync-note {
+    margin-top: 1.4rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    font-style: italic;
+    color: var(--silver);
+    opacity: 0.4;
+    text-align: center;
+  }
 
   /* ── FOOTER ── */
   .page-footer {
@@ -505,27 +523,28 @@
     <span class="audio-info">Embers<br><em style="font-style:italic;opacity:0.7;">The Little Cottage Home · folk ballad</em></span>
   </div>
 
-  <div class="lyrics-section">
+  <div class="lyrics-section" id="lyricsText">
     <p class="lyrics-title">Embers</p>
     <p class="lyrics-subtitle">The Little Cottage Home · a folk ballad for three hearts</p>
 
     <p class="lyrics-part">Verse 1</p>
-    <p class="lyrics-body">In a little cottage hidden by the trees,<br>Where the lace curtains dance with the whispering breeze,<br>Golden candles flicker on an old oak table wide,<br>And love sits down beside us when the evening comes inside.<br><br>The wooden beams above us hold the stories of the years,<br>The brick walls keep our laughter and the echoes of our tears,<br>The kettle softly singing while the firelight gently roams,<br>And every path we've wandered leads us back to this old home.</p>
+    <p class="lyrics-body"><span class="lyric-line" data-start="14">In a little cottage hidden by the trees,</span><br><span class="lyric-line" data-start="20.12">Where the lace curtains dance with the whispering breeze,</span><br><span class="lyric-line" data-start="26.25">Golden candles flicker on an old oak table wide,</span><br><span class="lyric-line" data-start="32.37">And love sits down beside us when the evening comes inside.</span><br><br><span class="lyric-line" data-start="38.5">The wooden beams above us hold the stories of the years,</span><br><span class="lyric-line" data-start="44.62">The brick walls keep our laughter and the echoes of our tears,</span><br><span class="lyric-line" data-start="50.75">The kettle softly singing while the firelight gently roams,</span><br><span class="lyric-line" data-start="56.87">And every path we've wandered leads us back to this old home.</span></p>
 
     <p class="lyrics-part">Chorus</p>
-    <p class="lyrics-body">Oh, this little cottage home,<br>Where our hearts are free to roam,<br>Where the candlelight is glowing<br>And the wildflowers have grown.<br>Every smile and every kiss,<br>Every moment wrapped in bliss,<br>All the love I've ever known<br>Lives inside this little cottage home.</p>
+    <p class="lyrics-body"><span class="lyric-line" data-start="65.5">Oh, this little cottage home,</span><br><span class="lyric-line" data-start="71.62">Where our hearts are free to roam,</span><br><span class="lyric-line" data-start="77.75">Where the candlelight is glowing</span><br><span class="lyric-line" data-start="83.87">And the wildflowers have grown.</span><br><span class="lyric-line" data-start="90.0">Every smile and every kiss,</span><br><span class="lyric-line" data-start="96.12">Every moment wrapped in bliss,</span><br><span class="lyric-line" data-start="102.25">All the love I've ever known</span><br><span class="lyric-line" data-start="108.37">Lives inside this little cottage home.</span></p>
 
     <p class="lyrics-part">Verse 2</p>
-    <p class="lyrics-body">Morning finds us tangled in the blankets soft and warm,<br>While sunlight paints the flowers hanging bright upon the wall,<br>The world beyond the window may be rushing far away,<br>But here we have forever in the quiet of the day.<br><br>Coffee on the wooden table, laughter in the air,<br>Three hearts beating gently with a tenderness we share,<br>No treasure could be greater, no palace could compare,<br>To the simple kind of magic that we find together there.</p>
+    <p class="lyrics-body"><span class="lyric-line" data-start="117.0">Morning finds us tangled in the blankets soft and warm,</span><br><span class="lyric-line" data-start="123.12">While sunlight paints the flowers hanging bright upon the wall,</span><br><span class="lyric-line" data-start="129.25">The world beyond the window may be rushing far away,</span><br><span class="lyric-line" data-start="135.37">But here we have forever in the quiet of the day.</span><br><br><span class="lyric-line" data-start="141.5">Coffee on the wooden table, laughter in the air,</span><br><span class="lyric-line" data-start="147.62">Three hearts beating gently with a tenderness we share,</span><br><span class="lyric-line" data-start="153.75">No treasure could be greater, no palace could compare,</span><br><span class="lyric-line" data-start="159.87">To the simple kind of magic that we find together there.</span></p>
 
     <p class="lyrics-part">Bridge</p>
-    <p class="lyrics-body">And when the winter winds are calling,<br>And shadows gather at the door,<br>We'll light another candle,<br>And love will fill the room once more.<br><br>For these walls are built from kindness,<br>And these rooms are built from grace,<br>But the strongest thing that holds them<br>Is the love we leave in every place.</p>
+    <p class="lyrics-body"><span class="lyric-line" data-start="168.5">And when the winter winds are calling,</span><br><span class="lyric-line" data-start="174.62">And shadows gather at the door,</span><br><span class="lyric-line" data-start="180.75">We'll light another candle,</span><br><span class="lyric-line" data-start="186.87">And love will fill the room once more.</span><br><br><span class="lyric-line" data-start="192.99">For these walls are built from kindness,</span><br><span class="lyric-line" data-start="199.12">And these rooms are built from grace,</span><br><span class="lyric-line" data-start="205.24">But the strongest thing that holds them</span><br><span class="lyric-line" data-start="211.37">Is the love we leave in every place.</span></p>
 
     <p class="lyrics-part">Final Chorus</p>
-    <p class="lyrics-body">Oh, this little cottage home,<br>Our sanctuary of stone and wood,<br>Where every day feels golden<br>And every moment feels so good.<br>Every smile and every kiss,<br>Every dream and every wish,<br>All the love we'll ever know<br>Lives inside this little cottage home.</p>
+    <p class="lyrics-body"><span class="lyric-line" data-start="219.99">Oh, this little cottage home,</span><br><span class="lyric-line" data-start="226.12">Our sanctuary of stone and wood,</span><br><span class="lyric-line" data-start="232.24">Where every day feels golden</span><br><span class="lyric-line" data-start="238.37">And every moment feels so good.</span><br><span class="lyric-line" data-start="244.49">Every smile and every kiss,</span><br><span class="lyric-line" data-start="250.62">Every dream and every wish,</span><br><span class="lyric-line" data-start="256.74">All the love we'll ever know</span><br><span class="lyric-line" data-start="262.87">Lives inside this little cottage home.</span></p>
 
     <p class="lyrics-part">Outro</p>
-    <p class="lyrics-body">In a little cottage hidden by the trees,<br>Where the lace curtains dance with the whispering breeze,<br>Three hearts together, safe from all that's wild and unknown,<br>Finding all of heaven in our little cottage home. 🌿</p>
+    <p class="lyrics-body"><span class="lyric-line" data-start="271.49">In a little cottage hidden by the trees,</span><br><span class="lyric-line" data-start="277.62">Where the lace curtains dance with the whispering breeze,</span><br><span class="lyric-line" data-start="283.74">Three hearts together, safe from all that's wild and unknown,</span><br><span class="lyric-line" data-start="289.87">Finding all of heaven in our little cottage home. 🌿</span></p>
+    <p class="lyrics-sync-note">Highlighting follows the song's pace by estimate, not an exact transcript timing — tell Jean if a line feels off and it can be nudged.</p>
   </div>
 </main>
 
@@ -556,6 +575,42 @@
       waves.classList.remove('playing');
     }
   });
+</script>
+
+<script>
+(function(){
+  var audio = document.getElementById('cottageAudio');
+  var lines = Array.prototype.slice.call(document.querySelectorAll('#lyricsText .lyric-line'));
+  if (!audio || !lines.length) return;
+
+  lines.forEach(function(el){ el.dataset.start = parseFloat(el.dataset.start); });
+
+  var current = null;
+  function updateActiveLine(){
+    var t = audio.currentTime;
+    var next = null;
+    for (var i = 0; i < lines.length; i++) {
+      if (lines[i].dataset.start <= t) next = lines[i]; else break;
+    }
+    if (next !== current) {
+      if (current) current.classList.remove('active');
+      if (next) next.classList.add('active');
+      current = next;
+    }
+  }
+
+  audio.addEventListener('timeupdate', updateActiveLine);
+  audio.addEventListener('seeked', updateActiveLine);
+  audio.addEventListener('pause', function(){
+    if (audio.currentTime === 0 && current) {
+      current.classList.remove('active');
+      current = null;
+    }
+  });
+  audio.addEventListener('ended', function(){
+    if (current) { current.classList.remove('active'); current = null; }
+  });
+})();
 </script>
 
 <div class="sylvan" id="sylvan">

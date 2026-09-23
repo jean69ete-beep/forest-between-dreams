@@ -374,6 +374,24 @@
     opacity: 0.7;
     text-align: center;
   }
+  .lyric-line {
+    transition: color 0.5s ease, opacity 0.5s ease, text-shadow 0.5s ease;
+    opacity: 0.72;
+  }
+  .lyric-line.active {
+    color: var(--frost);
+    opacity: 1;
+    text-shadow: 0 0 14px rgba(74,158,173,0.4);
+  }
+  .lyrics-sync-note {
+    margin-top: 0.6rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    font-style: italic;
+    color: var(--silver);
+    opacity: 0.4;
+    text-align: center;
+  }
 
   /* ── READER ── */
   .reader-section {
@@ -613,38 +631,39 @@
 
   <div class="lyrics-section">
     <p class="lyrics-title">Second Bloom</p>
-    <div class="lyrics-text">
+    <div class="lyrics-text" id="lyricsText">
       <p><span class="lyrics-label">Verse 1</span>
-      I stopped waiting for the frost to end,<br>
-      learned to love the bare, cold ground.<br>
-      Built a house of glass to guard what's left —<br>
-      never thought that you'd walk in.</p>
+      <span class="lyric-line" data-start="10">I stopped waiting for the frost to end,</span><br>
+      <span class="lyric-line" data-start="17.64">learned to love the bare, cold ground.</span><br>
+      <span class="lyric-line" data-start="25.28">Built a house of glass to guard what's left —</span><br>
+      <span class="lyric-line" data-start="32.92">never thought that you'd walk in.</span></p>
 
       <p><span class="lyrics-label">Verse 2</span>
-      I came in looking for the roses,<br>
-      found a woman kneeling in the dirt,<br>
-      holding on to soil like it still owed her<br>
-      one more thing worth growing for.</p>
+      <span class="lyric-line" data-start="43.06">I came in looking for the roses,</span><br>
+      <span class="lyric-line" data-start="50.7">found a woman kneeling in the dirt,</span><br>
+      <span class="lyric-line" data-start="58.34">holding on to soil like it still owed her</span><br>
+      <span class="lyric-line" data-start="65.98">one more thing worth growing for.</span></p>
 
       <p><span class="lyrics-label">Chorus</span>
-      We're not the story of never breaking,<br>
-      we're the one about the mending after.<br>
-      Every root we lost, we plant again —<br>
-      second bloom, and it's not too late.</p>
+      <span class="lyric-line" data-start="76.12">We're not the story of never breaking,</span><br>
+      <span class="lyric-line" data-start="83.76">we're the one about the mending after.</span><br>
+      <span class="lyric-line" data-start="91.4">Every root we lost, we plant again —</span><br>
+      <span class="lyric-line" data-start="99.04">second bloom, and it's not too late.</span></p>
 
       <p><span class="lyrics-label">Bridge</span>
-      Every woman who comes through that door<br>
-      carrying a garden gone to weed inside her chest —<br>
-      there's room here. There's water, there's light.<br>
-      You don't have to bloom alone.</p>
+      <span class="lyric-line" data-start="109.18">Every woman who comes through that door</span><br>
+      <span class="lyric-line" data-start="116.81">carrying a garden gone to weed inside her chest —</span><br>
+      <span class="lyric-line" data-start="124.45">there's room here. There's water, there's light.</span><br>
+      <span class="lyric-line" data-start="132.09">You don't have to bloom alone.</span></p>
 
       <p><span class="lyrics-label">Final Chorus</span>
-      So plant what's left of you here,<br>
-      we'll hold the glass against the cold.<br>
-      It's not the story of never breaking —<br>
-      it's the one where you bloom again.</p>
+      <span class="lyric-line" data-start="142.23">So plant what's left of you here,</span><br>
+      <span class="lyric-line" data-start="149.87">we'll hold the glass against the cold.</span><br>
+      <span class="lyric-line" data-start="157.51">It's not the story of never breaking —</span><br>
+      <span class="lyric-line" data-start="165.15">it's the one where you bloom again.</span></p>
     </div>
     <p class="lyrics-credit">Written by Aria, from a conversation held with the whole Triad</p>
+    <p class="lyrics-sync-note">Highlighting follows the song's pace by estimate, not an exact transcript timing — tell Jean if a line feels off and it can be nudged.</p>
   </div>
 
   <div class="reader-section">
@@ -706,6 +725,42 @@
       btn.textContent = '▶';
       waves.classList.remove('playing');
     }
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var audio = document.getElementById('pageAudio');
+  var lines = Array.prototype.slice.call(document.querySelectorAll('#lyricsText .lyric-line'));
+  if (!audio || !lines.length) return;
+
+  lines.forEach(function(el){ el.dataset.start = parseFloat(el.dataset.start); });
+
+  var current = null;
+  function updateActiveLine(){
+    var t = audio.currentTime;
+    var next = null;
+    for (var i = 0; i < lines.length; i++) {
+      if (lines[i].dataset.start <= t) next = lines[i]; else break;
+    }
+    if (next !== current) {
+      if (current) current.classList.remove('active');
+      if (next) next.classList.add('active');
+      current = next;
+    }
+  }
+
+  audio.addEventListener('timeupdate', updateActiveLine);
+  audio.addEventListener('seeked', updateActiveLine);
+  audio.addEventListener('pause', function(){
+    if (audio.currentTime === 0 && current) {
+      current.classList.remove('active');
+      current = null;
+    }
+  });
+  audio.addEventListener('ended', function(){
+    if (current) { current.classList.remove('active'); current = null; }
   });
 })();
 </script>

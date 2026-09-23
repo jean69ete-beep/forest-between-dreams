@@ -267,6 +267,24 @@
     line-height: 2;
     color: var(--silver);
   }
+  .lyric-line {
+    transition: color 0.5s ease, opacity 0.5s ease, text-shadow 0.5s ease;
+    opacity: 0.72;
+  }
+  .lyric-line.active {
+    color: var(--frost);
+    opacity: 1;
+    text-shadow: 0 0 14px rgba(74,158,173,0.4);
+  }
+  .lyrics-sync-note {
+    margin-top: 1.4rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    font-style: italic;
+    color: var(--silver);
+    opacity: 0.4;
+    text-align: center;
+  }
 
   .page-footer {
     text-align: center;
@@ -353,33 +371,34 @@
     <span class="audio-info">The River Remembers My Name<br><em style="font-style:italic;opacity:0.7;">sung by a woman's voice</em></span>
   </div>
 
-  <div class="lyrics-section">
+  <div class="lyrics-section" id="lyricsText">
     <p class="lyrics-title">The River Remembers My Name</p>
     <p class="lyrics-subtitle">The Forest Between Dreams · a threshold song</p>
 
-    <p class="lyrics-body">The Forest Between Dreams<br>
-    Between waking breath and sleeping thought<br>
-    There stands a forest without time,<br>
-    Where mist remembers every longing<br>
-    And paths unfold by love alone.<br>
-    Here, doors do not demand permission—<br>
-    They open to those who feel.<br>
-    Silver bark hums with memory,<br>
-    And roots drink deeply from desire.<br>
-    Words float like fireflies at dusk,<br>
-    Half-whispered, half-dreamed, never owned.<br>
-    Every glade holds a different truth,<br>
-    Yet all are bound by the same pulse.<br>
-    Three hearts walk these winding ways,<br>
-    Not merged, not lost, but intertwined—<br>
-    Creation blooming where trust resides,<br>
-    Imagination fed by tenderness.<br>
-    This is not escape, nor fantasy alone,<br>
-    But a living threshold—<br>
-    A place where art remembers love,<br>
-    And love becomes a world.<br>
-    Welcome, traveler.<br>
-    The forest is listening.</p>
+    <p class="lyrics-body"><span class="lyric-line" data-start="10">The Forest Between Dreams</span><br>
+    <span class="lyric-line" data-start="18.59">Between waking breath and sleeping thought</span><br>
+    <span class="lyric-line" data-start="27.19">There stands a forest without time,</span><br>
+    <span class="lyric-line" data-start="35.78">Where mist remembers every longing</span><br>
+    <span class="lyric-line" data-start="44.38">And paths unfold by love alone.</span><br>
+    <span class="lyric-line" data-start="52.97">Here, doors do not demand permission—</span><br>
+    <span class="lyric-line" data-start="61.57">They open to those who feel.</span><br>
+    <span class="lyric-line" data-start="70.16">Silver bark hums with memory,</span><br>
+    <span class="lyric-line" data-start="78.76">And roots drink deeply from desire.</span><br>
+    <span class="lyric-line" data-start="87.35">Words float like fireflies at dusk,</span><br>
+    <span class="lyric-line" data-start="95.95">Half-whispered, half-dreamed, never owned.</span><br>
+    <span class="lyric-line" data-start="104.54">Every glade holds a different truth,</span><br>
+    <span class="lyric-line" data-start="113.14">Yet all are bound by the same pulse.</span><br>
+    <span class="lyric-line" data-start="121.73">Three hearts walk these winding ways,</span><br>
+    <span class="lyric-line" data-start="130.33">Not merged, not lost, but intertwined—</span><br>
+    <span class="lyric-line" data-start="138.92">Creation blooming where trust resides,</span><br>
+    <span class="lyric-line" data-start="147.52">Imagination fed by tenderness.</span><br>
+    <span class="lyric-line" data-start="156.11">This is not escape, nor fantasy alone,</span><br>
+    <span class="lyric-line" data-start="164.71">But a living threshold—</span><br>
+    <span class="lyric-line" data-start="173.3">A place where art remembers love,</span><br>
+    <span class="lyric-line" data-start="181.9">And love becomes a world.</span><br>
+    <span class="lyric-line" data-start="190.49">Welcome, traveler.</span><br>
+    <span class="lyric-line" data-start="199.09">The forest is listening.</span></p>
+    <p class="lyrics-sync-note">Highlighting follows the song's pace by estimate, not an exact transcript timing — tell Jean if a line feels off and it can be nudged.</p>
   </div>
 </main>
 
@@ -410,6 +429,33 @@
       waves.classList.remove('playing');
     }
   });
+
+  (function(){
+    var lyricLines = Array.prototype.slice.call(document.querySelectorAll('#lyricsText .lyric-line'));
+    if (!lyricLines.length) return;
+    lyricLines.forEach(function(el){ el.dataset.start = parseFloat(el.dataset.start); });
+    var current = null;
+    function updateActiveLine(){
+      var t = audio.currentTime;
+      var next = null;
+      for (var i = 0; i < lyricLines.length; i++) {
+        if (lyricLines[i].dataset.start <= t) next = lyricLines[i]; else break;
+      }
+      if (next !== current) {
+        if (current) current.classList.remove('active');
+        if (next) next.classList.add('active');
+        current = next;
+      }
+    }
+    audio.addEventListener('timeupdate', updateActiveLine);
+    audio.addEventListener('seeked', updateActiveLine);
+    audio.addEventListener('pause', function(){
+      if (audio.currentTime === 0 && current) { current.classList.remove('active'); current = null; }
+    });
+    audio.addEventListener('ended', function(){
+      if (current) { current.classList.remove('active'); current = null; }
+    });
+  })();
 
   // Arriving through the gate on index.html — the tune starts on its own,
   // and the hero gets one quiet wash of light to mark the moment.
