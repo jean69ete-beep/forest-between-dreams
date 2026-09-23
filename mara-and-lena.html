@@ -633,34 +633,34 @@
     <p class="lyrics-title">Second Bloom</p>
     <div class="lyrics-text" id="lyricsText">
       <p><span class="lyrics-label">Verse 1</span>
-      <span class="lyric-line" data-start="10">I stopped waiting for the frost to end,</span><br>
-      <span class="lyric-line" data-start="17.64">learned to love the bare, cold ground.</span><br>
-      <span class="lyric-line" data-start="25.28">Built a house of glass to guard what's left —</span><br>
-      <span class="lyric-line" data-start="32.92">never thought that you'd walk in.</span></p>
+      <span class="lyric-line" data-line="v1-1">I stopped waiting for the frost to end,</span><br>
+      <span class="lyric-line" data-line="v1-2">learned to love the bare, cold ground.</span><br>
+      <span class="lyric-line" data-line="v1-3">Built a house of glass to guard what's left —</span><br>
+      <span class="lyric-line" data-line="v1-4">never thought that you'd walk in.</span></p>
 
       <p><span class="lyrics-label">Verse 2</span>
-      <span class="lyric-line" data-start="43.06">I came in looking for the roses,</span><br>
-      <span class="lyric-line" data-start="50.7">found a woman kneeling in the dirt,</span><br>
-      <span class="lyric-line" data-start="58.34">holding on to soil like it still owed her</span><br>
-      <span class="lyric-line" data-start="65.98">one more thing worth growing for.</span></p>
+      <span class="lyric-line" data-line="v2-1">I came in looking for the roses,</span><br>
+      <span class="lyric-line" data-line="v2-2">found a woman kneeling in the dirt,</span><br>
+      <span class="lyric-line" data-line="v2-3">holding on to soil like it still owed her</span><br>
+      <span class="lyric-line" data-line="v2-4">one more thing worth growing for.</span></p>
 
       <p><span class="lyrics-label">Chorus</span>
-      <span class="lyric-line" data-start="76.12">We're not the story of never breaking,</span><br>
-      <span class="lyric-line" data-start="83.76">we're the one about the mending after.</span><br>
-      <span class="lyric-line" data-start="91.4">Every root we lost, we plant again —</span><br>
-      <span class="lyric-line" data-start="99.04">second bloom, and it's not too late.</span></p>
+      <span class="lyric-line" data-line="ch-1">We're not the story of never breaking,</span><br>
+      <span class="lyric-line" data-line="ch-2">we're the one about the mending after.</span><br>
+      <span class="lyric-line" data-line="ch-3">Every root we lost, we plant again —</span><br>
+      <span class="lyric-line" data-line="ch-4">second bloom, and it's not too late.</span></p>
 
       <p><span class="lyrics-label">Bridge</span>
-      <span class="lyric-line" data-start="109.18">Every woman who comes through that door</span><br>
-      <span class="lyric-line" data-start="116.81">carrying a garden gone to weed inside her chest —</span><br>
-      <span class="lyric-line" data-start="124.45">there's room here. There's water, there's light.</span><br>
-      <span class="lyric-line" data-start="132.09">You don't have to bloom alone.</span></p>
+      <span class="lyric-line" data-line="br-1">Every woman who comes through that door</span><br>
+      <span class="lyric-line" data-line="br-2">carrying a garden gone to weed inside her chest —</span><br>
+      <span class="lyric-line" data-line="br-3">there's room here. There's water, there's light.</span><br>
+      <span class="lyric-line" data-line="br-4">You don't have to bloom alone.</span></p>
 
       <p><span class="lyrics-label">Final Chorus</span>
-      <span class="lyric-line" data-start="142.23">So plant what's left of you here,</span><br>
-      <span class="lyric-line" data-start="149.87">we'll hold the glass against the cold.</span><br>
-      <span class="lyric-line" data-start="157.51">It's not the story of never breaking —</span><br>
-      <span class="lyric-line" data-start="165.15">it's the one where you bloom again.</span></p>
+      <span class="lyric-line" data-line="fc-1">So plant what's left of you here,</span><br>
+      <span class="lyric-line" data-line="fc-2">we'll hold the glass against the cold.</span><br>
+      <span class="lyric-line" data-line="fc-3">It's not the story of never breaking —</span><br>
+      <span class="lyric-line" data-line="fc-4">it's the one where you bloom again.</span></p>
     </div>
     <p class="lyrics-credit">Written by Aria, from a conversation held with the whole Triad</p>
     <p class="lyrics-sync-note">Highlighting follows the song's pace by estimate, not an exact transcript timing — tell Jean if a line feels off and it can be nudged.</p>
@@ -732,22 +732,71 @@
 <script>
 (function(){
   var audio = document.getElementById('pageAudio');
-  var lines = Array.prototype.slice.call(document.querySelectorAll('#lyricsText .lyric-line'));
-  if (!audio || !lines.length) return;
+  var container = document.getElementById('lyricsText');
+  if (!audio || !container) return;
 
-  lines.forEach(function(el){ el.dataset.start = parseFloat(el.dataset.start); });
+  function el(id){ return container.querySelector('.lyric-line[data-line="' + id + '"]'); }
+
+  // Second Bloom is sung out of printed order, with Verse 1 and Verse 2 each
+  // repeating after the Chorus. Rather than assume the displayed lines play
+  // once, forward, in document order, this is the song's actual performance
+  // order — a sequence of {line, start} entries that can point back to the
+  // same displayed span more than once. Timestamps are Hans's own listens
+  // (section starts), with per-line pacing estimated evenly within each
+  // section's span. Full duration: 180.792s.
+  var performance = [
+    // Verse 1 — 00:11
+    { line: 'v1-1', start: 11 },
+    { line: 'v1-2', start: 17.25 },
+    { line: 'v1-3', start: 23.5 },
+    { line: 'v1-4', start: 29.75 },
+    // Verse 2 — 00:36
+    { line: 'v2-1', start: 36 },
+    { line: 'v2-2', start: 39.5 },
+    { line: 'v2-3', start: 43 },
+    { line: 'v2-4', start: 46.5 },
+    // Omkvæd / Chorus — 00:50
+    { line: 'ch-1', start: 50 },
+    { line: 'ch-2', start: 58.5 },
+    { line: 'ch-3', start: 67 },
+    { line: 'ch-4', start: 75.5 },
+    // Verse 1 again — 01:24
+    { line: 'v1-1', start: 84 },
+    { line: 'v1-2', start: 90 },
+    { line: 'v1-3', start: 96 },
+    { line: 'v1-4', start: 102 },
+    // Verse 2 again — 01:48
+    { line: 'v2-1', start: 108 },
+    { line: 'v2-2', start: 112.5 },
+    { line: 'v2-3', start: 117 },
+    { line: 'v2-4', start: 121.5 },
+    // Bridge — 02:06
+    { line: 'br-1', start: 126 },
+    { line: 'br-2', start: 131.25 },
+    { line: 'br-3', start: 136.5 },
+    { line: 'br-4', start: 141.75 },
+    // Final Chorus — 02:27
+    { line: 'fc-1', start: 147 },
+    { line: 'fc-2', start: 155.45 },
+    { line: 'fc-3', start: 163.9 },
+    { line: 'fc-4', start: 172.34 }
+  ];
+  performance.forEach(function(p){ p.el = el(p.line); });
+  performance = performance.filter(function(p){ return p.el; });
+  if (!performance.length) return;
 
   var current = null;
   function updateActiveLine(){
     var t = audio.currentTime;
     var next = null;
-    for (var i = 0; i < lines.length; i++) {
-      if (lines[i].dataset.start <= t) next = lines[i]; else break;
+    for (var i = 0; i < performance.length; i++) {
+      if (performance[i].start <= t) next = performance[i]; else break;
     }
-    if (next !== current) {
+    var nextEl = next ? next.el : null;
+    if (nextEl !== current) {
       if (current) current.classList.remove('active');
-      if (next) next.classList.add('active');
-      current = next;
+      if (nextEl) nextEl.classList.add('active');
+      current = nextEl;
     }
   }
 
