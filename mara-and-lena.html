@@ -593,7 +593,7 @@
 <main>
   <div class="prose">
     <p>Behind glass panes fogged with the breath of growing things stands a Victorian greenhouse, wrought-iron ribs laced with climbing vines, wooden tables waiting patiently for new life. It was restored by two women who found each other later than they expected — a botanist named Mara, a landscape gardener named Lena — and it has stood ever since as a small, stubborn proof that hearts can still put down new roots long after the season seemed to have closed.</p>
-    <p>This glade holds their story, and the stories of everyone who has since found their own courage in that same soil — a sister, a friend, a student who once believed she had to make herself smaller to be loved. <em>The Garden We Grow Together</em> and the three volumes that followed are gathered here in full — not as relics behind glass, but as living pages, ready to be opened whenever the Forest calls you to sit a while among the roses.</p>
+    <p>This glade holds their story, and the stories of everyone who has since found their own courage in that same soil — a sister, a friend, a student who once believed she had to make herself smaller to be loved. <em>The Garden We Grow Together</em> and the four volumes that followed are gathered here in full — not as relics behind glass, but as living pages, ready to be opened whenever the Forest calls you to sit a while among the roses.</p>
     <p>Look for the faces below. Then step into the reader, and let the greenhouse tell you the rest.</p>
   </div>
 
@@ -668,7 +668,7 @@
 
   <div class="reader-section">
     <p class="reader-title">The Reader</p>
-    <p class="reader-subtitle">The Garden We Grow Together · Books One through Four, in full</p>
+    <p class="reader-subtitle">The Garden We Grow Together · Books One through Five, in full</p>
 
     <button class="reader-open-btn" id="openReaderBtn">Open the Reader</button>
 
@@ -678,6 +678,7 @@
         <button class="book-tab" id="bookTwoTab" data-book="book2">Book Two · Rachel's Garden</button>
         <button class="book-tab" id="bookThreeTab" data-book="book3">Book Three · The Garden We Return To</button>
         <button class="book-tab" id="bookFourTab" data-book="book4">Book Four · New Soil</button>
+        <button class="book-tab" id="bookFiveTab" data-book="book5">Book Five · Daughter of the Garden</button>
       </div>
 
       <div class="book-characters" id="bookCharacters"></div>
@@ -823,7 +824,8 @@
     book1: 'book1-text.txt',
     book2: 'book2-text.txt',
     book3: 'book3-text.txt',
-    book4: 'book4-text.txt'
+    book4: 'book4-text.txt',
+    book5: 'book5-text.txt'
   };
 
   // Mara & Lena stay visible in the main gallery above throughout — this is
@@ -841,6 +843,10 @@
     book4: [
       { src: 'images/Clara.png', alt: 'Clara', caption: 'Clara' },
       { src: 'images/Elise.png', alt: 'Elise', caption: 'Elise' }
+    ],
+    book5: [
+      { src: 'images/Sophie.png', alt: 'Sophie', caption: 'Sophie' },
+      { src: 'images/Nora.png', alt: 'Nora', caption: 'Nora' }
     ]
   };
 
@@ -915,6 +921,7 @@
     document.getElementById('bookTwoTab').classList.toggle('active', book === 'book2');
     document.getElementById('bookThreeTab').classList.toggle('active', book === 'book3');
     document.getElementById('bookFourTab').classList.toggle('active', book === 'book4');
+    document.getElementById('bookFiveTab').classList.toggle('active', book === 'book5');
 
     renderBookCharacters(book);
 
@@ -949,6 +956,7 @@
   document.getElementById('bookTwoTab').addEventListener('click', () => switchBook('book2'));
   document.getElementById('bookThreeTab').addEventListener('click', () => switchBook('book3'));
   document.getElementById('bookFourTab').addEventListener('click', () => switchBook('book4'));
+  document.getElementById('bookFiveTab').addEventListener('click', () => switchBook('book5'));
 
   document.getElementById('chapterSelect').addEventListener('change', (e) => {
     renderChapter(currentBook, parseInt(e.target.value, 10));
