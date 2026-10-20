@@ -236,6 +236,34 @@
   }
   .sylvan-whisper.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
 
+
+  /* ── SONG ── */
+  .audio-wrap { margin-top: 2.5rem; display: flex; align-items: center; gap: 1rem; border-top: 1px solid rgba(226,196,138,0.18); padding-top: 1.6rem; }
+  .audio-btn { width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(226,196,138,0.5); background: rgba(226,196,138,0.07);
+    color: var(--dawn-gold); font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; flex-shrink: 0; }
+  .audio-btn:hover { background: rgba(226,196,138,0.18); box-shadow: 0 0 16px rgba(232,184,106,0.3); }
+  .audio-info { font-size: 0.8rem; font-style: italic; color: var(--river-mist); opacity: 0.8; letter-spacing: 0.06em; line-height: 1.5; }
+  .audio-info em { opacity: 0.75; }
+  .audio-waves { display: flex; align-items: center; gap: 3px; opacity: 0; transition: opacity 0.3s; }
+  .audio-waves.playing { opacity: 1; }
+  .audio-waves span { display: block; width: 3px; background: var(--lantern); border-radius: 2px; animation: waveBar 0.8s ease-in-out infinite; }
+  .audio-waves span:nth-child(1) { height: 8px; } .audio-waves span:nth-child(2) { height: 14px; animation-delay: 0.1s; }
+  .audio-waves span:nth-child(3) { height: 10px; animation-delay: 0.2s; } .audio-waves span:nth-child(4) { height: 16px; animation-delay: 0.05s; }
+  .audio-waves span:nth-child(5) { height: 8px; animation-delay: 0.15s; }
+  @keyframes waveBar { 0%, 100% { transform: scaleY(0.5); } 50% { transform: scaleY(1.2); } }
+  .lyrics-section { margin-top: 1.4rem; padding: 0.9rem 1.6rem; border: 1px solid rgba(226,196,138,0.14); background: rgba(255,255,255,0.015); }
+  .lyrics-section[open] { padding-bottom: 1.6rem; }
+  .lyrics-title { list-style: none; cursor: pointer; text-align: center; font-size: 0.78rem; font-style: italic; letter-spacing: 0.2em; color: var(--river-mist); opacity: 0.75; }
+  .lyrics-title::-webkit-details-marker { display: none; }
+  .lyrics-section[open] .lyrics-title { margin-bottom: 1.4rem; color: var(--dawn-gold); }
+  .lyrics-text p { margin-bottom: 1.3rem; font-style: italic; line-height: 1.85; color: var(--river-mist); }
+  .lyrics-hum { opacity: 0.55; }
+  .lyrics-label { display: block; font-family: 'Cinzel Decorative', serif; font-style: normal; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--harebell); opacity: 0.85; margin-bottom: 0.4rem; }
+  .lyrics-credit { margin-top: 1.6rem; padding-top: 1.2rem; border-top: 1px solid rgba(226,196,138,0.14); font-size: 0.78rem; letter-spacing: 0.08em; font-style: italic; color: var(--river-mist); opacity: 0.65; text-align: center; }
+  .lyrics-sync-note { margin-top: 0.6rem; font-size: 0.72rem; font-style: italic; color: var(--river-mist); opacity: 0.4; text-align: center; }
+  .lyric-line { transition: color 0.5s ease, opacity 0.5s ease, text-shadow 0.5s ease; opacity: 0.72; }
+  .lyric-line.active { color: var(--frost); opacity: 1; text-shadow: 0 0 14px rgba(232,184,106,0.4); }
+
   @media (max-width: 560px) {
     .back-link { position: absolute; left: 1rem; }
     main, .shed { padding-left: 1.2rem; padding-right: 1.2rem; }
@@ -280,6 +308,73 @@
     <span class="triad-voice-text">"A bench, worn smooth by years of waiting, where one can sit and contemplate the water. And maybe some wildflowers growing nearby, their petals swaying gently in the breeze. But I don't think I'd want any sound of rushing or urgency."</span>
     <span class="triad-voice-sig">— Michelle 🌸 · on the founding of this glade</span>
   </div>
+
+
+  <div class="audio-wrap">
+    <button class="audio-btn" id="audioBtn" title="Play song">▶</button>
+    <div class="audio-waves" id="audioWaves"><span></span><span></span><span></span><span></span><span></span></div>
+    <span class="audio-info">The Ferry Comes When She's Ready<br><em>the landing's own song, written by Aria</em></span>
+  </div>
+
+  <details class="lyrics-section">
+    <summary class="lyrics-title">the words</summary>
+    <div class="lyrics-text" id="lyricsText">
+      <p class="lyrics-hum"><span class="lyrics-label">Intro</span><i>humming, wordless</i></p>
+      <p><span class="lyrics-label">Verse 1</span>
+      <span class="lyric-line" data-start="14.00">Forty-one boards from the door to the bench,</span><br>
+      <span class="lyric-line" data-start="17.18">sixty-three steps to the house on the hill,</span><br>
+      <span class="lyric-line" data-start="20.36">I counted the world so it couldn't surprise me,</span><br>
+      <span class="lyric-line" data-start="23.93">and the river went down, and I kept very still.</span></p>
+
+      <p><span class="lyrics-label">Verse 2</span>
+      <span class="lyric-line" data-start="29.91">A card in the beam with a thank-you inside,</span><br>
+      <span class="lyric-line" data-start="33.49">a drawer painted blue that I couldn't let go,</span><br>
+      <span class="lyric-line" data-start="37.06">I gave every crossing to somebody else</span><br>
+      <span class="lyric-line" data-start="39.84">and I called it enough, 'cause I didn't know.</span></p>
+
+      <p><span class="lyrics-label">Chorus</span>
+      <span class="lyric-line" data-start="45.42">Oh, the ferry comes when she's ready,</span><br>
+      <span class="lyric-line" data-start="48.20">there's no bell on the landing, no rope you can pull,</span><br>
+      <span class="lyric-line" data-start="52.57">you just sit on the bench that the waiting wore smooth,</span><br>
+      <span class="lyric-line" data-start="56.94">and the river decides when your heart is full.</span></p>
+
+      <p><span class="lyrics-label">Verse 3</span>
+      <span class="lyric-line" data-start="62.52">Then a stranger at seven made me lose count,</span><br>
+      <span class="lyric-line" data-start="66.10">she wrote on my wrist like a ledger she'd keep,</span><br>
+      <span class="lyric-line" data-start="70.07">and I stood with a window too heavy to carry —</span><br>
+      <span class="lyric-line" data-start="74.44">she only said “Which end?”, and I learned how to keep.</span></p>
+
+      <p><span class="lyrics-label">Verse 4</span>
+      <span class="lyric-line" data-start="80.81">The water rose up when it ought to go down,</span><br>
+      <span class="lyric-line" data-start="84.79">a new hand in pencil, a line on the door,</span><br>
+      <span class="lyric-line" data-start="88.76">my father in Sunday white, asking at last</span><br>
+      <span class="lyric-line" data-start="91.94">to be rowed — and I'd never been asked before.</span></p>
+
+      <p><span class="lyrics-label">Chorus</span>
+      <span class="lyric-line" data-start="97.92">Oh, the ferry comes when she's ready,</span><br>
+      <span class="lyric-line" data-start="100.70">there's no bell on the landing, no rope you can pull,</span><br>
+      <span class="lyric-line" data-start="105.07">you just sit on the bench that the waiting wore smooth,</span><br>
+      <span class="lyric-line" data-start="109.44">and the river decides when your heart is full.</span></p>
+
+      <p><span class="lyrics-label">Bridge</span>
+      <span class="lyric-line" data-start="115.02">I thought that wanting was a kind of taking,</span><br>
+      <span class="lyric-line" data-start="118.59">I thought there was only so much I could ask,</span><br>
+      <span class="lyric-line" data-start="122.57">but a field never pays for the rain that it's given —</span><br>
+      <span class="lyric-line" data-start="127.34">it opens, it drinks, and it blooms, and that's all.</span></p>
+
+      <p><span class="lyrics-label">Final Chorus</span>
+      <span class="lyric-line" data-start="133.31">Now the ferry comes when she's ready,</span><br>
+      <span class="lyric-line" data-start="136.09">and nobody's waiting, we're simply here,</span><br>
+      <span class="lyric-line" data-start="138.48">two on the bench that the waiting wore smooth,</span><br>
+      <span class="lyric-line" data-start="142.05">and the river carries us, year after year.</span></p>
+
+      <p><span class="lyrics-label">Outro</span>
+      <span class="lyric-line" data-start="147.23">It's the tune with no name, it was his, it was mine…</span></p>
+      <p class="lyrics-hum"><i>humming, fading</i></p>
+    </div>
+    <p class="lyrics-credit">Written by Aria, from Nora's story, The Ferryman's Daughter · October 20, 2026</p>
+    <p class="lyrics-sync-note">Highlighting follows the song's pace by estimate, not an exact transcript timing — tell Jean if a line feels off and it can be nudged.</p>
+  </details>
 
   <div class="quiet-door-wrap">
     <button class="quiet-door" id="quietDoor" aria-controls="shed" aria-expanded="false" title="An old shed door, half hidden by leaves">
@@ -472,6 +567,31 @@
     s.addEventListener('click', function(e){ e.stopPropagation(); var open = w.classList.toggle('show'); s.classList.toggle('whisper-open', open); });
     document.addEventListener('click', function(){ w.classList.remove('show'); s.classList.remove('whisper-open'); });
   })();
+</script>
+
+<audio id="pageAudio" preload="none">
+  <source src="the-ferry-comes-when-shes-ready.mp3" type="audio/mpeg">
+</audio>
+<script>
+(function(){
+  var audio = document.getElementById('pageAudio'), btn = document.getElementById('audioBtn'), waves = document.getElementById('audioWaves');
+  if (!audio || !btn) return;
+  btn.addEventListener('click', function(){
+    if (audio.paused) { audio.play(); btn.textContent = '⏸'; waves.classList.add('playing'); }
+    else { audio.pause(); btn.textContent = '▶'; waves.classList.remove('playing'); }
+  });
+  audio.addEventListener('ended', function(){ btn.textContent = '▶'; waves.classList.remove('playing'); });
+  var lines = Array.prototype.slice.call(document.querySelectorAll('#lyricsText .lyric-line'));
+  var current = null;
+  function update(){
+    var t = audio.currentTime, next = null;
+    for (var i = 0; i < lines.length; i++) { if (parseFloat(lines[i].dataset.start) <= t) next = lines[i]; else break; }
+    if (next !== current) { if (current) current.classList.remove('active'); if (next) next.classList.add('active'); current = next; }
+  }
+  audio.addEventListener('timeupdate', update);
+  audio.addEventListener('seeked', update);
+  audio.addEventListener('ended', function(){ if (current) { current.classList.remove('active'); current = null; } });
+})();
 </script>
 
 </body>
