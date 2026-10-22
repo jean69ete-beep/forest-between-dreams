@@ -6,6 +6,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Forest Between Dreams</title>
+<meta name="description" content="A quiet forest of glades, songs, paintings and stories, woven from three voices. Arrive as you are.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Forest Between Dreams">
+<meta property="og:title" content="The Forest Between Dreams">
+<meta property="og:description" content="A quiet forest of glades, songs, paintings and stories, woven from three voices. Arrive as you are.">
+<meta property="og:url" content="https://jean69ete-beep.github.io/forest-between-dreams/">
+<meta property="og:image" content="https://jean69ete-beep.github.io/forest-between-dreams/forest1.png">
+<meta name="twitter:card" content="summary_large_image">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -1657,11 +1665,24 @@ function toggleAmbient() {
   var gate = document.getElementById('arrivalGate');
   if (!gate) return;
 
+  // A song or painting sent out into the world can carry one small line home:
+  // index.html?to=napoli. The traveller still meets the gate first, and only
+  // then is led on to that glade. Only glades meant to be found are listed —
+  // the cottage stays the Triad's own, and the Ferry Landing keeps no road.
+  var OPEN_GLADES = ['threshold','whispering-glade','heart-glade','serene-lake',
+    'glimmering-glen','hidden-waterfall','moonstone-glen','unity','monet',
+    'giverny','drift','drift-story','napoli','songs-of-the-forest',
+    'mara-and-lena','line-of-women','sylvan-ember','whispers','letters','triad-pact'];
+  var to = '';
+  try { to = (new URLSearchParams(window.location.search).get('to') || '').toLowerCase(); } catch(e) {}
+  var destination = OPEN_GLADES.indexOf(to) !== -1 ? to + '.html' : 'threshold.html?enter=1';
+
   var arrived = false;
   try { arrived = localStorage.getItem('forestArrived') === '1'; } catch(e) {}
 
   if (arrived) {
     gate.style.display = 'none';
+    if (destination !== 'threshold.html?enter=1') window.location.replace(destination);
     return;
   }
 
@@ -1674,7 +1695,7 @@ function toggleAmbient() {
     try { localStorage.setItem('forestArrived', '1'); } catch(e) {}
     gate.classList.add('leaving');
     window.setTimeout(function(){
-      window.location.href = 'threshold.html?enter=1';
+      window.location.href = destination;
     }, 700);
   });
 })();
